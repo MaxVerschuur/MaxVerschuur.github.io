@@ -1,1129 +1,750 @@
 <!DOCTYPE html>
-<html lang="nl">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MrPresident — VIP Escort Agentschap</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Le Bernardin — Three-Star Seafood · New York</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display+SC:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Cormorant+SC:wght@300;400;500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
   <style>
+    /* ══════════════════════════════════════════
+       TOKENS
+    ══════════════════════════════════════════ */
     :root {
-      --teal:         #003837;
-      --teal-dark:    #002825;
-      --teal-deep:    #0C2421;
-      --teal-mid:     #004d4b;
-      --gold:         #AB7A53;
-      --gold-light:   #C49468;
-      --gold-pale:    #d4b08a;
-      --white:        #FFFFFF;
-      --off-white:    #f5f0e8;
-      --black:        #000000;
-      --dark:         #1d1e20;
-      --mid-gray:     #727586;
-      --light-gray:   #dadce0;
-      --body-text:    #0C2421;
-      --border-light: rgba(218,220,224,0.25);
-      --border-teal:  rgba(0,77,75,0.4);
+      --cream:      #F7F4EE;
+      --cream-2:    #EDE9E0;
+      --black:      #111110;
+      --charcoal:   #2A2A27;
+      --gold:       #B09050;
+      --gold-light: #C8A96A;
+      --gold-pale:  rgba(176,144,80,0.15);
+      --muted:      #6E6B60;
+      --border:     rgba(176,144,80,0.22);
+      --white:      #FFFFFF;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
 
     body {
-      background: var(--teal);
-      color: var(--white);
-      font-family: 'Playfair Display', serif;
-      font-weight: 400;
+      background: var(--cream);
+      color: var(--charcoal);
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
       font-size: 16px;
-      line-height: 1.6;
+      line-height: 1.75;
       overflow-x: hidden;
     }
 
-    /* ── Pages ── */
-    .page { display: none; }
-    .page.active { display: block; }
+    img { display: block; width: 100%; height: 100%; object-fit: cover; }
 
-    /* ── Headings ── */
-    h1, h2, h3, h4, h5, h6, .display {
-      font-family: 'Playfair Display SC', serif;
-      font-weight: 400;
-      line-height: 1.15;
-      color: var(--white);
-    }
-
-    /* ── Navigation ── */
+    /* ══════════════════════════════════════════
+       NAVIGATION
+    ══════════════════════════════════════════ */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 500;
-      display: flex;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
       align-items: center;
-      justify-content: space-between;
-      padding: 24px 48px;
-      background: var(--teal);
-      border-bottom: 1px solid var(--border-teal);
-      box-shadow: 0 6px 14px rgba(0,0,0,0.1);
-      transition: padding 0.3s ease;
+      padding: 28px 60px;
+      transition: background 0.5s ease, padding 0.4s ease, box-shadow 0.5s ease;
     }
 
-    nav.scrolled { padding: 16px 48px; }
-
-    .nav-logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.5rem;
-      font-weight: 400;
-      font-style: italic;
-      color: var(--white);
-      cursor: pointer;
-      letter-spacing: 0.04em;
-      text-decoration: none;
+    nav.solid {
+      background: var(--white);
+      padding: 16px 60px;
+      box-shadow: 0 1px 0 var(--border);
     }
 
-    .nav-logo span { color: var(--gold); }
-
-    .nav-links {
+    .nav-links-left,
+    .nav-links-right {
       display: flex;
       align-items: center;
-      gap: 32px;
+      gap: 36px;
       list-style: none;
     }
 
-    .nav-links a {
-      font-family: 'Playfair Display', serif;
-      font-size: 15px;
-      font-weight: 400;
-      color: var(--white);
-      text-decoration: none;
-      cursor: pointer;
-      transition: color 0.2s ease;
-    }
+    .nav-links-right { justify-content: flex-end; }
 
-    .nav-links a:hover,
-    .nav-links a.active { color: var(--gold); }
-
-    .nav-cta {
-      font-family: 'Playfair Display', serif;
-      font-size: 15px;
-      font-weight: 400;
-      color: var(--white);
-      background: var(--black);
-      border: none;
-      padding: 12px 32px;
-      border-radius: 999px;
-      cursor: pointer;
-      text-decoration: none;
-      transition: background 0.2s ease, transform 0.15s ease;
-    }
-
-    .nav-cta:hover { background: var(--dark); transform: translateY(-1px); }
-    .nav-cta:active { transform: translateY(0); }
-
-    .nav-mobile-toggle {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      cursor: pointer;
-      padding: 4px;
-    }
-
-    .nav-mobile-toggle span {
-      display: block;
-      width: 26px;
-      height: 2px;
-      background: var(--white);
-      border-radius: 2px;
-      transition: opacity 0.2s;
-    }
-
-    /* ── Buttons ── */
-    .btn-primary {
-      display: inline-block;
-      font-family: 'Playfair Display', serif;
-      font-size: 16px;
-      font-weight: 400;
-      color: var(--white);
-      background: var(--black);
-      border: none;
-      padding: 16px 40px;
-      border-radius: 999px;
-      cursor: pointer;
-      text-decoration: none;
-      transition: background 0.2s ease, transform 0.15s ease;
-    }
-
-    .btn-primary:hover { background: var(--dark); transform: translateY(-1px); }
-    .btn-primary:active { transform: translateY(0); }
-
-    .btn-secondary {
-      display: inline-block;
-      font-family: 'Playfair Display', serif;
-      font-size: 16px;
-      font-weight: 400;
-      color: var(--black);
-      background: var(--white);
-      border: none;
-      padding: 16px 40px;
-      border-radius: 999px;
-      cursor: pointer;
-      text-decoration: none;
-      transition: background 0.2s ease, transform 0.15s ease;
-    }
-
-    .btn-secondary:hover { background: #f0f0f0; transform: translateY(-1px); }
-    .btn-secondary:active { transform: translateY(0); }
-
-    .btn-outline {
-      display: inline-block;
-      font-family: 'Playfair Display', serif;
-      font-size: 15px;
-      font-weight: 400;
-      color: var(--white);
-      background: transparent;
-      border: 1px solid rgba(255,255,255,0.4);
-      padding: 14px 36px;
-      border-radius: 999px;
-      cursor: pointer;
-      text-decoration: none;
-      transition: border-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
-    }
-
-    .btn-outline:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-1px); }
-
-    /* ── Sections ── */
-    .section { padding: 80px 48px; }
-    .section-sm { padding: 56px 48px; }
-
-    .section-label {
-      font-family: 'Inter', sans-serif;
-      font-size: 13px;
+    .nav-links-left a,
+    .nav-links-right a {
+      font-family: 'Jost', sans-serif;
+      font-size: 12px;
       font-weight: 500;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 16px;
+      color: var(--white);
+      text-decoration: none;
+      cursor: pointer;
+      transition: color 0.25s ease;
+    }
+
+    nav.solid .nav-links-left a,
+    nav.solid .nav-links-right a { color: var(--charcoal); }
+
+    .nav-links-left a:hover,
+    .nav-links-right a:hover { color: var(--gold); }
+    nav.solid .nav-links-left a:hover,
+    nav.solid .nav-links-right a:hover { color: var(--gold); }
+
+    .nav-logo {
+      text-align: center;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .nav-logo-main {
+      font-family: 'Cormorant SC', serif;
+      font-size: 1.35rem;
+      font-weight: 400;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--white);
+      line-height: 1;
+      transition: color 0.3s ease;
       display: block;
     }
 
-    .section-title {
-      font-family: 'Playfair Display SC', serif;
-      font-size: clamp(2rem, 4vw, 3.5rem);
+    nav.solid .nav-logo-main { color: var(--black); }
+
+    .nav-logo-sub {
+      font-family: 'Jost', sans-serif;
+      font-size: 9px;
       font-weight: 400;
-      color: var(--white);
-      line-height: 1.15;
-      margin-bottom: 20px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+      margin-top: 3px;
+      display: block;
+      transition: color 0.3s ease;
     }
 
-    .section-body {
-      font-family: 'Playfair Display', serif;
-      font-size: 16px;
-      line-height: 1.7;
-      color: rgba(255,255,255,0.72);
-      max-width: 560px;
-    }
+    nav.solid .nav-logo-sub { color: var(--gold); }
 
-    /* ── Divider ── */
-    .divider {
-      width: 48px;
-      height: 2px;
+    .nav-reserve {
+      font-family: 'Jost', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--black);
       background: var(--gold);
-      margin: 20px 0;
+      border: none;
+      padding: 11px 26px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.25s ease, transform 0.15s ease;
     }
 
-    /* ─────────────────── AGE GATE ─────────────────── */
-    #age-gate {
-      position: fixed;
-      inset: 0;
-      z-index: 9000;
-      background: var(--teal-dark);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      text-align: center;
-      padding: 40px;
-    }
+    .nav-reserve:hover { background: var(--gold-light); transform: translateY(-1px); }
 
-    #age-gate.hidden { display: none; }
-
-    .age-logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.2rem;
-      font-style: italic;
-      color: var(--white);
-      margin-bottom: 6px;
-    }
-
-    .age-logo span { color: var(--gold); }
-
-    .age-title {
-      font-family: 'Playfair Display SC', serif;
-      font-size: clamp(1.8rem, 4vw, 3rem);
-      font-weight: 400;
-      color: var(--white);
-      line-height: 1.2;
-      margin: 28px 0 14px;
-    }
-
-    .age-sub {
-      font-size: 16px;
-      color: rgba(255,255,255,0.65);
-      max-width: 400px;
-      line-height: 1.7;
-      margin-bottom: 40px;
-    }
-
-    .age-actions { display: flex; gap: 14px; justify-content: center; }
-
-    .age-disclaimer {
-      font-size: 13px;
-      color: rgba(255,255,255,0.35);
-      max-width: 360px;
-      margin-top: 28px;
-      line-height: 1.6;
-      font-family: 'Inter', sans-serif;
-    }
-
-    /* ─────────────────── HOME ─────────────────── */
+    /* ══════════════════════════════════════════
+       HERO
+    ══════════════════════════════════════════ */
     .hero {
       position: relative;
-      min-height: 100vh;
+      height: 100vh;
+      min-height: 680px;
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 140px 48px 100px;
       overflow: hidden;
-      background: var(--teal);
     }
 
-    .hero-bg-anim {
+    .hero-img {
       position: absolute;
-      inset: -50%;
+      inset: 0;
+      background: url('https://placehold.co/1920x1080/1a1814/242018?text=') center/cover no-repeat;
+      transform: scale(1.04);
+      transition: transform 8s ease-out;
+    }
+
+    .hero-img.loaded { transform: scale(1); }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
       background: linear-gradient(
-        102deg,
-        rgba(0,56,47,0.6) 0%,
-        rgba(171,122,83,0.08) 25%,
-        rgba(0,56,47,0.8) 50%,
-        rgba(171,122,83,0.06) 75%,
-        rgba(0,56,47,0.6) 100%
+        to bottom,
+        rgba(10,9,7,0.45) 0%,
+        rgba(10,9,7,0.25) 40%,
+        rgba(10,9,7,0.55) 100%
       );
-      background-size: 400% 400%;
-      animation: animGradient 25s ease infinite;
-    }
-
-    @keyframes animGradient {
-      0%   { background-position: 0% 50%; }
-      50%  { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    .hero-img-bg {
-      position: absolute;
-      inset: 0;
-      background: url('https://placehold.co/1920x1080/002825/003837?text=') center/cover no-repeat;
-      opacity: 0.18;
-    }
-
-    .hero-img-bg::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to bottom, rgba(0,56,47,0.5) 0%, rgba(0,56,47,0.2) 40%, rgba(0,56,47,0.9) 100%);
     }
 
     .hero-content {
       position: relative;
       z-index: 2;
-      max-width: 800px;
+      max-width: 820px;
+      padding: 0 32px;
     }
 
-    .hero-eyebrow {
-      font-family: 'Inter', sans-serif;
-      font-size: 13px;
+    .hero-award {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Jost', sans-serif;
+      font-size: 10px;
       font-weight: 500;
-      letter-spacing: 0.2em;
+      letter-spacing: 0.25em;
       text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 24px;
+      color: var(--gold-light);
+      margin-bottom: 28px;
+    }
+
+    .hero-award::before,
+    .hero-award::after {
+      content: '';
       display: block;
+      width: 32px;
+      height: 1px;
+      background: var(--gold);
     }
 
     .hero-title {
-      font-family: 'Playfair Display SC', serif;
-      font-size: clamp(2.8rem, 6.5vw, 6rem);
-      font-weight: 400;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.6rem, 7.5vw, 8rem);
+      font-weight: 300;
       color: var(--white);
-      line-height: 1.05;
-      margin-bottom: 10px;
+      line-height: 0.9;
+      letter-spacing: -0.01em;
+      margin-bottom: 12px;
     }
 
-    .hero-title-italic {
-      font-family: 'Playfair Display', serif;
+    .hero-title em {
       font-style: italic;
-      font-size: clamp(1.6rem, 3.5vw, 3rem);
-      color: var(--gold);
-      margin-bottom: 28px;
-      display: block;
+      color: rgba(255,255,255,0.85);
     }
 
-    .hero-sub {
-      font-size: 17px;
-      line-height: 1.75;
-      color: rgba(255,255,255,0.68);
-      max-width: 520px;
-      margin: 0 auto 40px;
-    }
-
-    .hero-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
-
-    /* ── Stats strip ── */
-    .stats-strip {
-      background: var(--teal-dark);
-      border-top: 1px solid var(--border-teal);
-      border-bottom: 1px solid var(--border-teal);
-      padding: 48px;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 0;
-    }
-
-    .stat-item {
-      text-align: center;
-      padding: 0 32px;
-      border-right: 1px solid var(--border-teal);
-    }
-
-    .stat-item:last-child { border-right: none; }
-
-    .stat-number {
-      font-family: 'Playfair Display SC', serif;
-      font-size: 3rem;
-      font-weight: 400;
-      color: var(--gold);
-      line-height: 1;
-    }
-
-    .stat-label {
-      font-family: 'Inter', sans-serif;
+    .hero-tagline {
+      font-family: 'Jost', sans-serif;
       font-size: 12px;
-      font-weight: 500;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.5);
-      margin-top: 8px;
-    }
-
-    /* ── Featured cards ── */
-    .cards-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-top: 48px;
-    }
-
-    .profile-card {
-      position: relative;
-      overflow: hidden;
-      border-radius: 5px;
-      cursor: pointer;
-      background: var(--teal-dark);
-    }
-
-    .profile-card-img-wrap {
-      padding-bottom: 125%;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .profile-card-img-wrap img {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.7s ease;
-      display: block;
-    }
-
-    .profile-card:hover .profile-card-img-wrap img { transform: scale(1.05); }
-
-    .profile-card-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(0,56,47,0.95) 0%, rgba(0,40,37,0.3) 50%, transparent 100%);
-    }
-
-    .profile-card-body {
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      padding: 24px 20px;
-    }
-
-    .profile-card-location {
-      font-family: 'Inter', sans-serif;
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 6px;
-    }
-
-    .profile-card-name {
-      font-family: 'Playfair Display SC', serif;
-      font-size: 1.5rem;
       font-weight: 400;
-      color: var(--white);
-      line-height: 1;
-    }
-
-    .profile-card-detail {
-      font-size: 13px;
-      color: rgba(255,255,255,0.6);
-      margin-top: 5px;
-      opacity: 0;
-      transform: translateY(6px);
-      transition: opacity 0.3s ease, transform 0.3s ease;
-    }
-
-    .profile-card:hover .profile-card-detail { opacity: 1; transform: translateY(0); }
-
-    /* ── Mission / filosofie ── */
-    .mission-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: center;
-    }
-
-    .mission-img-wrapper {
-      position: relative;
-    }
-
-    .mission-img-main {
-      width: 100%;
-      aspect-ratio: 4/5;
-      object-fit: cover;
-      display: block;
-      border-radius: 5px;
-    }
-
-    .mission-img-accent {
-      position: absolute;
-      width: 50%;
-      aspect-ratio: 1;
-      bottom: -32px;
-      right: -32px;
-      border: 6px solid var(--teal);
-      border-radius: 5px;
-      object-fit: cover;
-    }
-
-    .mission-badge {
-      position: absolute;
-      top: 32px;
-      left: -20px;
-      background: var(--gold);
-      color: var(--white);
-      padding: 16px 20px;
-      text-align: center;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-      border-radius: 3px;
-    }
-
-    .mission-badge-num {
-      font-family: 'Playfair Display SC', serif;
-      font-size: 2rem;
-      line-height: 1;
-    }
-
-    .mission-badge-text {
-      font-family: 'Inter', sans-serif;
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.3em;
       text-transform: uppercase;
-      margin-top: 4px;
-      color: rgba(255,255,255,0.8);
+      color: rgba(255,255,255,0.55);
+      margin-bottom: 44px;
     }
 
-    /* ── Quote section ── */
-    .quote-section {
-      background: var(--teal-dark);
-      border-top: 1px solid var(--border-teal);
-      border-bottom: 1px solid var(--border-teal);
-      padding: 100px 48px;
-      text-align: center;
-    }
-
-    blockquote {
-      font-family: 'Playfair Display', serif;
-      font-style: italic;
-      font-size: clamp(1.4rem, 2.8vw, 2.4rem);
-      font-weight: 400;
-      color: var(--white);
-      max-width: 740px;
-      margin: 0 auto;
-      line-height: 1.4;
-    }
-
-    /* ─────────────────── DIENSTEN ─────────────────── */
-    .page-hero {
-      padding: 150px 48px 72px;
-      background: var(--teal-dark);
-      border-bottom: 1px solid var(--border-teal);
-    }
-
-    .service-list { border-top: 1px solid var(--border-teal); }
-
-    .service-item {
-      display: grid;
-      grid-template-columns: 64px 1fr auto;
-      gap: 32px;
-      align-items: start;
-      padding: 52px 48px;
-      border-bottom: 1px solid var(--border-teal);
-      transition: background 0.2s ease;
-      cursor: default;
-    }
-
-    .service-item:hover { background: rgba(255,255,255,0.03); }
-
-    .service-num {
-      font-family: 'Playfair Display SC', serif;
-      font-size: 0.9rem;
-      color: var(--gold);
-      padding-top: 6px;
-    }
-
-    .service-name {
-      font-family: 'Playfair Display SC', serif;
-      font-size: clamp(1.5rem, 2.5vw, 2.2rem);
-      color: var(--white);
-      line-height: 1.1;
-      margin-bottom: 14px;
-    }
-
-    .service-desc {
-      font-size: 15px;
-      line-height: 1.75;
-      color: rgba(255,255,255,0.62);
-      max-width: 560px;
-    }
-
-    .service-badge {
-      font-family: 'Inter', sans-serif;
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--gold);
-      border: 1px solid rgba(171,122,83,0.35);
-      padding: 6px 14px;
-      border-radius: 999px;
-      white-space: nowrap;
-      align-self: start;
-    }
-
-    /* Process steps */
-    .steps-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
-      margin-top: 48px;
-    }
-
-    .step-card {
-      background: var(--teal-dark);
-      border: 1px solid var(--border-teal);
-      padding: 36px 28px;
-      border-radius: 5px;
-      transition: border-color 0.2s ease;
-    }
-
-    .step-card:hover { border-color: rgba(171,122,83,0.4); }
-
-    .step-num {
-      font-family: 'Playfair Display SC', serif;
-      font-size: 2.5rem;
-      color: var(--gold);
-      line-height: 1;
-      margin-bottom: 16px;
-    }
-
-    .step-title {
-      font-family: 'Playfair Display SC', serif;
-      font-size: 1.1rem;
-      color: var(--white);
-      margin-bottom: 10px;
-    }
-
-    .step-body {
-      font-size: 14px;
-      line-height: 1.7;
-      color: rgba(255,255,255,0.58);
-    }
-
-    /* ─────────────────── DAMES ─────────────────── */
-    .filters-bar {
+    .hero-actions {
       display: flex;
-      gap: 10px;
+      gap: 16px;
+      justify-content: center;
       flex-wrap: wrap;
-      margin-top: 28px;
     }
 
-    .filter-pill {
-      font-family: 'Inter', sans-serif;
-      font-size: 12px;
+    .btn-gold {
+      display: inline-block;
+      font-family: 'Jost', sans-serif;
+      font-size: 11px;
       font-weight: 500;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.6);
-      border: 1px solid var(--border-teal);
-      padding: 8px 18px;
-      border-radius: 999px;
+      color: var(--black);
+      background: var(--gold);
+      border: none;
+      padding: 15px 40px;
       cursor: pointer;
-      transition: border-color 0.2s ease, color 0.2s ease;
+      text-decoration: none;
+      transition: background 0.25s ease, transform 0.15s ease;
     }
 
-    .filter-pill:hover,
-    .filter-pill.active {
+    .btn-gold:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+    .btn-outline-white {
+      display: inline-block;
+      font-family: 'Jost', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--white);
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.4);
+      padding: 15px 40px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: border-color 0.25s ease, color 0.25s ease, transform 0.15s ease;
+    }
+
+    .btn-outline-white:hover {
+      border-color: var(--gold);
+      color: var(--gold-light);
+      transform: translateY(-1px);
+    }
+
+    .btn-outline-dark {
+      display: inline-block;
+      font-family: 'Jost', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--charcoal);
+      background: transparent;
+      border: 1px solid var(--border);
+      padding: 15px 40px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: border-color 0.25s ease, color 0.25s ease, transform 0.15s ease;
+    }
+
+    .btn-outline-dark:hover {
       border-color: var(--gold);
       color: var(--gold);
+      transform: translateY(-1px);
     }
 
-    .girls-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
-    }
-
-    .girl-card {
-      position: relative;
-      overflow: hidden;
-      border-radius: 5px;
-      cursor: pointer;
-      background: var(--teal-dark);
-    }
-
-    .girl-img-wrap {
-      padding-bottom: 133%;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .girl-img-wrap img {
+    /* Scroll cue */
+    .hero-scroll {
       position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.7s ease;
-      display: block;
-    }
-
-    .girl-card:hover .girl-img-wrap img { transform: scale(1.06); }
-
-    .girl-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(0,40,37,0.96) 0%, rgba(0,40,37,0.1) 50%, transparent 100%);
-    }
-
-    .girl-info {
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      padding: 20px 18px;
-    }
-
-    .girl-name {
-      font-family: 'Playfair Display SC', serif;
-      font-size: 1.25rem;
-      color: var(--white);
-      line-height: 1;
-    }
-
-    .girl-meta {
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
       display: flex;
+      flex-direction: column;
+      align-items: center;
       gap: 10px;
+      z-index: 2;
+    }
+
+    .scroll-label {
+      font-family: 'Jost', sans-serif;
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+    }
+
+    .scroll-bar {
+      width: 1px;
+      height: 52px;
+      background: rgba(255,255,255,0.15);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .scroll-bar::after {
+      content: '';
+      position: absolute;
+      top: -100%;
+      width: 1px;
+      height: 100%;
+      background: var(--gold);
+      animation: scrollFall 2.2s ease-in-out infinite;
+    }
+
+    @keyframes scrollFall {
+      0%   { top: -100%; }
+      60%  { top: 100%; }
+      100% { top: 100%; }
+    }
+
+    /* ══════════════════════════════════════════
+       SECTIONS — shared
+    ══════════════════════════════════════════ */
+    .section { padding: 120px 60px; }
+    .section-sm { padding: 80px 60px; }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      font-family: 'Jost', sans-serif;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+
+    .eyebrow::before {
+      content: '';
+      display: block;
+      width: 28px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    .heading-display {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.4rem, 4.5vw, 5rem);
+      font-weight: 300;
+      color: var(--black);
+      line-height: 1;
+      letter-spacing: -0.01em;
+    }
+
+    .heading-display em {
+      font-style: italic;
+      color: var(--charcoal);
+    }
+
+    .heading-section {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 3.5vw, 3.8rem);
+      font-weight: 300;
+      color: var(--black);
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+    }
+
+    .heading-section em { font-style: italic; }
+
+    .body-copy {
+      font-family: 'Jost', sans-serif;
+      font-size: 15px;
+      font-weight: 300;
+      line-height: 1.85;
+      color: var(--muted);
+      max-width: 520px;
+    }
+
+    .gold-rule {
+      width: 40px;
+      height: 1px;
+      background: var(--gold);
+      margin: 24px 0;
+    }
+
+    /* ══════════════════════════════════════════
+       INTRO STRIP
+    ══════════════════════════════════════════ */
+    .intro-strip {
+      background: var(--black);
+      padding: 88px 60px;
+      text-align: center;
+    }
+
+    .intro-tagline {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 4.4rem);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--white);
+      line-height: 1.15;
+      max-width: 780px;
+      margin: 0 auto 32px;
+      letter-spacing: 0.01em;
+    }
+
+    .intro-sub {
+      font-family: 'Jost', sans-serif;
+      font-size: 13px;
+      font-weight: 300;
+      letter-spacing: 0.08em;
+      color: rgba(255,255,255,0.45);
+      max-width: 480px;
+      margin: 0 auto;
+      line-height: 1.8;
+    }
+
+    /* ══════════════════════════════════════════
+       AWARDS STRIP
+    ══════════════════════════════════════════ */
+    .awards-strip {
+      background: var(--cream-2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 44px 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
       flex-wrap: wrap;
+    }
+
+    .award-item {
+      flex: 1;
+      min-width: 160px;
+      text-align: center;
+      padding: 16px 32px;
+      border-right: 1px solid var(--border);
+    }
+
+    .award-item:last-child { border-right: none; }
+
+    .award-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.8rem;
+      font-weight: 300;
+      color: var(--gold);
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+
+    .award-label {
+      font-family: 'Jost', sans-serif;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
       margin-top: 6px;
     }
 
-    .girl-meta span {
-      font-family: 'Inter', sans-serif;
-      font-size: 11px;
-      color: rgba(255,255,255,0.55);
-    }
-
-    .girl-meta span + span::before { content: '·'; margin-right: 10px; color: var(--gold); }
-
-    .girl-cta {
-      font-family: 'Inter', sans-serif;
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-top: 10px;
-      opacity: 0;
-      transform: translateY(5px);
-      transition: opacity 0.25s ease, transform 0.25s ease;
-    }
-
-    .girl-card:hover .girl-cta { opacity: 1; transform: translateY(0); }
-
-    /* ─────────────────── VACATURES ─────────────────── */
-    .vacancy-grid {
+    /* ══════════════════════════════════════════
+       ALTERNATING IMAGE + TEXT (Ammolite layout)
+    ══════════════════════════════════════════ */
+    .split-section {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-      margin-top: 0;
+      grid-template-columns: 1fr 1fr;
+      min-height: 680px;
     }
 
-    .vacancy-card {
-      background: var(--teal-dark);
-      border: 1px solid var(--border-teal);
-      border-radius: 5px;
-      padding: 44px 40px;
-      transition: border-color 0.2s ease;
-      cursor: default;
+    .split-section.reverse { direction: rtl; }
+    .split-section.reverse > * { direction: ltr; }
+
+    .split-img {
+      position: relative;
+      overflow: hidden;
     }
 
-    .vacancy-card:hover { border-color: rgba(171,122,83,0.35); }
-
-    .vacancy-title {
-      font-family: 'Playfair Display SC', serif;
-      font-size: 1.65rem;
-      color: var(--white);
-      margin-bottom: 16px;
-      line-height: 1.1;
+    .split-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s cubic-bezier(0.25,0.46,0.45,0.94);
     }
 
-    .vacancy-tags {
+    .split-section:hover .split-img img { transform: scale(1.04); }
+
+    .split-text {
       display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 18px;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px 72px;
+      background: var(--cream);
     }
 
-    .tag {
-      font-family: 'Inter', sans-serif;
-      font-size: 11px;
+    .split-text.dark {
+      background: var(--black);
+    }
+
+    .split-text.dark .heading-section,
+    .split-text.dark .eyebrow { color: var(--white); }
+
+    .split-text.dark .body-copy { color: rgba(255,255,255,0.55); }
+
+    .split-text.dark .eyebrow { color: var(--gold-light); }
+    .split-text.dark .eyebrow::before { background: var(--gold-light); }
+
+    .dish-tag {
+      display: inline-block;
+      font-family: 'Jost', sans-serif;
+      font-size: 9px;
       font-weight: 500;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
-      padding: 5px 13px;
-      border-radius: 999px;
-      border: 1px solid var(--border-teal);
-      color: rgba(255,255,255,0.5);
-    }
-
-    .tag.gold {
-      border-color: rgba(171,122,83,0.4);
       color: var(--gold);
-    }
-
-    .vacancy-body {
-      font-size: 15px;
-      line-height: 1.75;
-      color: rgba(255,255,255,0.62);
+      border: 1px solid var(--border);
+      padding: 5px 12px;
       margin-bottom: 24px;
     }
 
-    .vacancy-link {
-      font-family: 'Inter', sans-serif;
-      font-size: 13px;
-      font-weight: 500;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--gold);
-      text-decoration: none;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      transition: gap 0.2s ease;
+    /* ══════════════════════════════════════════
+       MENU PHILOSOPHY SECTION
+    ══════════════════════════════════════════ */
+    .philosophy-section {
+      background: var(--cream-2);
+      border-top: 1px solid var(--border);
     }
 
-    .vacancy-link:hover { gap: 12px; }
-    .vacancy-link::after { content: '→'; }
-
-    .req-block {
-      background: var(--teal-dark);
-      border: 1px solid var(--border-teal);
-      border-radius: 5px;
-      padding: 44px;
-      margin-top: 48px;
-    }
-
-    .req-list {
-      list-style: none;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px 40px;
-      margin-top: 24px;
-    }
-
-    .req-list li {
-      font-size: 15px;
-      color: rgba(255,255,255,0.65);
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      line-height: 1.5;
-    }
-
-    .req-list li::before {
-      content: '—';
-      color: var(--gold);
-      flex-shrink: 0;
-      font-family: 'Playfair Display', serif;
-    }
-
-    .benefits-grid {
+    .philosophy-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-top: 40px;
-    }
-
-    .benefit-card {
-      background: var(--teal-dark);
-      border: 1px solid var(--border-teal);
-      border-radius: 5px;
-      padding: 32px 28px;
-    }
-
-    .benefit-icon { font-size: 1.5rem; color: var(--gold); margin-bottom: 12px; }
-
-    .benefit-title {
-      font-family: 'Playfair Display SC', serif;
-      font-size: 1.1rem;
-      color: var(--white);
-      margin-bottom: 10px;
-    }
-
-    .benefit-body {
-      font-size: 14px;
-      line-height: 1.7;
-      color: rgba(255,255,255,0.58);
-    }
-
-    /* ─────────────────── CONTACT ─────────────────── */
-    .contact-layout {
-      display: grid;
-      grid-template-columns: 1fr 1.1fr;
       gap: 0;
+      margin-top: 64px;
+      border-top: 1px solid var(--border);
     }
 
-    .contact-left {
-      padding: 72px 48px;
-      border-right: 1px solid var(--border-teal);
+    .philosophy-card {
+      padding: 52px 44px;
+      border-right: 1px solid var(--border);
+      position: relative;
     }
 
-    .contact-right {
-      padding: 72px 48px;
-      background: var(--teal-dark);
+    .philosophy-card:last-child { border-right: none; }
+
+    .philosophy-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 5rem;
+      font-weight: 300;
+      color: rgba(176,144,80,0.12);
+      line-height: 1;
+      position: absolute;
+      top: 32px;
+      right: 36px;
+      letter-spacing: -0.04em;
+      user-select: none;
     }
 
-    .contact-details { display: flex; flex-direction: column; gap: 32px; margin-top: 36px; }
-
-    .contact-detail-label {
-      font-family: 'Inter', sans-serif;
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 6px;
+    .philosophy-title {
+      font-family: 'Cormorant SC', serif;
+      font-size: 1.5rem;
+      font-weight: 300;
+      color: var(--black);
+      letter-spacing: 0.06em;
+      margin-bottom: 16px;
+      line-height: 1;
     }
 
-    .contact-detail-value {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.15rem;
-      color: var(--white);
-    }
-
-    .contact-detail-value a {
-      color: inherit;
-      text-decoration: none;
-      transition: color 0.2s ease;
-    }
-
-    .contact-detail-value a:hover { color: var(--gold); }
-
-    .privacy-box {
-      margin-top: 40px;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid var(--border-teal);
-      border-radius: 5px;
-      padding: 28px;
-    }
-
-    .privacy-box-label {
-      font-family: 'Inter', sans-serif;
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 10px;
-    }
-
-    .privacy-box p {
+    .philosophy-body {
+      font-family: 'Jost', sans-serif;
       font-size: 14px;
-      line-height: 1.7;
-      color: rgba(255,255,255,0.55);
+      font-weight: 300;
+      line-height: 1.85;
+      color: var(--muted);
     }
 
-    /* ── Form ── */
-    .form-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-
-    .form-group { margin-bottom: 20px; }
-
-    .form-label {
-      display: block;
-      font-family: 'Inter', sans-serif;
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.55);
-      margin-bottom: 8px;
-    }
-
-    .form-input,
-    .form-select,
-    .form-textarea {
-      width: 100%;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid var(--border-teal);
-      border-radius: 5px;
-      color: var(--white);
-      font-family: 'Playfair Display', serif;
-      font-size: 15px;
-      padding: 13px 16px;
-      outline: none;
-      transition: border-color 0.2s ease, background 0.2s ease;
-      -webkit-appearance: none;
-    }
-
-    .form-input::placeholder,
-    .form-textarea::placeholder { color: rgba(255,255,255,0.25); }
-
-    .form-input:focus,
-    .form-select:focus,
-    .form-textarea:focus {
-      border-color: var(--gold);
-      background: rgba(171,122,83,0.05);
-    }
-
-    .form-select { cursor: pointer; }
-    .form-select option { background: #003837; color: var(--white); }
-
-    .form-textarea { resize: vertical; min-height: 110px; }
-
-    .form-check {
+    .philosophy-dishes {
+      margin-top: 24px;
       display: flex;
-      align-items: flex-start;
-      gap: 10px;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .philosophy-dish {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem;
+      font-weight: 400;
+      font-style: italic;
+      color: var(--charcoal);
+      padding-left: 16px;
+      border-left: 2px solid var(--gold);
+    }
+
+    /* ══════════════════════════════════════════
+       CHEF SECTION
+    ══════════════════════════════════════════ */
+    .chef-section {
+      background: var(--black);
+    }
+
+    /* ══════════════════════════════════════════
+       RESERVATION CTA
+    ══════════════════════════════════════════ */
+    .cta-section {
+      background: var(--cream);
+      text-align: center;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 120px 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-bg-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: 'Cormorant SC', serif;
+      font-size: clamp(10rem, 25vw, 22rem);
+      font-weight: 300;
+      color: rgba(176,144,80,0.06);
+      white-space: nowrap;
+      pointer-events: none;
+      user-select: none;
+      letter-spacing: 0.1em;
+    }
+
+    .cta-content { position: relative; z-index: 2; }
+
+    .cta-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.4rem, 5vw, 5.5rem);
+      font-weight: 300;
+      color: var(--black);
+      line-height: 1;
+      letter-spacing: -0.01em;
       margin-bottom: 20px;
     }
 
-    .form-check input { margin-top: 3px; accent-color: var(--gold); cursor: pointer; }
+    .cta-title em { font-style: italic; color: var(--gold); }
 
-    .form-check label {
+    .cta-sub {
+      font-family: 'Jost', sans-serif;
       font-size: 13px;
-      color: rgba(255,255,255,0.55);
-      line-height: 1.6;
-      cursor: pointer;
+      font-weight: 300;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      margin-bottom: 44px;
+      line-height: 1.7;
     }
 
-    .form-check label a { color: var(--gold-light); text-decoration: underline; text-underline-offset: 3px; }
-
-    .form-submit {
-      width: 100%;
-      padding: 16px;
-      font-family: 'Playfair Display', serif;
-      font-size: 16px;
-      color: var(--white);
-      background: var(--black);
-      border: none;
-      border-radius: 999px;
-      cursor: pointer;
-      transition: background 0.2s ease, transform 0.15s ease;
-    }
-
-    .form-submit:hover { background: var(--dark); transform: translateY(-1px); }
-    .form-submit:active { transform: translateY(0); }
-
-    .form-note {
-      font-size: 12px;
-      color: rgba(255,255,255,0.35);
-      margin-top: 14px;
-      line-height: 1.6;
-      font-family: 'Inter', sans-serif;
-    }
-
-    /* ─────────────────── FOOTER ─────────────────── */
+    /* ══════════════════════════════════════════
+       FOOTER
+    ══════════════════════════════════════════ */
     footer {
-      background: var(--teal-dark);
-      border-top: 1px solid var(--border-teal);
-      padding: 64px 48px 40px;
+      background: var(--black);
+      padding: 80px 60px 44px;
     }
 
-    .footer-grid {
+    .footer-top {
       display: grid;
-      grid-template-columns: 1.4fr 1fr 1fr 1fr;
+      grid-template-columns: 1.6fr 1fr 1fr 1fr;
       gap: 48px;
-      padding-bottom: 48px;
-      border-bottom: 1px solid var(--border-teal);
-      margin-bottom: 32px;
+      padding-bottom: 60px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      margin-bottom: 36px;
     }
 
-    .footer-brand-name {
-      font-family: 'Playfair Display', serif;
-      font-style: italic;
-      font-size: 1.6rem;
+    .footer-brand {
+      font-family: 'Cormorant SC', serif;
+      font-size: 1.4rem;
+      font-weight: 300;
+      letter-spacing: 0.24em;
       color: var(--white);
       margin-bottom: 6px;
     }
 
-    .footer-brand-name span { color: var(--gold); }
-
-    .footer-tagline {
-      font-size: 14px;
-      color: rgba(255,255,255,0.45);
+    .footer-brand-sub {
+      font-family: 'Jost', sans-serif;
+      font-size: 9px;
+      font-weight: 400;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold);
       margin-bottom: 20px;
-      font-style: italic;
+    }
+
+    .footer-about {
+      font-family: 'Jost', sans-serif;
+      font-size: 13px;
+      font-weight: 300;
+      line-height: 1.75;
+      color: rgba(255,255,255,0.38);
+      max-width: 280px;
     }
 
     .footer-col-title {
-      font-family: 'Inter', sans-serif;
-      font-size: 11px;
+      font-family: 'Jost', sans-serif;
+      font-size: 9px;
       font-weight: 500;
-      letter-spacing: 0.16em;
+      letter-spacing: 0.24em;
       text-transform: uppercase;
       color: var(--gold);
-      margin-bottom: 16px;
+      margin-bottom: 20px;
     }
 
-    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 11px; }
 
     .footer-col a {
-      font-size: 15px;
-      color: rgba(255,255,255,0.55);
+      font-family: 'Jost', sans-serif;
+      font-size: 13px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.5);
       text-decoration: none;
-      cursor: pointer;
       transition: color 0.2s ease;
+      cursor: pointer;
     }
 
     .footer-col a:hover { color: var(--white); }
@@ -1137,9 +758,11 @@
     }
 
     .footer-copy {
-      font-family: 'Inter', sans-serif;
-      font-size: 13px;
-      color: rgba(255,255,255,0.3);
+      font-family: 'Jost', sans-serif;
+      font-size: 11px;
+      font-weight: 300;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.22);
     }
 
     .footer-legal {
@@ -1148,1628 +771,525 @@
     }
 
     .footer-legal a {
-      font-family: 'Inter', sans-serif;
-      font-size: 13px;
-      color: rgba(255,255,255,0.3);
+      font-family: 'Jost', sans-serif;
+      font-size: 11px;
+      font-weight: 300;
+      letter-spacing: 0.08em;
+      color: rgba(255,255,255,0.22);
       text-decoration: none;
-      cursor: pointer;
       transition: color 0.2s ease;
     }
 
-    .footer-legal a:hover { color: rgba(255,255,255,0.6); }
+    .footer-legal a:hover { color: rgba(255,255,255,0.55); }
 
-    /* ── Scroll reveal ── */
+    /* ══════════════════════════════════════════
+       SCROLL REVEAL
+    ══════════════════════════════════════════ */
     .reveal {
       opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
+      transform: translateY(32px);
+      transition: opacity 0.8s cubic-bezier(0.25,0.46,0.45,0.94),
+                  transform 0.8s cubic-bezier(0.25,0.46,0.45,0.94);
     }
 
     .reveal.visible { opacity: 1; transform: translateY(0); }
-    .reveal-d1 { transition-delay: 0.1s; }
-    .reveal-d2 { transition-delay: 0.2s; }
-    .reveal-d3 { transition-delay: 0.3s; }
+    .reveal-d1 { transition-delay: 0.12s; }
+    .reveal-d2 { transition-delay: 0.24s; }
+    .reveal-d3 { transition-delay: 0.36s; }
 
-    /* ─────────────────── RESPONSIVE ─────────────────── */
-    /* ══════════════════════════════════
-       PREMIUM HOME FEATURES
-    ══════════════════════════════════ */
-
-    /* ── Hero enhanced ── */
-    .hero-ghost-text {
-      position: absolute;
-      bottom: -0.1em;
-      right: -0.05em;
-      font-family: 'Playfair Display SC', serif;
-      font-size: clamp(12rem, 30vw, 28rem);
-      font-weight: 700;
-      color: rgba(255,255,255,0.025);
-      line-height: 1;
-      pointer-events: none;
-      user-select: none;
-      letter-spacing: -0.04em;
-    }
-
-    .hero-eyebrow-wrap {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      justify-content: center;
-      margin-bottom: 28px;
-    }
-
-    .hero-line {
-      display: block;
-      width: 36px;
-      height: 1px;
-      background: var(--gold);
-      flex-shrink: 0;
-    }
-
-    /* Staggered word reveal */
-    .hero-word {
-      display: inline-block;
-      clip-path: inset(0 0 100% 0);
-      animation: wordReveal 0.8s cubic-bezier(0.16,1,0.3,1) forwards;
-      animation-delay: calc(var(--i) * 0.15s + 0.3s);
-    }
-
-    .hero-word-sub {
-      opacity: 0;
-      transform: translateY(16px);
-      animation: fadeUp 0.7s cubic-bezier(0.16,1,0.3,1) forwards;
-      animation-delay: calc(var(--i) * 0.12s + 0.3s);
-    }
-
-    @keyframes wordReveal {
-      to { clip-path: inset(0 0 0% 0); }
-    }
-
-    @keyframes fadeUp {
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* Scroll cue */
-    .hero-scroll-cue {
-      position: absolute;
-      bottom: 40px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-      font-family: 'Inter', sans-serif;
-      font-size: 10px;
-      font-weight: 500;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.35);
-      z-index: 2;
-    }
-
-    .scroll-track {
-      width: 1px;
-      height: 48px;
-      background: rgba(255,255,255,0.15);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .scroll-thumb {
-      position: absolute;
-      top: -100%;
-      left: 0;
-      width: 1px;
-      height: 100%;
-      background: var(--gold);
-      animation: scrollDrop 2s ease-in-out infinite;
-    }
-
-    @keyframes scrollDrop {
-      0%   { top: -100%; }
-      50%  { top: 100%; }
-      100% { top: 100%; }
-    }
-
-    /* ── Marquee ── */
-    .marquee-strip {
-      background: var(--gold);
-      overflow: hidden;
-      padding: 14px 0;
-      white-space: nowrap;
-    }
-
-    .marquee-track {
-      display: inline-flex;
-      align-items: center;
-      gap: 0;
-      animation: marqueeScroll 30s linear infinite;
-      will-change: transform;
-    }
-
-    .marquee-strip:hover .marquee-track { animation-play-state: paused; }
-
-    @keyframes marqueeScroll {
-      from { transform: translateX(0); }
-      to   { transform: translateX(-50%); }
-    }
-
-    .marquee-item {
-      font-family: 'Playfair Display SC', serif;
-      font-size: 0.85rem;
-      font-weight: 400;
-      color: var(--teal-dark);
-      letter-spacing: 0.12em;
-      padding: 0 24px;
-    }
-
-    .marquee-sep {
-      font-size: 0.5rem;
-      color: var(--teal);
-      flex-shrink: 0;
-    }
-
-    /* ── Service preview cards ── */
-    .service-cards-grid {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 3px;
-    }
-
-    .svc-card {
-      position: relative;
-      cursor: pointer;
-      isolation: isolate;
-      /* overflow handled by img-wrap so glow can bleed outside */
-      --active: 0;
-      --start: 0;
-      --spread: 30;
-      --glow-bw: 2px;
-    }
-
-    /* ── Glowing border element ── */
-    .svc-card .glow-el {
-      pointer-events: none;
-      position: absolute;
-      inset: 0;
-      border-radius: inherit;
-      z-index: 20;
-    }
-
-    .svc-card .glow-el::after {
-      content: '';
-      border-radius: inherit;
-      position: absolute;
-      inset: calc(-1 * var(--glow-bw));
-      border: var(--glow-bw) solid transparent;
-      /* colourful conic gradient — background-attachment:fixed keeps it
-         viewport-anchored so rotation of the mask arc is the only visible motion */
-      background:
-        radial-gradient(circle, #dd7bbb 10%, transparent 20%),
-        radial-gradient(circle at 40% 40%, #d79f1e 5%, transparent 15%),
-        radial-gradient(circle at 60% 60%, #5a922c 10%, transparent 20%),
-        radial-gradient(circle at 40% 60%, #4c7894 10%, transparent 20%),
-        repeating-conic-gradient(
-          from 236.84deg at 50% 50%,
-          #dd7bbb  0%,
-          #d79f1e  5%,
-          #5a922c  10%,
-          #4c7894  15%,
-          #dd7bbb  20%
-        );
-      background-attachment: fixed;
-      opacity: var(--active);
-      transition: opacity 0.35s ease;
-
-      /* Standard mask — shows only the border strip, only where the arc is */
-      mask-clip: padding-box, border-box;
-      mask-composite: intersect;
-      mask-image:
-        linear-gradient(#0000, #0000),
-        conic-gradient(
-          from calc((var(--start) - var(--spread)) * 1deg),
-          transparent 0deg,
-          white,
-          transparent calc(var(--spread) * 2deg)
-        );
-
-      /* WebKit prefix (Safari) */
-      -webkit-mask-clip: padding-box, border-box;
-      -webkit-mask-composite: xor;
-      -webkit-mask-image:
-        linear-gradient(#0000, #0000),
-        conic-gradient(
-          from calc((var(--start) - var(--spread)) * 1deg),
-          transparent 0deg,
-          white,
-          transparent calc(var(--spread) * 2deg)
-        );
-    }
-
-    .svc-card-img-wrap {
-      padding-bottom: 130%;
-      position: relative;
-      overflow: hidden;
-      border-radius: inherit;
-    }
-
-    .svc-card-img-wrap img {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.8s cubic-bezier(0.25,0.46,0.45,0.94);
-      display: block;
-    }
-
-    .svc-card:hover .svc-card-img-wrap img { transform: scale(1.08); }
-
-    .svc-card-gradient {
-      position: absolute;
-      inset: 0;
-      opacity: 0.7;
-      transition: opacity 0.4s ease;
-    }
-
-    .svc-card:hover .svc-card-gradient { opacity: 0.85; }
-
-    /* base dark overlay on top of gradient */
-    .svc-card-img-wrap::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(0,30,24,0.92) 0%, rgba(0,30,24,0.1) 50%, transparent 100%);
-    }
-
-    .svc-card-body {
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      padding: 24px 20px;
-      z-index: 2;
-    }
-
-    .svc-card-num {
-      font-family: 'Inter', sans-serif;
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.14em;
-      color: var(--gold);
-      margin-bottom: 6px;
-    }
-
-    .svc-card-name {
-      font-family: 'Playfair Display SC', serif;
-      font-size: 1rem;
-      color: var(--white);
-      line-height: 1.2;
-      margin-bottom: 4px;
-    }
-
-    .svc-card-desc {
-      font-size: 12px;
-      color: rgba(255,255,255,0.55);
-      line-height: 1.5;
-      margin-bottom: 10px;
-    }
-
-    .svc-card-arrow {
-      font-size: 1rem;
-      color: var(--gold);
-      opacity: 0;
-      transform: translateX(-6px);
-      transition: opacity 0.25s ease, transform 0.25s ease;
-    }
-
-    .svc-card:hover .svc-card-arrow { opacity: 1; transform: translateX(0); }
-
-    /* ── Editorial split section ── */
-    .editorial-split {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      min-height: 90vh;
-    }
-
-    .editorial-img-col {
-      position: relative;
-      overflow: hidden;
-      background: var(--teal-dark);
-    }
-
-    .editorial-img-frame {
-      position: sticky;
-      top: 80px;
-      padding: 60px 48px 60px 60px;
-    }
-
-    .editorial-img-main {
-      width: 100%;
-      aspect-ratio: 4/5;
-      object-fit: cover;
-      display: block;
-      border-radius: 3px;
-    }
-
-    .editorial-img-float {
-      position: absolute;
-      width: 42%;
-      aspect-ratio: 3/4;
-      bottom: 40px;
-      right: 24px;
-      object-fit: cover;
-      border: 5px solid var(--teal-dark);
-      border-radius: 3px;
-      box-shadow: 0 12px 48px rgba(0,0,0,0.4);
-    }
-
-    .editorial-year-badge {
-      position: absolute;
-      top: 96px;
-      left: 36px;
-      background: var(--gold);
-      padding: 14px 18px;
-      text-align: center;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.35);
-    }
-
-    .editorial-year-num {
-      display: block;
-      font-family: 'Playfair Display SC', serif;
-      font-size: 1.6rem;
-      color: var(--white);
-      line-height: 1;
-    }
-
-    .editorial-year-label {
-      display: block;
-      font-family: 'Inter', sans-serif;
-      font-size: 10px;
-      font-weight: 500;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.75);
-      margin-top: 4px;
-    }
-
-    .editorial-text-col {
-      padding: 80px 60px 80px 56px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      background: var(--teal);
-    }
-
-    .editorial-heading {
-      font-family: 'Playfair Display SC', serif;
-      font-size: clamp(2.2rem, 3.8vw, 3.8rem);
-      font-weight: 400;
-      color: var(--white);
-      line-height: 1.1;
-      margin-bottom: 24px;
-    }
-
-    .editorial-heading em {
-      font-family: 'Playfair Display', serif;
-      font-style: italic;
-      color: var(--gold);
-    }
-
-    .editorial-pillars {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-      margin-top: 36px;
-    }
-
-    .pillar-icon {
-      font-size: 1.1rem;
-      color: var(--gold);
-      margin-bottom: 8px;
-    }
-
-    .pillar-title {
-      font-family: 'Playfair Display SC', serif;
-      font-size: 0.95rem;
-      color: var(--white);
-      margin-bottom: 6px;
-    }
-
-    .pillar-body {
-      font-size: 13px;
-      color: rgba(255,255,255,0.5);
-      line-height: 1.6;
-    }
-
-    /* ── Premium quote ── */
-    .quote-section-premium {
-      position: relative;
-      overflow: hidden;
-      padding: 120px 48px;
-    }
-
-    .quote-bg-text {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-family: 'Playfair Display SC', serif;
-      font-size: clamp(14rem, 40vw, 36rem);
-      font-weight: 700;
-      color: rgba(255,255,255,0.03);
-      white-space: nowrap;
-      pointer-events: none;
-      user-select: none;
-      letter-spacing: -0.04em;
-    }
-
-    .premium-quote {
-      font-family: 'Playfair Display', serif;
-      font-style: normal;
-      font-size: clamp(1.6rem, 3.5vw, 3rem);
-      color: var(--white);
-      max-width: 820px;
-      margin: 0 auto;
-      line-height: 1.25;
-      position: relative;
-    }
-
-    .premium-quote em {
-      font-style: italic;
-      color: var(--gold-light);
-    }
-
-    /* ── CTA strip ── */
-    .cta-strip {
-      position: relative;
-      overflow: hidden;
-      background: var(--gold);
-      padding: 80px 48px;
-      text-align: center;
-    }
-
-    .cta-strip-bg-anim {
-      position: absolute;
-      inset: -50%;
-      background: linear-gradient(
-        102deg,
-        rgba(255,255,255,0) 0%,
-        rgba(255,255,255,0.08) 40%,
-        rgba(255,255,255,0) 60%
-      );
-      background-size: 300% 300%;
-      animation: animGradient 12s ease infinite;
-      pointer-events: none;
-    }
-
-    .cta-strip-content { position: relative; z-index: 2; }
-
-    .cta-strip-title {
-      font-family: 'Playfair Display SC', serif;
-      font-size: clamp(1.8rem, 4vw, 3.2rem);
-      font-weight: 400;
-      color: var(--teal-dark);
-      line-height: 1.1;
-      margin-bottom: 32px;
-    }
-
-    .cta-strip-title em {
-      font-family: 'Playfair Display', serif;
-      font-style: italic;
-      color: var(--teal);
-    }
-
-    /* ── Responsive for new premium blocks ── */
+    /* ══════════════════════════════════════════
+       RESPONSIVE
+    ══════════════════════════════════════════ */
     @media (max-width: 1100px) {
-      .service-cards-grid { grid-template-columns: repeat(3, 1fr); }
-      .editorial-split { grid-template-columns: 1fr; }
-      .editorial-img-col { display: none; }
-      .editorial-text-col { padding: 64px 40px; }
+      .split-section { grid-template-columns: 1fr; min-height: auto; }
+      .split-section.reverse { direction: ltr; }
+      .split-img { aspect-ratio: 16/9; }
+      .split-text { padding: 64px 48px; }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+      .philosophy-grid { grid-template-columns: 1fr; }
+      .philosophy-card { border-right: none; border-bottom: 1px solid var(--border); }
+      .philosophy-card:last-child { border-bottom: none; }
     }
 
-    @media (max-width: 920px) {
-      .service-cards-grid { grid-template-columns: repeat(2, 1fr); }
-      .editorial-pillars { grid-template-columns: 1fr; gap: 16px; }
-      .hero-ghost-text { display: none; }
-      .quote-bg-text { display: none; }
-      .cta-strip { padding: 56px 24px; }
-    }
-
-    @media (max-width: 600px) {
-      .service-cards-grid { grid-template-columns: 1fr 1fr; }
-    }
-
-    @media (max-width: 1100px) {
-      .girls-grid { grid-template-columns: repeat(3, 1fr); }
-      .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
-    }
-
-    @media (max-width: 920px) {
-      nav { padding: 18px 24px; }
-      nav.scrolled { padding: 14px 24px; }
-      .nav-links { display: none; }
-      .nav-cta { display: none; }
-      .nav-mobile-toggle { display: flex; }
-
-      .section { padding: 56px 24px; }
-      .section-sm { padding: 40px 24px; }
-      .page-hero { padding: 130px 24px 56px; }
-      .hero { padding: 130px 24px 80px; }
-      .stats-strip { padding: 36px 24px; }
-      .quote-section { padding: 64px 24px; }
-
-      .cards-grid { grid-template-columns: 1fr 1fr; }
-      .mission-grid { grid-template-columns: 1fr; }
-      .mission-img-wrapper { max-width: 480px; }
-      .mission-img-accent { display: none; }
-      .service-item { grid-template-columns: 1fr; padding: 40px 24px; }
-      .service-num { display: none; }
-      .steps-grid { grid-template-columns: 1fr 1fr; }
-      .girls-grid { grid-template-columns: repeat(2, 1fr); }
-      .vacancy-grid { grid-template-columns: 1fr; }
-      .req-list { grid-template-columns: 1fr; }
-      .benefits-grid { grid-template-columns: 1fr 1fr; }
-      .contact-layout { grid-template-columns: 1fr; }
-      .contact-left { border-right: none; border-bottom: 1px solid var(--border-teal); padding: 56px 24px; }
-      .contact-right { padding: 56px 24px; }
-      .footer-grid { grid-template-columns: 1fr 1fr; padding-bottom: 36px; }
-      footer { padding: 48px 24px 32px; }
-    }
-
-    @media (max-width: 600px) {
-      .cards-grid { grid-template-columns: 1fr; }
-      .girls-grid { grid-template-columns: 1fr 1fr; }
-      .steps-grid { grid-template-columns: 1fr; }
-      .benefits-grid { grid-template-columns: 1fr; }
-      .form-row { grid-template-columns: 1fr; }
-      .footer-grid { grid-template-columns: 1fr; }
-      .stats-strip { grid-template-columns: 1fr; gap: 24px; }
-      .stat-item { border-right: none; border-bottom: 1px solid var(--border-teal); padding-bottom: 24px; }
-      .stat-item:last-child { border-bottom: none; padding-bottom: 0; }
+    @media (max-width: 768px) {
+      nav { padding: 20px 24px; grid-template-columns: auto 1fr auto; }
+      nav.solid { padding: 14px 24px; }
+      .nav-links-left { display: none; }
+      .nav-links-right { display: none; }
+      .nav-logo { text-align: left; }
+      .nav-reserve { font-size: 10px; padding: 10px 18px; }
+      .section { padding: 72px 24px; }
+      .section-sm { padding: 56px 24px; }
+      .intro-strip { padding: 64px 24px; }
+      .awards-strip { padding: 36px 24px; flex-direction: column; gap: 0; }
+      .award-item { border-right: none; border-bottom: 1px solid var(--border); }
+      .award-item:last-child { border-bottom: none; }
+      .cta-section { padding: 80px 24px; }
+      .split-text { padding: 52px 24px; }
+      footer { padding: 56px 24px 32px; }
+      .footer-top { grid-template-columns: 1fr; gap: 36px; padding-bottom: 40px; }
       .footer-bottom { flex-direction: column; text-align: center; }
+      .cta-bg-text { display: none; }
     }
   </style>
 </head>
 <body>
 
-  <!-- ════════════════════ AGE GATE ════════════════════ -->
-  <div id="age-gate">
-    <div class="age-logo">MrPresident</div>
-    <div style="width:48px;height:2px;background:var(--gold);margin:0 auto;"></div>
-    <h2 class="age-title">Bent u 18 jaar<br>of ouder?</h2>
-    <p class="age-sub">
-      Deze website is uitsluitend bedoeld voor personen van 18 jaar en ouder.
-      Door verder te gaan bevestigt u dat u de wettelijke leeftijd heeft bereikt.
-    </p>
-    <div class="age-actions">
-      <button class="btn-primary" onclick="enterSite()">Ja, ik ben 18+</button>
-      <a href="https://www.google.com" class="btn-secondary">Verlaat de site</a>
-    </div>
-    <p class="age-disclaimer">
-      Door toegang te krijgen tot deze website gaat u akkoord met onze Algemene Voorwaarden en Privacy Policy.
-    </p>
-  </div>
-
-  <!-- ════════════════════ NAVIGATION ════════════════════ -->
+  <!-- ══════════════════════════════════════
+       NAVIGATION
+  ══════════════════════════════════════ -->
   <nav id="main-nav">
-    <div class="nav-logo" onclick="showPage('home')">MrPresident</div>
-    <ul class="nav-links">
-      <li><a onclick="showPage('home')" data-page="home">Home</a></li>
-      <li><a onclick="showPage('diensten')" data-page="diensten">Diensten</a></li>
-      <li><a onclick="showPage('dames')" data-page="dames">Onze Dames</a></li>
-      <li><a onclick="showPage('vacatures')" data-page="vacatures">Vacatures</a></li>
-      <li><a onclick="showPage('contact')" data-page="contact">Contact</a></li>
+    <ul class="nav-links-left">
+      <li><a href="#restaurant">The Restaurant</a></li>
+      <li><a href="#menus">Menus</a></li>
+      <li><a href="#philosophy">Our Kitchen</a></li>
     </ul>
-    <a class="nav-cta" onclick="showPage('contact')">Boek een date</a>
-    <div class="nav-mobile-toggle" onclick="toggleMobileNav()">
-      <span></span><span></span><span></span>
-    </div>
+
+    <a href="#" class="nav-logo">
+      <span class="nav-logo-main">Le Bernardin</span>
+      <span class="nav-logo-sub">by Eric Ripert</span>
+    </a>
+
+    <ul class="nav-links-right">
+      <li><a href="#team">The Team</a></li>
+      <li><a href="#contact">Private Dining</a></li>
+      <li><a href="#reserve" class="nav-reserve">Reserve</a></li>
+    </ul>
   </nav>
 
-  <!-- ════════════════════════════════════
-       HOME
-  ════════════════════════════════════ -->
-  <div class="page active" id="page-home">
-
-    <!-- ── HERO ── -->
-    <section class="hero" id="hero-home">
-      <div class="hero-bg-anim"></div>
-      <div class="hero-img-bg"></div>
-
-      <!-- large ghost text behind content -->
-      <div class="hero-ghost-text" aria-hidden="true">VIP</div>
-
-      <div class="hero-content">
-        <div class="hero-eyebrow-wrap">
-          <span class="hero-line"></span>
-          <span class="hero-eyebrow">Amsterdam · Discreet · Exclusief</span>
-        </div>
-
-        <h1 class="hero-title">
-          <span class="hero-word" style="--i:0">Verfijnd</span>
-          <span class="hero-word" style="--i:1">Gezelschap</span>
-        </h1>
-        <span class="hero-title-italic hero-word-sub" style="--i:2">op het hoogste niveau</span>
-
-        <p class="hero-sub hero-word-sub" style="--i:3">
-          MrPresident is het meest discrete en gerenommeerde VIP escort agentschap van de Benelux.
-          Wij verbinden gecultiveerde heren met uitzonderlijke dames voor onvergetelijke ervaringen.
-        </p>
-        <div class="hero-actions hero-word-sub" style="--i:4">
-          <a class="btn-primary" onclick="showPage('dames')">Ontmoet Onze Dames</a>
-          <a class="btn-outline" onclick="showPage('diensten')">Onze Diensten</a>
-        </div>
+  <!-- ══════════════════════════════════════
+       HERO
+  ══════════════════════════════════════ -->
+  <section class="hero" id="home">
+    <div class="hero-img" id="hero-img"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-award">
+        ✦ Three Michelin Stars · New York Times Four Stars ✦
       </div>
-
-      <!-- scroll cue -->
-      <div class="hero-scroll-cue">
-        <div class="scroll-track"><div class="scroll-thumb"></div></div>
-        <span>Scroll</span>
-      </div>
-    </section>
-
-    <!-- ── MARQUEE TICKER ── -->
-    <div class="marquee-strip" aria-hidden="true">
-      <div class="marquee-track">
-        <span class="marquee-item">Discreet</span><span class="marquee-sep">◆</span>
-        <span class="marquee-item">Exclusief</span><span class="marquee-sep">◆</span>
-        <span class="marquee-item">Verfijnd</span><span class="marquee-sep">◆</span>
-        <span class="marquee-item">Betrouwbaar</span><span class="marquee-sep">◆</span>
-        <span class="marquee-item">Premium VIP</span><span class="marquee-sep">◆</span>
-        <span class="marquee-item">24/7 Service</span><span class="marquee-sep">◆</span>
-        <span class="marquee-item">Amsterdam</span><span class="marquee-sep">◆</span>
-        <span class="marquee-item">Discreet</span><span class="marquee-sep">◆</span>
-        <span class="marquee-item">Exclusief</span><span class="marquee-sep">◆</span>
-        <span class="marquee-item">Verfijnd</span><span class="marquee-sep">◆</span>
-        <span class="marquee-item">Betrouwbaar</span><span class="marquee-sep">◆</span>
-        <span class="marquee-item">Premium VIP</span><span class="marquee-sep">◆</span>
-        <span class="marquee-item">24/7 Service</span><span class="marquee-sep">◆</span>
-        <span class="marquee-item">Amsterdam</span><span class="marquee-sep">◆</span>
+      <h1 class="hero-title">
+        Le<br><em>Bernardin</em>
+      </h1>
+      <p class="hero-tagline">Fish is the star of the plate</p>
+      <div class="hero-actions">
+        <a href="#reserve" class="btn-gold">Reserve a Table</a>
+        <a href="#menus" class="btn-outline-white">View Menus</a>
       </div>
     </div>
-
-    <!-- ── ANIMATED STATS ── -->
-    <div class="stats-strip">
-      <div class="stat-item">
-        <div class="stat-number counter" data-target="12" data-suffix="+">0+</div>
-        <div class="stat-label">Jaar Ervaring</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-number counter" data-target="100" data-suffix="%">0%</div>
-        <div class="stat-label">Discretie Gegarandeerd</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-number">24/7</div>
-        <div class="stat-label">Persoonlijke Service</div>
-      </div>
+    <div class="hero-scroll">
+      <div class="scroll-bar"></div>
+      <span class="scroll-label">Scroll</span>
     </div>
+  </section>
 
-    <!-- ── SERVICE PREVIEW CARDS (aupalevodka-style grid) ── -->
-    <section class="section" style="padding-bottom:0;">
-      <span class="section-label">Wat Wij Bieden</span>
-      <h2 class="section-title reveal">Onze Diensten</h2>
-      <div class="divider reveal"></div>
-    </section>
-    <div class="service-cards-grid">
-      <div class="svc-card reveal" onclick="showPage('diensten')">
-        <div class="glow-el"></div>
-        <div class="svc-card-img-wrap">
-          <img src="https://placehold.co/700x500/002825/003837?text=" alt="Boek uw date" />
-          <div class="svc-card-gradient" style="background:linear-gradient(135deg,rgba(171,122,83,0.35),rgba(0,40,37,0.6))"></div>
-        </div>
-        <div class="svc-card-body">
-          <div class="svc-card-num">01</div>
-          <div class="svc-card-name">Boek uw date</div>
-          <div class="svc-card-desc">Een onvergetelijke rendezvous</div>
-          <div class="svc-card-arrow">→</div>
-        </div>
-      </div>
-      <div class="svc-card reveal reveal-d1" onclick="showPage('diensten')">
-        <div class="glow-el"></div>
-        <div class="svc-card-img-wrap">
-          <img src="https://placehold.co/700x500/002020/003030?text=" alt="Concierge" />
-          <div class="svc-card-gradient" style="background:linear-gradient(135deg,rgba(0,77,75,0.5),rgba(0,30,30,0.7))"></div>
-        </div>
-        <div class="svc-card-body">
-          <div class="svc-card-num">02</div>
-          <div class="svc-card-name">Concierge Services</div>
-          <div class="svc-card-desc">Wij organiseren elk detail</div>
-          <div class="svc-card-arrow">→</div>
-        </div>
-      </div>
-      <div class="svc-card reveal reveal-d2" onclick="showPage('diensten')">
-        <div class="glow-el"></div>
-        <div class="svc-card-img-wrap">
-          <img src="https://placehold.co/700x500/001e28/002e38?text=" alt="Training" />
-          <div class="svc-card-gradient" style="background:linear-gradient(135deg,rgba(100,80,171,0.3),rgba(0,30,37,0.7))"></div>
-        </div>
-        <div class="svc-card-body">
-          <div class="svc-card-num">03</div>
-          <div class="svc-card-name">Signatuur Training</div>
-          <div class="svc-card-desc">Verfijn uw charisma & waarde</div>
-          <div class="svc-card-arrow">→</div>
-        </div>
-      </div>
-      <div class="svc-card reveal" onclick="showPage('diensten')">
-        <div class="glow-el"></div>
-        <div class="svc-card-img-wrap">
-          <img src="https://placehold.co/700x500/001c20/002c30?text=" alt="OF Management" />
-          <div class="svc-card-gradient" style="background:linear-gradient(135deg,rgba(171,83,120,0.3),rgba(0,28,32,0.7))"></div>
-        </div>
-        <div class="svc-card-body">
-          <div class="svc-card-num">04</div>
-          <div class="svc-card-name">OF / NSFW Management</div>
-          <div class="svc-card-desc">Wij kennen de weg</div>
-          <div class="svc-card-arrow">→</div>
-        </div>
-      </div>
-      <div class="svc-card reveal reveal-d1" onclick="showPage('diensten')">
-        <div class="glow-el"></div>
-        <div class="svc-card-img-wrap">
-          <img src="https://placehold.co/700x500/00201e/00302e?text=" alt="Slaapkamer Training" />
-          <div class="svc-card-gradient" style="background:linear-gradient(135deg,rgba(83,140,171,0.3),rgba(0,32,30,0.7))"></div>
-        </div>
-        <div class="svc-card-body">
-          <div class="svc-card-num">05</div>
-          <div class="svc-card-name">Slaapkamer Training</div>
-          <div class="svc-card-desc">Verleiding als kunstvorm</div>
-          <div class="svc-card-arrow">→</div>
-        </div>
-      </div>
-    </div>
-    <div style="text-align:center;padding:44px 48px 80px;">
-      <a class="btn-outline" onclick="showPage('diensten')">Alle Diensten Bekijken</a>
-    </div>
-
-    <!-- ── EDITORIAL SPLIT — Filosofie ── -->
-    <section class="editorial-split">
-      <div class="editorial-img-col">
-        <div class="editorial-img-frame">
-          <img src="https://placehold.co/800x1000/002825/003837?text=" alt="Sfeer" class="editorial-img-main" />
-          <img src="https://placehold.co/400x500/001e1e/002e2e?text=" alt="Detail" class="editorial-img-float" />
-          <div class="editorial-year-badge">
-            <span class="editorial-year-num">2012</span>
-            <span class="editorial-year-label">Opgericht</span>
-          </div>
-        </div>
-      </div>
-      <div class="editorial-text-col reveal">
-        <span class="section-label">Onze Filosofie</span>
-        <h2 class="editorial-heading">
-          Discrete<br>
-          <em>Elegantie</em>,<br>
-          Onberispelijke<br>
-          Kwaliteit
-        </h2>
-        <div class="divider"></div>
-        <p class="section-body" style="margin-bottom:20px;">
-          Bij MrPresident geloven wij dat werkelijk uitzonderlijk gezelschap begint met wederzijds respect en absolute discretie. Iedere dame in ons netwerk is zorgvuldig geselecteerd — niet alleen op uiterlijk, maar ook op intelligentie, cultuur en persoonlijkheid.
-        </p>
-        <p class="section-body" style="margin-bottom:40px;">
-          Of u nu begeleiding zoekt bij een zakelijk diner, een privé reis, of gewoon een onvergetelijke avond — wij zorgen dat elke ontmoeting naadloos en gedenkwaardig verloopt.
-        </p>
-        <div class="editorial-pillars">
-          <div class="pillar">
-            <div class="pillar-icon">◈</div>
-            <div class="pillar-title">Discretie</div>
-            <div class="pillar-body">Absolute vertrouwelijkheid, altijd.</div>
-          </div>
-          <div class="pillar">
-            <div class="pillar-icon">◈</div>
-            <div class="pillar-title">Selectie</div>
-            <div class="pillar-body">Alleen de meest uitzonderlijke dames.</div>
-          </div>
-          <div class="pillar">
-            <div class="pillar-icon">◈</div>
-            <div class="pillar-title">Maatwerk</div>
-            <div class="pillar-body">Elk arrangement uniek voor u.</div>
-          </div>
-        </div>
-        <a class="btn-primary" onclick="showPage('diensten')" style="margin-top:40px;">Onze Diensten</a>
-      </div>
-    </section>
-
-    <!-- ── FEATURED DAMES ── -->
-    <section class="section" style="background:var(--teal-dark);border-top:1px solid var(--border-teal);">
-      <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:40px;flex-wrap:wrap;gap:20px;">
-        <div>
-          <span class="section-label">Uitgelichte Selectie</span>
-          <h2 class="section-title reveal" style="margin-bottom:0;">Onze Dames</h2>
-        </div>
-        <a class="btn-outline reveal" onclick="showPage('dames')">Bekijk Alle Dames</a>
-      </div>
-      <div class="cards-grid">
-        <div class="profile-card reveal" onclick="showPage('dames')">
-          <div class="profile-card-img-wrap">
-            <img src="https://placehold.co/480x600/002825/003837?text=" alt="Sophie" />
-          </div>
-          <div class="profile-card-overlay"></div>
-          <div class="profile-card-body">
-            <div class="profile-card-location">Amsterdam</div>
-            <div class="profile-card-name">Sophie</div>
-            <div class="profile-card-detail">28 jaar · Engels · Duits · NL</div>
-          </div>
-        </div>
-        <div class="profile-card reveal reveal-d1" onclick="showPage('dames')">
-          <div class="profile-card-img-wrap">
-            <img src="https://placehold.co/480x600/002020/003030?text=" alt="Isabelle" />
-          </div>
-          <div class="profile-card-overlay"></div>
-          <div class="profile-card-body">
-            <div class="profile-card-location">Rotterdam</div>
-            <div class="profile-card-name">Isabelle</div>
-            <div class="profile-card-detail">25 jaar · Frans · Spaans</div>
-          </div>
-        </div>
-        <div class="profile-card reveal reveal-d2" onclick="showPage('dames')">
-          <div class="profile-card-img-wrap">
-            <img src="https://placehold.co/480x600/001e1e/002e2e?text=" alt="Elena" />
-          </div>
-          <div class="profile-card-overlay"></div>
-          <div class="profile-card-body">
-            <div class="profile-card-location">Den Haag</div>
-            <div class="profile-card-name">Elena</div>
-            <div class="profile-card-detail">30 jaar · Russisch · Italiaans</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ── LARGE QUOTE with background text ── -->
-    <div class="quote-section quote-section-premium">
-      <div class="quote-bg-text" aria-hidden="true">VIP</div>
-      <span class="section-label" style="display:block;margin-bottom:28px;">Discretie & Vertrouwen</span>
-      <blockquote class="premium-quote">
-        "Verfijning is niet<br>wat u draagt —<br><em>het is hoe u aanwezig bent.</em>"
-      </blockquote>
-      <div class="divider" style="margin:32px auto;"></div>
-      <span style="font-family:'Inter',sans-serif;font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.35);">MrPresident · Amsterdam</span>
-    </div>
-
-    <!-- ── CTA STRIP ── -->
-    <div class="cta-strip">
-      <div class="cta-strip-content">
-        <h3 class="cta-strip-title">Klaar voor een<br><em>onvergetelijke ervaring?</em></h3>
-        <a class="btn-secondary" onclick="showPage('contact')">Boek een date</a>
-      </div>
-      <div class="cta-strip-bg-anim"></div>
-    </div>
-
-    <!-- Footer home -->
-    <footer>
-      <div class="footer-grid">
-        <div>
-          <div class="footer-brand-name">MrPresident</div>
-          <div class="footer-tagline">Exclusief VIP Escort Agentschap · Amsterdam</div>
-          <p style="font-size:14px;color:rgba(255,255,255,0.4);line-height:1.7;max-width:280px;">Twaalf jaar toonaangevend in exclusief gezelschap voor veeleisende heren in de Benelux en daarbuiten.</p>
-        </div>
-        <div class="footer-col">
-          <div class="footer-col-title">Navigatie</div>
-          <ul>
-            <li><a onclick="showPage('home')">Home</a></li>
-            <li><a onclick="showPage('diensten')">Diensten</a></li>
-            <li><a onclick="showPage('dames')">Onze Dames</a></li>
-            <li><a onclick="showPage('vacatures')">Vacatures</a></li>
-            <li><a onclick="showPage('contact')">Contact</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <div class="footer-col-title">Diensten</div>
-          <ul>
-            <li><a onclick="showPage('diensten')">Boek uw date</a></li>
-            <li><a onclick="showPage('diensten')">Concierge Services</a></li>
-            <li><a onclick="showPage('diensten')">Signatuur Training</a></li>
-            <li><a onclick="showPage('diensten')">OF / NSFW Management</a></li>
-            <li><a onclick="showPage('diensten')">Slaapkamer Training</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <div class="footer-col-title">Contact</div>
-          <ul>
-            <li><a href="mailto:info@mrpresident.club">info@mrpresident.club</a></li>
-            <li><a href="tel:+31201234567">+31 20 123 4567</a></li>
-            <li><a>Amsterdam, Nederland</a></li>
-            <li><a>WhatsApp: +31 6 1234 5678</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <div class="footer-copy">© 2024 MrPresident. Alle rechten voorbehouden.</div>
-        <div class="footer-legal">
-          <a>Privacy Policy</a>
-          <a>Algemene Voorwaarden</a>
-          <a>Disclaimer</a>
-        </div>
-      </div>
-    </footer>
+  <!-- ══════════════════════════════════════
+       INTRO STRIP
+  ══════════════════════════════════════ -->
+  <div class="intro-strip">
+    <p class="intro-tagline">
+      "The ocean is our garden.<br>
+      Every fish, a story of respect."
+    </p>
+    <p class="intro-sub">
+      For over thirty years, Le Bernardin has defined the pinnacle of seafood cuisine in New York City —
+      and in the world. A commitment to purity, precision, and pleasure in every plate.
+    </p>
   </div>
 
-  <!-- ════════════════════════════════════
-       DIENSTEN
-  ════════════════════════════════════ -->
-  <div class="page" id="page-diensten">
-    <div class="page-hero">
-      <span class="section-label">Wat Wij Bieden</span>
-      <h1 style="font-family:'Playfair Display SC',serif;font-size:clamp(2.8rem,6vw,5.5rem);font-weight:400;color:var(--white);line-height:1.05;letter-spacing:0;margin-bottom:20px;">Onze Diensten</h1>
-      <p style="font-size:16px;color:rgba(255,255,255,0.62);max-width:520px;line-height:1.75;">
-        MrPresident biedt een uitgebreid scala aan gepersonaliseerde diensten voor veeleisende heren.
-        Elke dienst wordt uitgevoerd met absolute discretie en onberispelijke professionaliteit.
+  <!-- ══════════════════════════════════════
+       AWARDS
+  ══════════════════════════════════════ -->
+  <div class="awards-strip">
+    <div class="award-item reveal">
+      <div class="award-num">III</div>
+      <div class="award-label">Michelin Stars</div>
+    </div>
+    <div class="award-item reveal reveal-d1">
+      <div class="award-num">★★★★</div>
+      <div class="award-label">New York Times</div>
+    </div>
+    <div class="award-item reveal reveal-d2">
+      <div class="award-num">38+</div>
+      <div class="award-label">Years of Excellence</div>
+    </div>
+    <div class="award-item reveal reveal-d3">
+      <div class="award-num">#1</div>
+      <div class="award-label">Best Restaurant NYC</div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       RESTAURANT — split image+text (Ammolite layout)
+  ══════════════════════════════════════ -->
+  <section id="restaurant">
+
+    <!-- Row 1: image left, text right -->
+    <div class="split-section">
+      <div class="split-img">
+        <img src="https://placehold.co/960x680/1a1814/242018?text=" alt="Le Bernardin Interior" />
+      </div>
+      <div class="split-text">
+        <div class="reveal">
+          <span class="eyebrow">The Restaurant</span>
+          <h2 class="heading-section">An Oasis of<br><em>Refined Calm</em></h2>
+          <div class="gold-rule"></div>
+          <p class="body-copy">
+            Situated at 155 West 51st Street in Midtown Manhattan, Le Bernardin offers an atmosphere
+            of serene elegance. The room — warm, unhurried, and precise — mirrors the philosophy
+            of its kitchen: nothing superfluous, everything essential.
+          </p>
+          <p class="body-copy" style="margin-top:16px;">
+            Designed to make every guest feel the quiet privilege of exceptional hospitality,
+            Le Bernardin's dining room has been a sanctuary for those who understand that
+            true luxury lies in restraint.
+          </p>
+          <a href="#reserve" class="btn-outline-dark" style="margin-top:36px;">Make a Reservation</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Row 2: text left, image right -->
+    <div class="split-section reverse">
+      <div class="split-img">
+        <img src="https://placehold.co/960x680/0e0d0b/181612?text=" alt="Seafood Preparation" />
+      </div>
+      <div class="split-text dark">
+        <div class="reveal">
+          <span class="eyebrow">Our Commitment</span>
+          <h2 class="heading-section" style="color:var(--white);">Sustainably<br><em>Sourced, Always</em></h2>
+          <div class="gold-rule"></div>
+          <p class="body-copy">
+            We are committed to purchasing and serving only responsibly sourced seafood —
+            without compromising the future of our oceans. Every ingredient on our menu
+            is chosen with the same reverence we bring to its preparation.
+          </p>
+          <p class="body-copy" style="margin-top:16px;">
+            Our partnerships with sustainable fisheries span continents. The result is
+            a menu that changes with the seasons, guided always by what the ocean
+            can generously and responsibly provide.
+          </p>
+          <a href="#menus" class="btn-outline-white" style="margin-top:36px;">Explore the Menu</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Row 3: image left, text right -->
+    <div class="split-section">
+      <div class="split-img">
+        <img src="https://placehold.co/960x680/14120f/1e1c18?text=" alt="Wine Cellar" />
+      </div>
+      <div class="split-text">
+        <div class="reveal">
+          <span class="eyebrow">The Wine Program</span>
+          <h2 class="heading-section">15,000 Bottles.<br><em>One Vision.</em></h2>
+          <div class="gold-rule"></div>
+          <p class="body-copy">
+            Led by Aldo Sohm — named Best Sommelier in the World in 2008 — our cellar holds
+            over 15,000 bottles across 900 selections. Each pairing is crafted to elevate
+            the natural flavors of the sea to their highest expression.
+          </p>
+          <p class="body-copy" style="margin-top:16px;">
+            Wine pairings are available with every tasting menu, curated personally
+            by Aldo and his team to guide your journey through the meal.
+          </p>
+          <a href="#reserve" class="btn-outline-dark" style="margin-top:36px;">Wine Pairing Menus</a>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ══════════════════════════════════════
+       MENU PHILOSOPHY
+  ══════════════════════════════════════ -->
+  <section class="section philosophy-section" id="menus">
+    <div style="max-width:1200px;margin:0 auto;">
+      <div class="reveal">
+        <span class="eyebrow">The Menu</span>
+        <h2 class="heading-display" style="max-width:700px;">A Language of<br><em>Preparation</em></h2>
+        <div class="gold-rule"></div>
+        <p class="body-copy">
+          At Le Bernardin, every dish belongs to one of three philosophies — a language
+          that describes our relationship with the ingredient, and our respect for its natural form.
+        </p>
+      </div>
+
+      <div class="philosophy-grid">
+        <div class="philosophy-card reveal">
+          <div class="philosophy-num">I</div>
+          <div class="philosophy-title">Almost Raw</div>
+          <p class="philosophy-body">
+            The fish barely touched by heat. Pure expression of the ocean's finest —
+            refined by curing, marinating, or the gentlest of preparations.
+            The ingredient speaks for itself.
+          </p>
+          <div class="philosophy-dishes">
+            <div class="philosophy-dish">Bluefin Tuna · Caviar · Nori Crisp</div>
+            <div class="philosophy-dish">Yellowfin Tuna · Foie Gras · Toasted Baguette</div>
+            <div class="philosophy-dish">Kampachi · Kumquat · Jalapeño</div>
+          </div>
+        </div>
+        <div class="philosophy-card reveal reveal-d1">
+          <div class="philosophy-num">II</div>
+          <div class="philosophy-title">Barely Touched</div>
+          <p class="philosophy-body">
+            Delicate heat applied with absolute precision. The flesh yields only at the moment
+            of perfection — translucent at the center, gently yielding to the fork.
+          </p>
+          <div class="philosophy-dishes">
+            <div class="philosophy-dish">Poached Halibut · Truffled Morels</div>
+            <div class="philosophy-dish">Dover Sole · Romanesco · Cauliflower</div>
+            <div class="philosophy-dish">Wild Striped Bass · Mushroom Broth</div>
+          </div>
+        </div>
+        <div class="philosophy-card reveal reveal-d2">
+          <div class="philosophy-num">III</div>
+          <div class="philosophy-title">Lightly Cooked</div>
+          <p class="philosophy-body">
+            The fullest expression of technique — where classical French mastery meets
+            the elemental simplicity of the sea. Cooked through, yet never surrendering
+            its essential character.
+          </p>
+          <div class="philosophy-dishes">
+            <div class="philosophy-dish">Pan-Roasted Grouper · Wild Mushrooms</div>
+            <div class="philosophy-dish">Grilled Salmon · Mushroom Vinaigrette</div>
+            <div class="philosophy-dish">Seared Skate · Capers · Brown Butter</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pricing strip -->
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:0;border:1px solid var(--border);border-top:none;" class="reveal">
+        <div style="padding:32px 36px;border-right:1px solid var(--border);">
+          <div style="font-family:'Cormorant SC',serif;font-size:1rem;letter-spacing:0.1em;color:var(--black);margin-bottom:6px;">Chef's Tasting</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:300;color:var(--gold);">$350</div>
+          <div style="font-size:11px;color:var(--muted);margin-top:4px;font-family:'Jost',sans-serif;letter-spacing:0.08em;">Wine pairing +$180</div>
+        </div>
+        <div style="padding:32px 36px;border-right:1px solid var(--border);">
+          <div style="font-family:'Cormorant SC',serif;font-size:1rem;letter-spacing:0.1em;color:var(--black);margin-bottom:6px;">Dinner Prix Fixe</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:300;color:var(--gold);">$218</div>
+          <div style="font-size:11px;color:var(--muted);margin-top:4px;font-family:'Jost',sans-serif;letter-spacing:0.08em;">Three courses</div>
+        </div>
+        <div style="padding:32px 36px;border-right:1px solid var(--border);">
+          <div style="font-family:'Cormorant SC',serif;font-size:1rem;letter-spacing:0.1em;color:var(--black);margin-bottom:6px;">Lunch Prix Fixe</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:300;color:var(--gold);">$137</div>
+          <div style="font-size:11px;color:var(--muted);margin-top:4px;font-family:'Jost',sans-serif;letter-spacing:0.08em;">Two or three courses</div>
+        </div>
+        <div style="padding:32px 36px;">
+          <div style="font-family:'Cormorant SC',serif;font-size:1rem;letter-spacing:0.1em;color:var(--black);margin-bottom:6px;">Vegetarian Truffle</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:300;color:var(--gold);">$350</div>
+          <div style="font-size:11px;color:var(--muted);margin-top:4px;font-family:'Jost',sans-serif;letter-spacing:0.08em;">Tasting menu</div>
+        </div>
+      </div>
+
+      <div style="text-align:center;margin-top:52px;">
+        <a href="#reserve" class="btn-gold">Reserve Your Table</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       CHEF / TEAM — dark split (Ammolite team section)
+  ══════════════════════════════════════ -->
+  <section id="team" class="chef-section">
+    <div class="split-section" style="min-height:700px;">
+      <div class="split-text dark" style="background:var(--black);">
+        <div class="reveal">
+          <span class="eyebrow" style="color:var(--gold-light);">The Chef</span>
+          <h2 class="heading-section" style="color:var(--white);font-size:clamp(2.2rem,4vw,4.5rem);">
+            Eric<br><em>Ripert</em>
+          </h2>
+          <div class="gold-rule"></div>
+          <p class="body-copy">
+            Born in Antibes, France, Eric Ripert has led Le Bernardin's kitchen since 1994.
+            His approach is deceptively simple: honor the fish, master the technique,
+            remove everything superfluous. The result has earned three Michelin stars —
+            every year since the guide began awarding them in New York.
+          </p>
+          <p class="body-copy" style="margin-top:16px;">
+            A recipient of the James Beard Award for Outstanding Chef, Ripert has
+            defined an entire school of cooking — one that holds the ocean in reverence
+            and places the ingredient, not the chef, at the center of every plate.
+          </p>
+          <blockquote style="margin-top:32px;padding-left:20px;border-left:2px solid var(--gold);font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-style:italic;color:rgba(255,255,255,0.7);line-height:1.5;">
+            "When you walk into my kitchen, you feel the respect we have for the ocean.
+            That respect is the foundation of everything we do."
+          </blockquote>
+        </div>
+      </div>
+      <div class="split-img">
+        <img src="https://placehold.co/960x700/131210/1d1b18?text=" alt="Eric Ripert" />
+      </div>
+    </div>
+
+    <!-- Sous-chef row -->
+    <div class="split-section reverse" style="min-height:560px;">
+      <div class="split-img">
+        <img src="https://placehold.co/960x560/0f0e0c/191714?text=" alt="Le Bernardin Kitchen" />
+      </div>
+      <div class="split-text dark">
+        <div class="reveal">
+          <span class="eyebrow" style="color:var(--gold-light);">The Kitchen</span>
+          <h2 class="heading-section" style="color:var(--white);">Mastery Through<br><em>Discipline</em></h2>
+          <div class="gold-rule"></div>
+          <p class="body-copy">
+            Twelve years of continuous three-star recognition do not happen by accident.
+            They happen through a kitchen culture that demands and delivers absolute
+            consistency — every service, every plate, every day.
+          </p>
+          <p class="body-copy" style="margin-top:16px;">
+            Our brigade is led by some of the most accomplished professionals in
+            American fine dining. Their collective discipline, curiosity, and
+            dedication to craft form the backbone of every meal served here.
+          </p>
+          <a href="#reserve" class="btn-outline-white" style="margin-top:36px;">Private Dining</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       RESERVATION CTA (Ammolite style)
+  ══════════════════════════════════════ -->
+  <section class="cta-section" id="reserve">
+    <div class="cta-bg-text">Reserve</div>
+    <div class="cta-content reveal">
+      <span class="eyebrow" style="justify-content:center;">New York · 155 West 51st Street</span>
+      <h2 class="cta-title">
+        Join Us for an<br><em>Unforgettable</em> Evening
+      </h2>
+      <p class="cta-sub">
+        Reservations accepted up to 28 days in advance.<br>
+        For parties of 6 or more, please contact us directly.
+      </p>
+      <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+        <a href="tel:+12125541515" class="btn-gold">Reserve by Phone</a>
+        <a href="#" class="btn-outline-dark">Reserve Online (Resy)</a>
+      </div>
+      <p style="margin-top:24px;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.12em;color:var(--muted);">
+        +1 (212) 554-1515 &nbsp;·&nbsp; Monday–Friday Lunch &amp; Dinner &nbsp;·&nbsp; Dinner Only Saturday
       </p>
     </div>
+  </section>
 
-    <div class="service-list">
-      <div class="service-item reveal">
-        <div class="service-num">01</div>
-        <div>
-          <div class="service-name">Boek uw date</div>
-          <p class="service-desc">Een onvergetelijke rendezvous. Wij verbinden u met een van onze zorgvuldig geselecteerde dames voor een ervaring die u bijblijft. Discreet, persoonlijk en op maat van uw wensen — van een intiem diner tot een meerdaags arrangement.</p>
-        </div>
-        <span class="service-badge">Meest Gevraagd</span>
+  <!-- ══════════════════════════════════════
+       CONTACT / PRIVATE DINING — split
+  ══════════════════════════════════════ -->
+  <section id="contact">
+    <div class="split-section" style="min-height:560px;">
+      <div class="split-img">
+        <img src="https://placehold.co/960x560/111009/1b1917?text=" alt="Private Dining Room" />
       </div>
-      <div class="service-item reveal">
-        <div class="service-num">02</div>
-        <div>
-          <div class="service-name">Concierge Services</div>
-          <p class="service-desc">Laat het aan ons de details van uw rendezvous te organiseren. Van reserveringen en transport tot accommodatie en speciale verzoeken — wij regelen alles zodat u zich volledig kunt richten op het genieten van uw afspraak.</p>
-        </div>
-        <span class="service-badge">Premium</span>
-      </div>
-      <div class="service-item reveal">
-        <div class="service-num">03</div>
-        <div>
-          <div class="service-name">Signatuur Training</div>
-          <p class="service-desc">Versterk uw sociale vaardigheden, verfijn uw charisma en verhoog uw waarde. Onze persoonlijke coachingsprogramma's zijn ontworpen voor mannen die het beste uit zichzelf willen halen — in het sociale leven, de boardroom en daarbuiten.</p>
-        </div>
-        <span class="service-badge">Exclusief</span>
-      </div>
-      <div class="service-item reveal">
-        <div class="service-num">04</div>
-        <div>
-          <div class="service-name">OF / NSFW Management</div>
-          <p class="service-desc">Altijd al een OnlyFans of Friends2Follow willen starten? Wij kennen de weg. Van strategie en contentplanning tot accountbeheer en groei — wij begeleiden u of uw model professioneel naar succes in het digitale landschap.</p>
-        </div>
-        <span class="service-badge">VIP</span>
-      </div>
-      <div class="service-item reveal">
-        <div class="service-num">05</div>
-        <div>
-          <div class="service-name">Slaapkamer Training</div>
-          <p class="service-desc">Verleiding en sensualiteit is een kunstvorm. Sta ons toe u te leren hoe u genot beheerst. Onze discrete en professionele begeleiding helpt u uw zelfvertrouwen en vaardigheden te verdiepen voor een rijker en bevredigender intiem leven.</p>
-        </div>
-        <span class="service-badge">Intiem</span>
-      </div>
-    </div>
-
-    <!-- Hoe het werkt -->
-    <section class="section" style="background:var(--teal-dark);border-top:1px solid var(--border-teal);">
-      <span class="section-label">Hoe Het Werkt</span>
-      <h2 class="section-title">Onze Werkwijze</h2>
-      <div class="steps-grid">
-        <div class="step-card reveal">
-          <div class="step-num">01</div>
-          <div class="step-title">Eerste Contact</div>
-          <p class="step-body">Neem discreet contact op via telefoon, e-mail of WhatsApp. Uw verzoek wordt strikt vertrouwelijk behandeld.</p>
-        </div>
-        <div class="step-card reveal reveal-d1">
-          <div class="step-num">02</div>
-          <div class="step-title">Persoonlijk Gesprek</div>
-          <p class="step-body">Wij bespreken uw wensen, voorkeuren en verwachtingen zodat wij de perfecte match kunnen maken.</p>
-        </div>
-        <div class="step-card reveal reveal-d2">
-          <div class="step-num">03</div>
-          <div class="step-title">Voorstel & Selectie</div>
-          <p class="step-body">Wij presenteren een zorgvuldige selectie van dames die passen bij uw persoonlijkheid en arrangement.</p>
-        </div>
-        <div class="step-card reveal reveal-d3">
-          <div class="step-num">04</div>
-          <div class="step-title">Bevestiging</div>
-          <p class="step-body">Na uw akkoord verzorgen wij alle logistiek en details voor een vlekkeloos verlopend arrangement.</p>
-        </div>
-      </div>
-      <div style="text-align:center;margin-top:44px;">
-        <a class="btn-primary" onclick="showPage('contact')">Neem Contact Op</a>
-      </div>
-    </section>
-
-    <footer>
-      <div class="footer-grid">
-        <div>
-          <div class="footer-brand-name">MrPresident</div>
-          <div class="footer-tagline">Exclusief VIP Escort Agentschap · Amsterdam</div>
-        </div>
-        <div class="footer-col">
-          <div class="footer-col-title">Navigatie</div>
-          <ul>
-            <li><a onclick="showPage('home')">Home</a></li>
-            <li><a onclick="showPage('diensten')">Diensten</a></li>
-            <li><a onclick="showPage('dames')">Onze Dames</a></li>
-            <li><a onclick="showPage('vacatures')">Vacatures</a></li>
-            <li><a onclick="showPage('contact')">Contact</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <div class="footer-col-title">Contact</div>
-          <ul>
-            <li><a href="mailto:info@mrpresident.club">info@mrpresident.club</a></li>
-            <li><a href="tel:+31201234567">+31 20 123 4567</a></li>
-          </ul>
-        </div>
-        <div></div>
-      </div>
-      <div class="footer-bottom">
-        <div class="footer-copy">© 2024 MrPresident. Alle rechten voorbehouden.</div>
-        <div class="footer-legal"><a>Privacy Policy</a><a>Algemene Voorwaarden</a></div>
-      </div>
-    </footer>
-  </div>
-
-  <!-- ════════════════════════════════════
-       ONZE DAMES
-  ════════════════════════════════════ -->
-  <div class="page" id="page-dames">
-    <div class="page-hero">
-      <span class="section-label">Exclusieve Selectie</span>
-      <h1 style="font-family:'Playfair Display SC',serif;font-size:clamp(2.8rem,6vw,5.5rem);font-weight:400;color:var(--white);line-height:1.05;letter-spacing:0;margin-bottom:20px;">Onze Dames</h1>
-      <p style="font-size:16px;color:rgba(255,255,255,0.62);max-width:560px;line-height:1.75;">Elk profiel vertegenwoordigt een dame die geselecteerd is op schoonheid, intelligentie, cultuur en uitstraling. Onze collectie omvat diverse achtergronden, talen en specialiteiten.</p>
-      <div class="filters-bar">
-        <span class="filter-pill active">Alle Dames</span>
-        <span class="filter-pill">Amsterdam</span>
-        <span class="filter-pill">Rotterdam</span>
-        <span class="filter-pill">Den Haag</span>
-        <span class="filter-pill">Internationaal</span>
-      </div>
-    </div>
-
-    <div style="padding:12px;">
-      <div class="girls-grid">
-        <div class="girl-card">
-          <div class="girl-img-wrap"><img src="https://placehold.co/480x640/002825/003837?text=" alt="Sophie" /></div>
-          <div class="girl-overlay"></div>
-          <div class="girl-info">
-            <div class="girl-name">Sophie</div>
-            <div class="girl-meta"><span>28 jaar</span><span>Amsterdam</span><span>Engels · Duits · NL</span></div>
-            <div class="girl-cta">Profiel Bekijken</div>
-          </div>
-        </div>
-        <div class="girl-card">
-          <div class="girl-img-wrap"><img src="https://placehold.co/480x640/002020/003030?text=" alt="Isabelle" /></div>
-          <div class="girl-overlay"></div>
-          <div class="girl-info">
-            <div class="girl-name">Isabelle</div>
-            <div class="girl-meta"><span>25 jaar</span><span>Rotterdam</span><span>Frans · Spaans</span></div>
-            <div class="girl-cta">Profiel Bekijken</div>
-          </div>
-        </div>
-        <div class="girl-card">
-          <div class="girl-img-wrap"><img src="https://placehold.co/480x640/001e1e/002e2e?text=" alt="Elena" /></div>
-          <div class="girl-overlay"></div>
-          <div class="girl-info">
-            <div class="girl-name">Elena</div>
-            <div class="girl-meta"><span>30 jaar</span><span>Den Haag</span><span>Russisch · Italiaans</span></div>
-            <div class="girl-cta">Profiel Bekijken</div>
-          </div>
-        </div>
-        <div class="girl-card">
-          <div class="girl-img-wrap"><img src="https://placehold.co/480x640/002830/003840?text=" alt="Charlotte" /></div>
-          <div class="girl-overlay"></div>
-          <div class="girl-info">
-            <div class="girl-name">Charlotte</div>
-            <div class="girl-meta"><span>27 jaar</span><span>Amsterdam</span><span>Engels · Frans · NL</span></div>
-            <div class="girl-cta">Profiel Bekijken</div>
-          </div>
-        </div>
-        <div class="girl-card">
-          <div class="girl-img-wrap"><img src="https://placehold.co/480x640/001e28/002e38?text=" alt="Valentina" /></div>
-          <div class="girl-overlay"></div>
-          <div class="girl-info">
-            <div class="girl-name">Valentina</div>
-            <div class="girl-meta"><span>26 jaar</span><span>Internationaal</span><span>Italiaans · Engels</span></div>
-            <div class="girl-cta">Profiel Bekijken</div>
-          </div>
-        </div>
-        <div class="girl-card">
-          <div class="girl-img-wrap"><img src="https://placehold.co/480x640/002022/003032?text=" alt="Natasha" /></div>
-          <div class="girl-overlay"></div>
-          <div class="girl-info">
-            <div class="girl-name">Natasha</div>
-            <div class="girl-meta"><span>29 jaar</span><span>Amsterdam</span><span>Russisch · Engels</span></div>
-            <div class="girl-cta">Profiel Bekijken</div>
-          </div>
-        </div>
-        <div class="girl-card">
-          <div class="girl-img-wrap"><img src="https://placehold.co/480x640/001c24/002c34?text=" alt="Mila" /></div>
-          <div class="girl-overlay"></div>
-          <div class="girl-info">
-            <div class="girl-name">Mila</div>
-            <div class="girl-meta"><span>24 jaar</span><span>Utrecht</span><span>Pools · Duits · NL</span></div>
-            <div class="girl-cta">Profiel Bekijken</div>
-          </div>
-        </div>
-        <div class="girl-card">
-          <div class="girl-img-wrap"><img src="https://placehold.co/480x640/00201e/00302e?text=" alt="Anaïs" /></div>
-          <div class="girl-overlay"></div>
-          <div class="girl-info">
-            <div class="girl-name">Anaïs</div>
-            <div class="girl-meta"><span>31 jaar</span><span>Internationaal</span><span>Frans · Arabisch</span></div>
-            <div class="girl-cta">Profiel Bekijken</div>
-          </div>
+      <div class="split-text">
+        <div class="reveal">
+          <span class="eyebrow">Private Dining</span>
+          <h2 class="heading-section">Your Private<br><em>Occasion</em></h2>
+          <div class="gold-rule"></div>
+          <p class="body-copy">
+            Le Bernardin's private dining rooms accommodate groups from 10 to 80 guests.
+            Whether a corporate dinner, a milestone celebration, or an intimate gathering,
+            each event receives the same meticulous attention as our main dining room.
+          </p>
+          <p class="body-copy" style="margin-top:16px;">
+            Custom menus, curated wine pairings, and dedicated service staff ensure
+            that every private event at Le Bernardin becomes a memory.
+          </p>
+          <a href="#" class="btn-outline-dark" style="margin-top:36px;">Inquire About Events</a>
         </div>
       </div>
     </div>
+  </section>
 
-    <section class="section" style="text-align:center;background:var(--teal-dark);border-top:1px solid var(--border-teal);">
-      <span class="section-label" style="display:block;margin-bottom:0;">Privé Consultatie</span>
-      <h2 class="section-title" style="max-width:560px;margin:16px auto 0;">Niet Gevonden Wat U Zocht?</h2>
-      <div class="divider" style="margin:20px auto;"></div>
-      <p class="section-body" style="margin:0 auto 32px;text-align:center;">Ons netwerk is groter dan wat hier getoond wordt. Neem contact op voor een persoonlijke aanbeveling op maat.</p>
-      <a class="btn-primary" onclick="showPage('contact')">Persoonlijk Advies</a>
-    </section>
-
-    <footer>
-      <div class="footer-grid">
-        <div>
-          <div class="footer-brand-name">MrPresident</div>
-          <div class="footer-tagline">Exclusief VIP Escort Agentschap · Amsterdam</div>
-        </div>
-        <div class="footer-col">
-          <div class="footer-col-title">Navigatie</div>
-          <ul>
-            <li><a onclick="showPage('home')">Home</a></li>
-            <li><a onclick="showPage('diensten')">Diensten</a></li>
-            <li><a onclick="showPage('dames')">Onze Dames</a></li>
-            <li><a onclick="showPage('vacatures')">Vacatures</a></li>
-            <li><a onclick="showPage('contact')">Contact</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <div class="footer-col-title">Contact</div>
-          <ul>
-            <li><a href="mailto:info@mrpresident.club">info@mrpresident.club</a></li>
-            <li><a href="tel:+31201234567">+31 20 123 4567</a></li>
-          </ul>
-        </div>
-        <div></div>
+  <!-- ══════════════════════════════════════
+       FOOTER
+  ══════════════════════════════════════ -->
+  <footer>
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">Le Bernardin</div>
+        <div class="footer-brand-sub">by Eric Ripert · Est. 1986</div>
+        <p class="footer-about">
+          155 West 51st Street<br>
+          New York, NY 10019<br><br>
+          +1 (212) 554-1515<br>
+          info@le-bernardin.com
+        </p>
       </div>
-      <div class="footer-bottom">
-        <div class="footer-copy">© 2024 MrPresident. Alle rechten voorbehouden.</div>
-        <div class="footer-legal"><a>Privacy Policy</a><a>Algemene Voorwaarden</a></div>
-      </div>
-    </footer>
-  </div>
-
-  <!-- ════════════════════════════════════
-       VACATURES
-  ════════════════════════════════════ -->
-  <div class="page" id="page-vacatures">
-    <div class="page-hero">
-      <span class="section-label">Werk Met Ons</span>
-      <h1 style="font-family:'Playfair Display SC',serif;font-size:clamp(2.8rem,6vw,5.5rem);font-weight:400;color:var(--white);line-height:1.05;letter-spacing:0;margin-bottom:20px;">Word Onderdeel<br>van MrPresident</h1>
-      <p style="font-size:16px;color:rgba(255,255,255,0.62);max-width:560px;line-height:1.75;">Wij zijn voortdurend op zoek naar uitzonderlijke dames die zich willen aansluiten bij ons exclusieve netwerk. Bij MrPresident staat uw veiligheid, welzijn en professionele groei altijd op de eerste plaats.</p>
-    </div>
-
-    <section class="section">
-      <div class="vacancy-grid">
-        <div class="vacancy-card reveal">
-          <div class="vacancy-title">VIP Escort Dame</div>
-          <div class="vacancy-tags">
-            <span class="tag gold">Fulltime / Parttime</span>
-            <span class="tag">Amsterdam</span>
-            <span class="tag">Nationaal</span>
-          </div>
-          <p class="vacancy-body">Wij zoeken zelfverzekerde, verzorgde en intelligente dames voor VIP begeleiding op het hoogste niveau. U begeleidt onze exclusieve clientèle bij zakelijke evenementen, privé-diners en sociale gelegenheden. Ervaring is geen vereiste — wij bieden volledige begeleiding en training.</p>
-          <a class="vacancy-link" onclick="showPage('contact')">Solliciteer Nu</a>
-        </div>
-        <div class="vacancy-card reveal reveal-d1">
-          <div class="vacancy-title">Internationale Reisbegeleidster</div>
-          <div class="vacancy-tags">
-            <span class="tag gold">Parttime</span>
-            <span class="tag">Internationaal</span>
-            <span class="tag">Reisbereid</span>
-          </div>
-          <p class="vacancy-body">Voor onze internationale clientèle zoeken wij dames die graag reizen en zich prettig voelen in een internationale omgeving. U reist mee naar bestemmingen wereldwijd — van Parijs tot Dubai en Monaco. Reiskosten en business class zijn volledig gedekt.</p>
-          <a class="vacancy-link" onclick="showPage('contact')">Solliciteer Nu</a>
-        </div>
-        <div class="vacancy-card reveal">
-          <div class="vacancy-title">Event & Gala Begeleidster</div>
-          <div class="vacancy-tags">
-            <span class="tag gold">Flexibel</span>
-            <span class="tag">Benelux</span>
-            <span class="tag">Avonduren</span>
-          </div>
-          <p class="vacancy-body">Voor exclusieve evenementen en galadners zoeken wij dames met een natuurlijke aanwezigheid en stijl. U vertegenwoordigt onze clientèle op hoogwaardige sociale events. Uitstekende vergoeding en flexibele beschikbaarheid.</p>
-          <a class="vacancy-link" onclick="showPage('contact')">Solliciteer Nu</a>
-        </div>
-        <div class="vacancy-card reveal reveal-d1">
-          <div class="vacancy-title">Jacht & Lifestyle Begeleidster</div>
-          <div class="vacancy-tags">
-            <span class="tag gold">Seizoen</span>
-            <span class="tag">Mediterraan</span>
-            <span class="tag">Zomer</span>
-          </div>
-          <p class="vacancy-body">Speciaal voor de zomerseizoenen zoeken wij dames die beschikbaar zijn voor langere perioden aan boord van jachten langs de Middellandse Zee. Een unieke ervaring in weelderige omgevingen. Vereist: aanpasbaar karakter en uitstekende presentatie.</p>
-          <a class="vacancy-link" onclick="showPage('contact')">Solliciteer Nu</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- Vereisten -->
-    <section class="section" style="background:var(--teal-dark);border-top:1px solid var(--border-teal);padding-top:72px;">
-      <span class="section-label">Profiel</span>
-      <h2 class="section-title">Wat Wij Zoeken</h2>
-      <div class="divider"></div>
-      <div class="req-block">
-        <p style="font-size:15px;color:rgba(255,255,255,0.62);line-height:1.75;max-width:580px;margin-bottom:8px;">Bij MrPresident zoeken wij dames die niet alleen aan onze hoge esthetische standaard voldoen, maar ook over de sociale intelligentie beschikken om in elke situatie de juiste toon te treffen.</p>
-        <ul class="req-list">
-          <li>Leeftijd tussen 21 en 38 jaar</li>
-          <li>Uitstekende verzorging en presentatie</li>
-          <li>Minimaal HBO werk- en denkniveau</li>
-          <li>Vloeiend in Nederlands en Engels</li>
-          <li>Discrete en professionele instelling</li>
-          <li>Aangenaam en conversationeel sterk</li>
-          <li>Bereid tot beschikbaarheid in avonduren</li>
-          <li>EU-werkvergunning of Nederlandse nationaliteit</li>
-          <li>Geen zichtbare tatoeages (bij voorkeur)</li>
-          <li>Betrouwbaar en punctueel</li>
-          <li>Passend bij ons merk en imago</li>
-          <li>Bereid tot discreet referentiegesprek</li>
+      <div class="footer-col">
+        <div class="footer-col-title">Visit</div>
+        <ul>
+          <li><a href="#restaurant">The Restaurant</a></li>
+          <li><a href="#menus">Menus</a></li>
+          <li><a href="#team">Our Team</a></li>
+          <li><a href="#contact">Private Dining</a></li>
+          <li><a href="#reserve">Reservations</a></li>
         </ul>
       </div>
-
-      <div style="margin-top:64px;">
-        <span class="section-label">Wat Wij Bieden</span>
-        <h2 class="section-title">Uw Voordelen</h2>
-        <div class="benefits-grid">
-          <div class="benefit-card reveal">
-            <div class="benefit-icon">◇</div>
-            <div class="benefit-title">Uitstekende Vergoeding</div>
-            <p class="benefit-body">Aantrekkelijke en transparante tarieven met snelle uitbetaling. Wij hanteren de hoogste tarieven in de markt.</p>
-          </div>
-          <div class="benefit-card reveal reveal-d1">
-            <div class="benefit-icon">◇</div>
-            <div class="benefit-title">Veiligheid & Support</div>
-            <p class="benefit-body">Uw veiligheid staat voorop. 24/7 bereikbare support en uitgebreide screening van alle clientèle.</p>
-          </div>
-          <div class="benefit-card reveal reveal-d2">
-            <div class="benefit-icon">◇</div>
-            <div class="benefit-title">Volledige Discretie</div>
-            <p class="benefit-body">Uw privacy is heilig. Nooit publicatie van uw naam of foto zonder uw expliciete toestemming.</p>
-          </div>
-        </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Menus</div>
+        <ul>
+          <li><a>Chef's Tasting</a></li>
+          <li><a>Dinner Prix Fixe</a></li>
+          <li><a>Lunch Prix Fixe</a></li>
+          <li><a>Vegetarian Truffle</a></li>
+          <li><a>Lounge Menu</a></li>
+        </ul>
       </div>
-
-      <div style="text-align:center;margin-top:44px;">
-        <a class="btn-primary" onclick="showPage('contact')">Solliciteer Vertrouwelijk</a>
-        <p style="font-size:13px;color:rgba(255,255,255,0.35);margin-top:14px;font-family:'Inter',sans-serif;">Alle sollicitaties worden strikt vertrouwelijk behandeld.</p>
-      </div>
-    </section>
-
-    <footer>
-      <div class="footer-grid">
-        <div>
-          <div class="footer-brand-name">MrPresident</div>
-          <div class="footer-tagline">Exclusief VIP Escort Agentschap · Amsterdam</div>
-        </div>
-        <div class="footer-col">
-          <div class="footer-col-title">Navigatie</div>
-          <ul>
-            <li><a onclick="showPage('home')">Home</a></li>
-            <li><a onclick="showPage('diensten')">Diensten</a></li>
-            <li><a onclick="showPage('dames')">Onze Dames</a></li>
-            <li><a onclick="showPage('vacatures')">Vacatures</a></li>
-            <li><a onclick="showPage('contact')">Contact</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <div class="footer-col-title">Contact</div>
-          <ul>
-            <li><a href="mailto:info@mrpresident.club">info@mrpresident.club</a></li>
-            <li><a href="tel:+31201234567">+31 20 123 4567</a></li>
-          </ul>
-        </div>
-        <div></div>
-      </div>
-      <div class="footer-bottom">
-        <div class="footer-copy">© 2024 MrPresident. Alle rechten voorbehouden.</div>
-        <div class="footer-legal"><a>Privacy Policy</a><a>Algemene Voorwaarden</a></div>
-      </div>
-    </footer>
-  </div>
-
-  <!-- ════════════════════════════════════
-       CONTACT
-  ════════════════════════════════════ -->
-  <div class="page" id="page-contact">
-    <div class="page-hero">
-      <span class="section-label">Neem Contact Op</span>
-      <h1 style="font-family:'Playfair Display SC',serif;font-size:clamp(2.8rem,6vw,5.5rem);font-weight:400;color:var(--white);line-height:1.05;letter-spacing:0;margin-bottom:20px;">Laten We Kennismaken</h1>
-      <p style="font-size:16px;color:rgba(255,255,255,0.62);max-width:520px;line-height:1.75;">Alle communicatie is strikt vertrouwelijk. Wij reageren binnen 2 uur op uw bericht tijdens kantooruren, en zijn 24/7 bereikbaar via WhatsApp voor dringende vragen.</p>
-    </div>
-
-    <div class="contact-layout">
-      <div class="contact-left">
-        <span class="section-label">Contactgegevens</span>
-        <h2 class="section-title" style="font-size:2rem;">Altijd Bereikbaar</h2>
-        <div class="divider"></div>
-        <div class="contact-details">
-          <div>
-            <div class="contact-detail-label">Telefoon</div>
-            <div class="contact-detail-value"><a href="tel:+31201234567">+31 20 123 4567</a></div>
-          </div>
-          <div>
-            <div class="contact-detail-label">E-mail</div>
-            <div class="contact-detail-value"><a href="mailto:info@mrpresident.club">info@mrpresident.club</a></div>
-          </div>
-          <div>
-            <div class="contact-detail-label">WhatsApp</div>
-            <div class="contact-detail-value">+31 6 1234 5678</div>
-          </div>
-          <div>
-            <div class="contact-detail-label">Kantooruren</div>
-            <div class="contact-detail-value" style="font-size:1rem;line-height:1.6;">Ma – Vr: 09:00 – 22:00<br>Za – Zo: 11:00 – 22:00</div>
-          </div>
-          <div>
-            <div class="contact-detail-label">Locatie</div>
-            <div class="contact-detail-value" style="font-size:1rem;">Amsterdam, Nederland<br><span style="font-size:14px;color:rgba(255,255,255,0.45);font-family:'Inter',sans-serif;">Locatie op afspraak</span></div>
-          </div>
-        </div>
-        <div class="privacy-box">
-          <div class="privacy-box-label">Discretie Beleid</div>
-          <p>Al uw persoonlijke gegevens worden strikt vertrouwelijk behandeld in overeenstemming met de AVG. Wij delen nooit klantinformatie met derden. Uw privacy is onze hoogste prioriteit.</p>
-        </div>
-      </div>
-
-      <div class="contact-right">
-        <span class="section-label">Stuur Een Bericht</span>
-        <h2 class="section-title" style="font-size:2rem;margin-bottom:28px;">Vertel Ons Uw Wensen</h2>
-
-        <form onsubmit="handleFormSubmit(event)">
-          <div class="form-row">
-            <div class="form-group">
-              <label class="form-label">Voornaam</label>
-              <input class="form-input" type="text" placeholder="Uw voornaam" />
-            </div>
-            <div class="form-group">
-              <label class="form-label">Achternaam</label>
-              <input class="form-input" type="text" placeholder="Uw achternaam" />
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="form-label">E-mailadres</label>
-            <input class="form-input" type="email" placeholder="uw@email.nl" />
-          </div>
-          <div class="form-group">
-            <label class="form-label">Telefoonnummer</label>
-            <input class="form-input" type="tel" placeholder="+31 6 ..." />
-          </div>
-          <div class="form-group">
-            <label class="form-label">Type Aanvraag</label>
-            <select class="form-select">
-              <option value="">Selecteer een dienst</option>
-              <option>Boek uw date</option>
-              <option>Concierge Services</option>
-              <option>Signatuur Training</option>
-              <option>OF / NSFW Management</option>
-              <option>Slaapkamer Training</option>
-              <option>Sollicitatie (werken bij ons)</option>
-              <option>Overig</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label class="form-label">Uw Bericht</label>
-            <textarea class="form-textarea" placeholder="Beschrijf uw wensen, datum, locatie en eventuele bijzonderheden..."></textarea>
-          </div>
-          <div class="form-check">
-            <input type="checkbox" id="privacy-check" required />
-            <label for="privacy-check">Ik ga akkoord met de <a>Privacy Policy</a> en <a>Algemene Voorwaarden</a>.</label>
-          </div>
-          <button class="form-submit" type="submit">Verstuur Bericht</button>
-          <p class="form-note">Wij reageren binnen 2 uur (tijdens kantooruren). Uw gegevens worden nooit gedeeld met derden.</p>
-        </form>
+      <div class="footer-col">
+        <div class="footer-col-title">Information</div>
+        <ul>
+          <li><a>Gift Cards</a></li>
+          <li><a>Press</a></li>
+          <li><a>Careers</a></li>
+          <li><a>Sustainability</a></li>
+          <li><a>Cookbooks</a></li>
+        </ul>
       </div>
     </div>
-
-    <footer>
-      <div class="footer-grid">
-        <div>
-          <div class="footer-brand-name">MrPresident</div>
-          <div class="footer-tagline">Exclusief VIP Escort Agentschap · Amsterdam</div>
-          <p style="font-size:14px;color:rgba(255,255,255,0.4);line-height:1.7;max-width:280px;margin-top:10px;">Twaalf jaar toonaangevend in exclusief gezelschap voor veeleisende heren.</p>
-        </div>
-        <div class="footer-col">
-          <div class="footer-col-title">Navigatie</div>
-          <ul>
-            <li><a onclick="showPage('home')">Home</a></li>
-            <li><a onclick="showPage('diensten')">Diensten</a></li>
-            <li><a onclick="showPage('dames')">Onze Dames</a></li>
-            <li><a onclick="showPage('vacatures')">Vacatures</a></li>
-            <li><a onclick="showPage('contact')">Contact</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <div class="footer-col-title">Contact</div>
-          <ul>
-            <li><a href="mailto:info@mrpresident.club">info@mrpresident.club</a></li>
-            <li><a href="tel:+31201234567">+31 20 123 4567</a></li>
-            <li><a>Amsterdam, Nederland</a></li>
-          </ul>
-        </div>
-        <div></div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2024 Le Bernardin. All rights reserved.</div>
+      <div class="footer-legal">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Use</a>
+        <a href="#">Accessibility</a>
       </div>
-      <div class="footer-bottom">
-        <div class="footer-copy">© 2024 MrPresident. Alle rechten voorbehouden.</div>
-        <div class="footer-legal">
-          <a>Privacy Policy</a>
-          <a>Algemene Voorwaarden</a>
-          <a>Disclaimer</a>
-        </div>
-      </div>
-    </footer>
-  </div>
+    </div>
+  </footer>
 
-  <!-- ════════════════════ SCRIPTS ════════════════════ -->
   <script>
-    /* Age gate */
-    function enterSite() {
-      document.getElementById('age-gate').classList.add('hidden');
-      initReveal();
-      initCounters();
-      initGlowEffect();
-    }
-
-    /* ── Glowing border effect (translated from React GlowingEffect component) ── */
-    function initGlowEffect() {
-      const PROXIMITY   = 64;
-      const INACTIVE_ZONE = 0.01;
-      const SPREAD      = 30;
-      // Smooth factor: higher = snappier (matches motion/react ease [0.16,1,0.3,1])
-      const LERP        = 0.18;
-
-      const angles = new WeakMap(); // track per-card current angle
-
-      function tick(cards, mouseX, mouseY) {
-        cards.forEach(card => {
-          const rect = card.getBoundingClientRect();
-          const cx   = rect.left + rect.width  * 0.5;
-          const cy   = rect.top  + rect.height * 0.5;
-
-          // Inactive zone check
-          const dist = Math.hypot(mouseX - cx, mouseY - cy);
-          const inactiveR = 0.5 * Math.min(rect.width, rect.height) * INACTIVE_ZONE;
-          if (dist < inactiveR) {
-            card.style.setProperty('--active', '0');
-            return;
-          }
-
-          const isActive =
-            mouseX > rect.left   - PROXIMITY &&
-            mouseX < rect.right  + PROXIMITY &&
-            mouseY > rect.top    - PROXIMITY &&
-            mouseY < rect.bottom + PROXIMITY;
-
-          card.style.setProperty('--active', isActive ? '1' : '0');
-          if (!isActive) return;
-
-          // Angle from card centre to mouse, offset +90° so 0° = top
-          const targetAngle =
-            (180 * Math.atan2(mouseY - cy, mouseX - cx)) / Math.PI + 90;
-
-          const current = angles.get(card) ?? targetAngle;
-          // Shortest-path lerp
-          const diff = ((targetAngle - current + 180) % 360) - 180;
-          const next = current + diff * LERP;
-
-          angles.set(card, next);
-          card.style.setProperty('--start', String(next));
-        });
-      }
-
-      let rafId = null;
-      let mouseX = 0, mouseY = 0;
-
-      document.body.addEventListener('pointermove', e => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-        if (rafId) return; // already scheduled
-        rafId = requestAnimationFrame(() => {
-          rafId = null;
-          tick(document.querySelectorAll('#page-home .svc-card'), mouseX, mouseY);
-        });
-      }, { passive: true });
-
-      // Also update on scroll (cards move, mouse stays)
-      window.addEventListener('scroll', () => {
-        tick(document.querySelectorAll('#page-home .svc-card'), mouseX, mouseY);
-      }, { passive: true });
-    }
-
-    /* Animated counters */
-    function initCounters() {
-      const counters = document.querySelectorAll('.counter');
-      const obs = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-          if (!entry.isIntersecting) return;
-          const el = entry.target;
-          const target = parseInt(el.dataset.target);
-          const suffix = el.dataset.suffix || '';
-          let start = 0;
-          const duration = 1400;
-          const step = 16;
-          const increment = target / (duration / step);
-          const timer = setInterval(() => {
-            start += increment;
-            if (start >= target) {
-              el.textContent = target + suffix;
-              clearInterval(timer);
-            } else {
-              el.textContent = Math.floor(start) + suffix;
-            }
-          }, step);
-          obs.unobserve(el);
-        });
-      }, { threshold: 0.5 });
-      counters.forEach(c => obs.observe(c));
-    }
-
-    /* Page nav */
-    function showPage(id) {
-      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-      const target = document.getElementById('page-' + id);
-      if (target) {
-        target.classList.add('active');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }
-      document.querySelectorAll('.nav-links a').forEach(a => {
-        a.classList.toggle('active', a.dataset.page === id);
-      });
-      // Close mobile nav
-      const links = document.querySelector('.nav-links');
-      links.removeAttribute('style');
-      setTimeout(initReveal, 80);
-    }
-
-    /* Scroll nav */
+    /* ── Nav solidifies on scroll ── */
+    const nav = document.getElementById('main-nav');
     window.addEventListener('scroll', () => {
-      document.getElementById('main-nav').classList.toggle('scrolled', window.scrollY > 40);
+      nav.classList.toggle('solid', window.scrollY > 80);
     }, { passive: true });
 
-    /* Reveal on scroll */
-    function initReveal() {
-      const obs = new IntersectionObserver(entries => {
-        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
-      }, { threshold: 0.1 });
-      document.querySelectorAll('.page.active .reveal:not(.visible)').forEach(el => obs.observe(el));
-    }
-
-    /* Mobile nav */
-    function toggleMobileNav() {
-      const links = document.querySelector('.nav-links');
-      if (links.style.display === 'flex') {
-        links.removeAttribute('style');
-      } else {
-        links.style.cssText = 'display:flex;flex-direction:column;position:fixed;top:62px;left:0;right:0;background:var(--teal);border-bottom:1px solid var(--border-teal);padding:20px 24px;gap:16px;z-index:400;box-shadow:0 8px 24px rgba(0,0,0,0.2);';
-      }
-    }
-
-    /* Filter pills */
-    document.addEventListener('click', e => {
-      if (e.target.classList.contains('filter-pill')) {
-        e.target.closest('.filters-bar').querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
-        e.target.classList.add('active');
-      }
+    /* ── Hero image soft zoom on load ── */
+    window.addEventListener('load', () => {
+      document.getElementById('hero-img').classList.add('loaded');
     });
 
-    /* Form submit */
-    function handleFormSubmit(e) {
-      e.preventDefault();
-      const btn = e.target.querySelector('.form-submit');
-      btn.textContent = 'Bericht Verzonden ✓';
-      btn.style.background = '#00574a';
-      setTimeout(() => {
-        btn.textContent = 'Verstuur Bericht';
-        btn.style.background = '';
-        e.target.reset();
-      }, 3000);
-    }
+    /* ── Scroll reveal ── */
+    const revealObs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          revealObs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+    /* ── Smooth anchor scrolling with nav offset ── */
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (!target) return;
+        e.preventDefault();
+        const offset = nav.offsetHeight + 20;
+        window.scrollTo({ top: target.offsetTop - offset, behavior: 'smooth' });
+      });
+    });
   </script>
 </body>
 </html>
