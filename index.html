@@ -1,1295 +1,867 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Le Bernardin — Three-Star Seafood · New York</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Cormorant+SC:wght@300;400;500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Resn — Digital Experience Design Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@200;300;400;500;700&family=Work+Sans:wght@100;200;300;400&display=swap" rel="stylesheet">
   <style>
-    /* ══════════════════════════════════════════
-       TOKENS
-    ══════════════════════════════════════════ */
-    :root {
-      --cream:      #F7F4EE;
-      --cream-2:    #EDE9E0;
-      --black:      #111110;
-      --charcoal:   #2A2A27;
-      --gold:       #B09050;
-      --gold-light: #C8A96A;
-      --gold-pale:  rgba(176,144,80,0.15);
-      --muted:      #6E6B60;
-      --border:     rgba(176,144,80,0.22);
-      --white:      #FFFFFF;
-    }
-
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
+
+    html { font-size: 10px; -webkit-font-smoothing: antialiased; }
 
     body {
-      background: var(--cream);
-      color: var(--charcoal);
-      font-family: 'Jost', sans-serif;
+      background: #000;
+      color: #fff;
+      font-family: 'Barlow', Arial, sans-serif;
+      font-size: 1.6rem;
       font-weight: 300;
-      font-size: 16px;
-      line-height: 1.75;
-      overflow-x: hidden;
-    }
-
-    img { display: block; width: 100%; height: 100%; object-fit: cover; }
-
-    /* ══════════════════════════════════════════
-       NAVIGATION
-    ══════════════════════════════════════════ */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 500;
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
-      align-items: center;
-      padding: 28px 60px;
-      transition: background 0.5s ease, padding 0.4s ease, box-shadow 0.5s ease;
-    }
-
-    nav.solid {
-      background: var(--white);
-      padding: 16px 60px;
-      box-shadow: 0 1px 0 var(--border);
-    }
-
-    .nav-links-left,
-    .nav-links-right {
-      display: flex;
-      align-items: center;
-      gap: 36px;
-      list-style: none;
-    }
-
-    .nav-links-right { justify-content: flex-end; }
-
-    .nav-links-left a,
-    .nav-links-right a {
-      font-family: 'Jost', sans-serif;
-      font-size: 12px;
-      font-weight: 500;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--white);
-      text-decoration: none;
-      cursor: pointer;
-      transition: color 0.25s ease;
-    }
-
-    nav.solid .nav-links-left a,
-    nav.solid .nav-links-right a { color: var(--charcoal); }
-
-    .nav-links-left a:hover,
-    .nav-links-right a:hover { color: var(--gold); }
-    nav.solid .nav-links-left a:hover,
-    nav.solid .nav-links-right a:hover { color: var(--gold); }
-
-    .nav-logo {
-      text-align: center;
-      cursor: pointer;
-      text-decoration: none;
-    }
-
-    .nav-logo-main {
-      font-family: 'Cormorant SC', serif;
-      font-size: 1.35rem;
-      font-weight: 400;
-      letter-spacing: 0.28em;
-      text-transform: uppercase;
-      color: var(--white);
-      line-height: 1;
-      transition: color 0.3s ease;
-      display: block;
-    }
-
-    nav.solid .nav-logo-main { color: var(--black); }
-
-    .nav-logo-sub {
-      font-family: 'Jost', sans-serif;
-      font-size: 9px;
-      font-weight: 400;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.6);
-      margin-top: 3px;
-      display: block;
-      transition: color 0.3s ease;
-    }
-
-    nav.solid .nav-logo-sub { color: var(--gold); }
-
-    .nav-reserve {
-      font-family: 'Jost', sans-serif;
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--black);
-      background: var(--gold);
-      border: none;
-      padding: 11px 26px;
-      cursor: pointer;
-      text-decoration: none;
-      transition: background 0.25s ease, transform 0.15s ease;
-    }
-
-    .nav-reserve:hover { background: var(--gold-light); transform: translateY(-1px); }
-
-    /* ══════════════════════════════════════════
-       HERO
-    ══════════════════════════════════════════ */
-    .hero {
-      position: relative;
+      overflow: hidden;
+      width: 100vw;
       height: 100vh;
-      min-height: 680px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      overflow: hidden;
-    }
-
-    .hero-img {
-      position: absolute;
-      inset: 0;
-      background: url('https://placehold.co/1920x1080/1a1814/242018?text=') center/cover no-repeat;
-      transform: scale(1.04);
-      transition: transform 8s ease-out;
-    }
-
-    .hero-img.loaded { transform: scale(1); }
-
-    .hero-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        to bottom,
-        rgba(10,9,7,0.45) 0%,
-        rgba(10,9,7,0.25) 40%,
-        rgba(10,9,7,0.55) 100%
-      );
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      max-width: 820px;
-      padding: 0 32px;
-    }
-
-    .hero-award {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      font-family: 'Jost', sans-serif;
-      font-size: 10px;
-      font-weight: 500;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: var(--gold-light);
-      margin-bottom: 28px;
-    }
-
-    .hero-award::before,
-    .hero-award::after {
-      content: '';
-      display: block;
-      width: 32px;
-      height: 1px;
-      background: var(--gold);
-    }
-
-    .hero-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(3.6rem, 7.5vw, 8rem);
-      font-weight: 300;
-      color: var(--white);
-      line-height: 0.9;
-      letter-spacing: -0.01em;
-      margin-bottom: 12px;
-    }
-
-    .hero-title em {
-      font-style: italic;
-      color: rgba(255,255,255,0.85);
-    }
-
-    .hero-tagline {
-      font-family: 'Jost', sans-serif;
-      font-size: 12px;
-      font-weight: 400;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.55);
-      margin-bottom: 44px;
-    }
-
-    .hero-actions {
-      display: flex;
-      gap: 16px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    .btn-gold {
-      display: inline-block;
-      font-family: 'Jost', sans-serif;
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--black);
-      background: var(--gold);
-      border: none;
-      padding: 15px 40px;
-      cursor: pointer;
-      text-decoration: none;
-      transition: background 0.25s ease, transform 0.15s ease;
-    }
-
-    .btn-gold:hover { background: var(--gold-light); transform: translateY(-1px); }
-
-    .btn-outline-white {
-      display: inline-block;
-      font-family: 'Jost', sans-serif;
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--white);
-      background: transparent;
-      border: 1px solid rgba(255,255,255,0.4);
-      padding: 15px 40px;
-      cursor: pointer;
-      text-decoration: none;
-      transition: border-color 0.25s ease, color 0.25s ease, transform 0.15s ease;
-    }
-
-    .btn-outline-white:hover {
-      border-color: var(--gold);
-      color: var(--gold-light);
-      transform: translateY(-1px);
-    }
-
-    .btn-outline-dark {
-      display: inline-block;
-      font-family: 'Jost', sans-serif;
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--charcoal);
-      background: transparent;
-      border: 1px solid var(--border);
-      padding: 15px 40px;
-      cursor: pointer;
-      text-decoration: none;
-      transition: border-color 0.25s ease, color 0.25s ease, transform 0.15s ease;
-    }
-
-    .btn-outline-dark:hover {
-      border-color: var(--gold);
-      color: var(--gold);
-      transform: translateY(-1px);
-    }
-
-    /* Scroll cue */
-    .hero-scroll {
-      position: absolute;
-      bottom: 40px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-      z-index: 2;
-    }
-
-    .scroll-label {
-      font-family: 'Jost', sans-serif;
-      font-size: 9px;
-      font-weight: 500;
-      letter-spacing: 0.28em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.4);
-    }
-
-    .scroll-bar {
-      width: 1px;
-      height: 52px;
-      background: rgba(255,255,255,0.15);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .scroll-bar::after {
-      content: '';
-      position: absolute;
-      top: -100%;
-      width: 1px;
-      height: 100%;
-      background: var(--gold);
-      animation: scrollFall 2.2s ease-in-out infinite;
-    }
-
-    @keyframes scrollFall {
-      0%   { top: -100%; }
-      60%  { top: 100%; }
-      100% { top: 100%; }
-    }
-
-    /* ══════════════════════════════════════════
-       SECTIONS — shared
-    ══════════════════════════════════════════ */
-    .section { padding: 120px 60px; }
-    .section-sm { padding: 80px 60px; }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 14px;
-      font-family: 'Jost', sans-serif;
-      font-size: 10px;
-      font-weight: 500;
-      letter-spacing: 0.28em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 20px;
-    }
-
-    .eyebrow::before {
-      content: '';
-      display: block;
-      width: 28px;
-      height: 1px;
-      background: var(--gold);
-    }
-
-    .heading-display {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2.4rem, 4.5vw, 5rem);
-      font-weight: 300;
-      color: var(--black);
-      line-height: 1;
-      letter-spacing: -0.01em;
-    }
-
-    .heading-display em {
-      font-style: italic;
-      color: var(--charcoal);
-    }
-
-    .heading-section {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2rem, 3.5vw, 3.8rem);
-      font-weight: 300;
-      color: var(--black);
-      line-height: 1.05;
-      letter-spacing: -0.01em;
-    }
-
-    .heading-section em { font-style: italic; }
-
-    .body-copy {
-      font-family: 'Jost', sans-serif;
-      font-size: 15px;
-      font-weight: 300;
-      line-height: 1.85;
-      color: var(--muted);
-      max-width: 520px;
-    }
-
-    .gold-rule {
-      width: 40px;
-      height: 1px;
-      background: var(--gold);
-      margin: 24px 0;
-    }
-
-    /* ══════════════════════════════════════════
-       INTRO STRIP
-    ══════════════════════════════════════════ */
-    .intro-strip {
-      background: var(--black);
-      padding: 88px 60px;
-      text-align: center;
-    }
-
-    .intro-tagline {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2rem, 4vw, 4.4rem);
-      font-weight: 300;
-      font-style: italic;
-      color: var(--white);
-      line-height: 1.15;
-      max-width: 780px;
-      margin: 0 auto 32px;
-      letter-spacing: 0.01em;
-    }
-
-    .intro-sub {
-      font-family: 'Jost', sans-serif;
-      font-size: 13px;
-      font-weight: 300;
-      letter-spacing: 0.08em;
-      color: rgba(255,255,255,0.45);
-      max-width: 480px;
-      margin: 0 auto;
-      line-height: 1.8;
-    }
-
-    /* ══════════════════════════════════════════
-       AWARDS STRIP
-    ══════════════════════════════════════════ */
-    .awards-strip {
-      background: var(--cream-2);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      padding: 44px 60px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0;
-      flex-wrap: wrap;
-    }
-
-    .award-item {
-      flex: 1;
-      min-width: 160px;
-      text-align: center;
-      padding: 16px 32px;
-      border-right: 1px solid var(--border);
-    }
-
-    .award-item:last-child { border-right: none; }
-
-    .award-num {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 2.8rem;
-      font-weight: 300;
-      color: var(--gold);
-      line-height: 1;
-      letter-spacing: -0.02em;
-    }
-
-    .award-label {
-      font-family: 'Jost', sans-serif;
-      font-size: 10px;
-      font-weight: 500;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-top: 6px;
-    }
-
-    /* ══════════════════════════════════════════
-       ALTERNATING IMAGE + TEXT (Ammolite layout)
-    ══════════════════════════════════════════ */
-    .split-section {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      min-height: 680px;
-    }
-
-    .split-section.reverse { direction: rtl; }
-    .split-section.reverse > * { direction: ltr; }
-
-    .split-img {
-      position: relative;
-      overflow: hidden;
-    }
-
-    .split-img img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.8s cubic-bezier(0.25,0.46,0.45,0.94);
-    }
-
-    .split-section:hover .split-img img { transform: scale(1.04); }
-
-    .split-text {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 80px 72px;
-      background: var(--cream);
-    }
-
-    .split-text.dark {
-      background: var(--black);
-    }
-
-    .split-text.dark .heading-section,
-    .split-text.dark .eyebrow { color: var(--white); }
-
-    .split-text.dark .body-copy { color: rgba(255,255,255,0.55); }
-
-    .split-text.dark .eyebrow { color: var(--gold-light); }
-    .split-text.dark .eyebrow::before { background: var(--gold-light); }
-
-    .dish-tag {
-      display: inline-block;
-      font-family: 'Jost', sans-serif;
-      font-size: 9px;
-      font-weight: 500;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--gold);
-      border: 1px solid var(--border);
-      padding: 5px 12px;
-      margin-bottom: 24px;
-    }
-
-    /* ══════════════════════════════════════════
-       MENU PHILOSOPHY SECTION
-    ══════════════════════════════════════════ */
-    .philosophy-section {
-      background: var(--cream-2);
-      border-top: 1px solid var(--border);
-    }
-
-    .philosophy-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 0;
-      margin-top: 64px;
-      border-top: 1px solid var(--border);
-    }
-
-    .philosophy-card {
-      padding: 52px 44px;
-      border-right: 1px solid var(--border);
-      position: relative;
-    }
-
-    .philosophy-card:last-child { border-right: none; }
-
-    .philosophy-num {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 5rem;
-      font-weight: 300;
-      color: rgba(176,144,80,0.12);
-      line-height: 1;
-      position: absolute;
-      top: 32px;
-      right: 36px;
-      letter-spacing: -0.04em;
       user-select: none;
+      -webkit-tap-highlight-color: rgba(0,0,0,0);
     }
 
-    .philosophy-title {
-      font-family: 'Cormorant SC', serif;
-      font-size: 1.5rem;
-      font-weight: 300;
-      color: var(--black);
-      letter-spacing: 0.06em;
-      margin-bottom: 16px;
-      line-height: 1;
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #171719; }
+    ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.25); border-radius: 3px; }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ── Shell ── */
+    .shell {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      pointer-events: none;
     }
 
-    .philosophy-body {
-      font-family: 'Jost', sans-serif;
-      font-size: 14px;
-      font-weight: 300;
-      line-height: 1.85;
-      color: var(--muted);
-    }
-
-    .philosophy-dishes {
-      margin-top: 24px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .philosophy-dish {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.05rem;
+    .shell-btn {
+      position: absolute;
+      background: none;
+      border: none;
+      color: #fff;
+      font-family: 'Barlow', Arial, sans-serif;
+      font-size: 1.1rem;
       font-weight: 400;
-      font-style: italic;
-      color: var(--charcoal);
-      padding-left: 16px;
-      border-left: 2px solid var(--gold);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      cursor: pointer;
+      pointer-events: all;
+      padding: 3rem;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+    .shell-btn.vis { opacity: 1; }
+    .shell-btn:hover { opacity: 0.5 !important; }
+
+    .btn-drop  { top: 0; left: 0; }
+    .btn-disco { top: 0; right: 0; }
+    .btn-reel  { bottom: 0; right: 0; }
+    .btn-audio { bottom: 0; left: 0; }
+
+    /* ── Gem ── */
+    .bg-gem {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      pointer-events: all;
+      width: 140px;
+      height: 180px;
     }
 
-    /* ══════════════════════════════════════════
-       CHEF SECTION
-    ══════════════════════════════════════════ */
-    .chef-section {
-      background: var(--black);
+    .gem-svg-wrap {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -58%);
+      opacity: 0.15;
+      transition: opacity 0.4s ease;
     }
+    .bg-gem:hover .gem-svg-wrap { opacity: 0.45; }
 
-    /* ══════════════════════════════════════════
-       RESERVATION CTA
-    ══════════════════════════════════════════ */
-    .cta-section {
-      background: var(--cream);
-      text-align: center;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      padding: 120px 60px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .cta-bg-text {
+    .gem-ring-wrap {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      font-family: 'Cormorant SC', serif;
-      font-size: clamp(10rem, 25vw, 22rem);
-      font-weight: 300;
-      color: rgba(176,144,80,0.06);
-      white-space: nowrap;
-      pointer-events: none;
-      user-select: none;
-      letter-spacing: 0.1em;
-    }
-
-    .cta-content { position: relative; z-index: 2; }
-
-    .cta-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2.4rem, 5vw, 5.5rem);
-      font-weight: 300;
-      color: var(--black);
-      line-height: 1;
-      letter-spacing: -0.01em;
-      margin-bottom: 20px;
-    }
-
-    .cta-title em { font-style: italic; color: var(--gold); }
-
-    .cta-sub {
-      font-family: 'Jost', sans-serif;
-      font-size: 13px;
-      font-weight: 300;
-      letter-spacing: 0.06em;
-      color: var(--muted);
-      margin-bottom: 44px;
-      line-height: 1.7;
-    }
-
-    /* ══════════════════════════════════════════
-       FOOTER
-    ══════════════════════════════════════════ */
-    footer {
-      background: var(--black);
-      padding: 80px 60px 44px;
-    }
-
-    .footer-top {
-      display: grid;
-      grid-template-columns: 1.6fr 1fr 1fr 1fr;
-      gap: 48px;
-      padding-bottom: 60px;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-      margin-bottom: 36px;
-    }
-
-    .footer-brand {
-      font-family: 'Cormorant SC', serif;
-      font-size: 1.4rem;
-      font-weight: 300;
-      letter-spacing: 0.24em;
-      color: var(--white);
-      margin-bottom: 6px;
-    }
-
-    .footer-brand-sub {
-      font-family: 'Jost', sans-serif;
-      font-size: 9px;
-      font-weight: 400;
-      letter-spacing: 0.28em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 20px;
-    }
-
-    .footer-about {
-      font-family: 'Jost', sans-serif;
-      font-size: 13px;
-      font-weight: 300;
-      line-height: 1.75;
-      color: rgba(255,255,255,0.38);
-      max-width: 280px;
-    }
-
-    .footer-col-title {
-      font-family: 'Jost', sans-serif;
-      font-size: 9px;
-      font-weight: 500;
-      letter-spacing: 0.24em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 20px;
-    }
-
-    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 11px; }
-
-    .footer-col a {
-      font-family: 'Jost', sans-serif;
-      font-size: 13px;
-      font-weight: 300;
-      color: rgba(255,255,255,0.5);
-      text-decoration: none;
-      transition: color 0.2s ease;
-      cursor: pointer;
-    }
-
-    .footer-col a:hover { color: var(--white); }
-
-    .footer-bottom {
       display: flex;
-      justify-content: space-between;
+      flex-direction: column;
       align-items: center;
-      flex-wrap: wrap;
-      gap: 16px;
+      pointer-events: none;
     }
 
-    .footer-copy {
-      font-family: 'Jost', sans-serif;
-      font-size: 11px;
-      font-weight: 300;
-      letter-spacing: 0.1em;
-      color: rgba(255,255,255,0.22);
+    .gem-msg {
+      font-size: 0.9rem;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      white-space: nowrap;
+      margin-top: 10px;
     }
 
-    .footer-legal {
-      display: flex;
-      gap: 24px;
-    }
-
-    .footer-legal a {
-      font-family: 'Jost', sans-serif;
-      font-size: 11px;
-      font-weight: 300;
-      letter-spacing: 0.08em;
-      color: rgba(255,255,255,0.22);
-      text-decoration: none;
-      transition: color 0.2s ease;
-    }
-
-    .footer-legal a:hover { color: rgba(255,255,255,0.55); }
-
-    /* ══════════════════════════════════════════
-       SCROLL REVEAL
-    ══════════════════════════════════════════ */
-    .reveal {
+    /* ── Pages ── */
+    .page {
+      position: fixed;
+      inset: 0;
       opacity: 0;
-      transform: translateY(32px);
-      transition: opacity 0.8s cubic-bezier(0.25,0.46,0.45,0.94),
-                  transform 0.8s cubic-bezier(0.25,0.46,0.45,0.94);
+      pointer-events: none;
+      transition: opacity 0.7s ease;
+      z-index: 10;
+    }
+    .page.active {
+      opacity: 1;
+      pointer-events: all;
     }
 
-    .reveal.visible { opacity: 1; transform: translateY(0); }
-    .reveal-d1 { transition-delay: 0.12s; }
-    .reveal-d2 { transition-delay: 0.24s; }
-    .reveal-d3 { transition-delay: 0.36s; }
+    /* ── Home ── */
+    #page-home {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: grab;
+    }
+    #page-home:active { cursor: grabbing; }
 
-    /* ══════════════════════════════════════════
-       RESPONSIVE
-    ══════════════════════════════════════════ */
-    @media (max-width: 1100px) {
-      .split-section { grid-template-columns: 1fr; min-height: auto; }
-      .split-section.reverse { direction: ltr; }
-      .split-img { aspect-ratio: 16/9; }
-      .split-text { padding: 64px 48px; }
-      .footer-top { grid-template-columns: 1fr 1fr; }
-      .philosophy-grid { grid-template-columns: 1fr; }
-      .philosophy-card { border-right: none; border-bottom: 1px solid var(--border); }
-      .philosophy-card:last-child { border-bottom: none; }
+    .home-title {
+      font-size: clamp(2.8rem, 4vw, 4.8rem);
+      font-weight: 200;
+      line-height: 1.05;
+      text-align: center;
+      max-width: 62rem;
+      letter-spacing: -0.03em;
+      padding: 0 2rem;
+      pointer-events: none;
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 1s ease 0.5s, transform 1s ease 0.5s;
+    }
+    .home-title.in { opacity: 1; transform: translateY(0); }
+
+    /* ── Menu overlay ── */
+    #page-menu {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #000;
+      z-index: 50;
     }
 
-    @media (max-width: 768px) {
-      nav { padding: 20px 24px; grid-template-columns: auto 1fr auto; }
-      nav.solid { padding: 14px 24px; }
-      .nav-links-left { display: none; }
-      .nav-links-right { display: none; }
-      .nav-logo { text-align: left; }
-      .nav-reserve { font-size: 10px; padding: 10px 18px; }
-      .section { padding: 72px 24px; }
-      .section-sm { padding: 56px 24px; }
-      .intro-strip { padding: 64px 24px; }
-      .awards-strip { padding: 36px 24px; flex-direction: column; gap: 0; }
-      .award-item { border-right: none; border-bottom: 1px solid var(--border); }
-      .award-item:last-child { border-bottom: none; }
-      .cta-section { padding: 80px 24px; }
-      .split-text { padding: 52px 24px; }
-      footer { padding: 56px 24px 32px; }
-      .footer-top { grid-template-columns: 1fr; gap: 36px; padding-bottom: 40px; }
-      .footer-bottom { flex-direction: column; text-align: center; }
-      .cta-bg-text { display: none; }
+    .menu-nav {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .menu-item {
+      font-size: clamp(4rem, 7vw, 6.5rem);
+      font-weight: 200;
+      line-height: 1;
+      letter-spacing: -2px;
+      text-transform: uppercase;
+      cursor: pointer;
+      padding: 0.5rem 0;
+      position: relative;
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.5s ease, transform 0.5s ease, color 0.2s;
+    }
+    .menu-item::after {
+      content: '';
+      position: absolute;
+      bottom: 0.4rem;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: #fff;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.35s ease;
+    }
+    .menu-item:hover::after { transform: scaleX(1); }
+    .menu-item:hover { color: rgba(255,255,255,0.55); }
+
+    #page-menu.active .menu-item { opacity: 1; transform: translateY(0); }
+    #page-menu.active .menu-item:nth-child(1) { transition-delay: 0.08s; }
+    #page-menu.active .menu-item:nth-child(2) { transition-delay: 0.17s; }
+    #page-menu.active .menu-item:nth-child(3) { transition-delay: 0.26s; }
+
+    .menu-close {
+      position: absolute;
+      top: 0; right: 0;
+      padding: 3rem;
+      font-size: 1.1rem;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      cursor: pointer;
+      opacity: 0.4;
+      transition: opacity 0.2s;
+    }
+    .menu-close:hover { opacity: 1; }
+
+    /* ── Inner nav ── */
+    .inner-nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      padding: 2.8rem 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 150;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+    .inner-nav.vis { opacity: 1; pointer-events: all; }
+
+    .nav-back {
+      font-size: 1.1rem;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      cursor: pointer;
+      opacity: 0.45;
+      transition: opacity 0.2s;
+    }
+    .nav-back:hover { opacity: 1; }
+
+    .nav-label {
+      font-size: 1.1rem;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      opacity: 0.25;
+    }
+
+    /* ── About ── */
+    #page-about { overflow-y: auto; padding-top: 10rem; }
+
+    .about-inner {
+      max-width: 118.4rem;
+      margin: 0 auto;
+      padding: 3rem 8rem 22rem;
+    }
+
+    .about-title {
+      font-size: clamp(2.4rem, 3.5vw, 3.4rem);
+      font-weight: 200;
+      line-height: 1.22;
+      max-width: 74rem;
+      margin-bottom: 9rem;
+    }
+
+    .about-block { margin-bottom: 7rem; }
+
+    .about-label {
+      font-size: 1.2rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.32);
+      margin-bottom: 2.4rem;
+    }
+
+    .about-block p {
+      font-size: 2rem;
+      font-weight: 300;
+      line-height: 1.78;
+      color: rgba(255,255,255,0.82);
+      max-width: 70rem;
+    }
+
+    .divider { width: 100%; max-width: 80rem; height: 1px; background: rgba(255,255,255,0.09); margin: 7rem 0; }
+
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; max-width: 80rem; }
+    .two-col-label { font-size: 1.2rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.32); margin-bottom: 2rem; }
+    .two-col ul { list-style: none; }
+    .two-col ul li { font-size: 1.8rem; font-weight: 300; line-height: 2.8rem; color: rgba(255,255,255,0.78); }
+
+    .awards-grid { display: flex; flex-wrap: wrap; gap: 5rem 7rem; }
+    .award-num { font-family: 'Work Sans', sans-serif; font-size: 8rem; font-weight: 100; line-height: 1; letter-spacing: 1px; }
+    .award-name { font-size: 1.1rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.32); margin-top: 0.6rem; }
+
+    /* ── Work ── */
+    #page-work { overflow-y: auto; padding-top: 10rem; }
+
+    .work-inner { max-width: 118.4rem; margin: 0 auto; padding: 3rem 8rem 22rem; }
+
+    .work-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem 4rem; }
+
+    .work-item { cursor: pointer; }
+
+    .work-thumb { width: 100%; aspect-ratio: 16/9; overflow: hidden; position: relative; background: #0d0d0d; }
+    .work-thumb-inner { width: 100%; height: 100%; background-size: cover; background-position: center; filter: brightness(0.6); transition: transform 0.8s ease, filter 0.4s ease; }
+    .work-item:hover .work-thumb-inner { transform: scale(1.04); filter: brightness(0.85); }
+
+    .work-meta { padding: 2.2rem 0 0; }
+    .work-client { font-size: 1.1rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.32); margin-bottom: 0.8rem; }
+    .work-title { font-size: 2.4rem; font-weight: 200; letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 0.8rem; }
+    .work-tags { font-size: 1.2rem; font-weight: 300; color: rgba(255,255,255,0.3); }
+
+    .work-item.wide { grid-column: 1 / -1; }
+    .work-item.wide .work-thumb { aspect-ratio: 21/8; }
+
+    /* ── Contact ── */
+    #page-contact { display: flex; align-items: center; overflow-y: auto; }
+
+    .contact-inner {
+      max-width: 116rem;
+      width: 100%;
+      margin: 0 auto;
+      padding: 10rem 8rem 8rem;
+      display: flex;
+      gap: 0;
+      align-items: flex-start;
+    }
+
+    .contact-email-col { flex: 3; padding-right: 8rem; }
+
+    .contact-label { font-size: 1.1rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.32); margin-bottom: 2.4rem; }
+
+    .contact-link {
+      font-size: clamp(2rem, 3vw, 3.4rem);
+      font-weight: 200;
+      letter-spacing: -0.04em;
+      display: block;
+      margin-bottom: 0.4rem;
+      line-height: 1.25;
+      position: relative;
+      width: fit-content;
+    }
+    .contact-link::after { content: ''; position: absolute; bottom: -1px; left: 0; width: 100%; height: 1px; background: #fff; transform: scaleX(0); transform-origin: left; transition: transform 0.35s ease; }
+    .contact-link:hover::after { transform: scaleX(1); }
+
+    .contact-hire { font-size: 1.4rem; font-weight: 300; color: rgba(255,255,255,0.38); margin-top: 3.5rem; display: inline-block; position: relative; cursor: pointer; }
+    .contact-hire::after { content: ''; position: absolute; bottom: -1px; left: 0; width: 100%; height: 1px; background: rgba(255,255,255,0.38); transform: scaleX(0); transform-origin: left; transition: transform 0.35s ease; }
+    .contact-hire:hover::after { transform: scaleX(1); }
+
+    .contact-other-col { flex: 1; display: flex; flex-direction: column; gap: 4rem; }
+
+    .contact-addr-block h4 { font-size: 1.1rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.32); margin-bottom: 1.2rem; }
+    .contact-addr-block p { font-family: 'Work Sans', sans-serif; font-size: 1.4rem; font-weight: 300; line-height: 2.2rem; color: rgba(255,255,255,0.5); }
+
+    .social-col h4 { font-size: 1.1rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.32); margin-bottom: 1.2rem; }
+    .social-link { display: block; font-size: 1.4rem; font-weight: 300; line-height: 2.6rem; color: rgba(255,255,255,0.48); position: relative; width: fit-content; }
+    .social-link::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 1px; background: rgba(255,255,255,0.48); transform: scaleX(0); transform-origin: left; transition: transform 0.3s ease; }
+    .social-link:hover::after { transform: scaleX(1); }
+
+    /* ── Reel ── */
+    #page-reel { background: #000; display: flex; align-items: center; justify-content: center; z-index: 40; }
+
+    .reel-wrap { text-align: center; }
+
+    .reel-play {
+      width: 80px; height: 80px;
+      border: 1px solid rgba(255,255,255,0.35);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 2.8rem;
+      cursor: pointer;
+      transition: border-color 0.2s, transform 0.3s ease;
+    }
+    .reel-play:hover { border-color: #fff; transform: scale(1.06); }
+
+    .reel-label { font-size: 1.1rem; font-weight: 400; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.4); }
+
+    /* ── Scroll hint ── */
+    .scroll-hint {
+      position: fixed;
+      bottom: 3rem;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.95rem;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.28);
+      z-index: 15;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.5s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+    .scroll-hint.vis { opacity: 1; }
+    .scroll-line { width: 1px; height: 36px; background: rgba(255,255,255,0.28); animation: scrollAnim 1.8s ease-in-out infinite; }
+    @keyframes scrollAnim {
+      0%   { transform: scaleY(0); transform-origin: top; }
+      49%  { transform: scaleY(1); transform-origin: top; }
+      50%  { transform: scaleY(1); transform-origin: bottom; }
+      100% { transform: scaleY(0); transform-origin: bottom; }
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .about-inner, .work-inner { padding-left: 3rem; padding-right: 3rem; }
+      .contact-inner { padding-left: 3rem; padding-right: 3rem; flex-direction: column; gap: 6rem; }
+      .contact-email-col { padding-right: 0; }
+      .two-col { grid-template-columns: 1fr; gap: 4rem; }
+      .work-grid { grid-template-columns: 1fr; }
+      .work-item.wide .work-thumb { aspect-ratio: 16/9; }
+      .award-num { font-size: 5.5rem; }
     }
   </style>
 </head>
 <body>
 
-  <!-- ══════════════════════════════════════
-       NAVIGATION
-  ══════════════════════════════════════ -->
-  <nav id="main-nav">
-    <ul class="nav-links-left">
-      <li><a href="#restaurant">The Restaurant</a></li>
-      <li><a href="#menus">Menus</a></li>
-      <li><a href="#philosophy">Our Kitchen</a></li>
-    </ul>
-
-    <a href="#" class="nav-logo">
-      <span class="nav-logo-main">Le Bernardin</span>
-      <span class="nav-logo-sub">by Eric Ripert</span>
-    </a>
-
-    <ul class="nav-links-right">
-      <li><a href="#team">The Team</a></li>
-      <li><a href="#contact">Private Dining</a></li>
-      <li><a href="#reserve" class="nav-reserve">Reserve</a></li>
-    </ul>
-  </nav>
-
-  <!-- ══════════════════════════════════════
-       HERO
-  ══════════════════════════════════════ -->
-  <section class="hero" id="home">
-    <div class="hero-img" id="hero-img"></div>
-    <div class="hero-overlay"></div>
-    <div class="hero-content">
-      <div class="hero-award">
-        ✦ Three Michelin Stars · New York Times Four Stars ✦
-      </div>
-      <h1 class="hero-title">
-        Le<br><em>Bernardin</em>
-      </h1>
-      <p class="hero-tagline">Fish is the star of the plate</p>
-      <div class="hero-actions">
-        <a href="#reserve" class="btn-gold">Reserve a Table</a>
-        <a href="#menus" class="btn-outline-white">View Menus</a>
-      </div>
-    </div>
-    <div class="hero-scroll">
-      <div class="scroll-bar"></div>
-      <span class="scroll-label">Scroll</span>
-    </div>
-  </section>
-
-  <!-- ══════════════════════════════════════
-       INTRO STRIP
-  ══════════════════════════════════════ -->
-  <div class="intro-strip">
-    <p class="intro-tagline">
-      "The ocean is our garden.<br>
-      Every fish, a story of respect."
-    </p>
-    <p class="intro-sub">
-      For over thirty years, Le Bernardin has defined the pinnacle of seafood cuisine in New York City —
-      and in the world. A commitment to purity, precision, and pleasure in every plate.
-    </p>
+  <!-- Shell -->
+  <div class="shell">
+    <button class="shell-btn btn-drop"  id="btn-drop">Drop</button>
+    <button class="shell-btn btn-disco" id="btn-disco">Discover</button>
+    <button class="shell-btn btn-reel"  id="btn-reel">Showreel</button>
+    <button class="shell-btn btn-audio" id="btn-audio">◯ Audio</button>
   </div>
 
-  <!-- ══════════════════════════════════════
-       AWARDS
-  ══════════════════════════════════════ -->
-  <div class="awards-strip">
-    <div class="award-item reveal">
-      <div class="award-num">III</div>
-      <div class="award-label">Michelin Stars</div>
+  <!-- Gem -->
+  <div class="bg-gem" id="gem">
+    <div class="gem-svg-wrap">
+      <svg width="46" height="62" viewBox="0 0 46 62" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="23,0 46,21 0,21" fill="rgba(255,255,255,0.65)"/>
+        <line x1="23" y1="0" x2="10" y2="21" stroke="rgba(255,255,255,0.25)" stroke-width="0.6"/>
+        <line x1="23" y1="0" x2="36" y2="21" stroke="rgba(255,255,255,0.25)" stroke-width="0.6"/>
+        <line x1="0"  y1="21" x2="46" y2="21" stroke="rgba(255,255,255,0.45)" stroke-width="0.6"/>
+        <polygon points="0,21 46,21 23,62" fill="rgba(255,255,255,0.92)"/>
+        <line x1="11" y1="21" x2="23" y2="62" stroke="rgba(0,0,0,0.12)" stroke-width="0.6"/>
+        <line x1="35" y1="21" x2="23" y2="62" stroke="rgba(0,0,0,0.12)" stroke-width="0.6"/>
+        <line x1="23" y1="21" x2="23" y2="62" stroke="rgba(255,255,255,0.18)" stroke-width="0.6"/>
+      </svg>
     </div>
-    <div class="award-item reveal reveal-d1">
-      <div class="award-num">★★★★</div>
-      <div class="award-label">New York Times</div>
-    </div>
-    <div class="award-item reveal reveal-d2">
-      <div class="award-num">38+</div>
-      <div class="award-label">Years of Excellence</div>
-    </div>
-    <div class="award-item reveal reveal-d3">
-      <div class="award-num">#1</div>
-      <div class="award-label">Best Restaurant NYC</div>
+    <div class="gem-ring-wrap">
+      <canvas id="ring-canvas" width="80" height="80"></canvas>
+      <div class="gem-msg">click &amp; hold</div>
     </div>
   </div>
 
-  <!-- ══════════════════════════════════════
-       RESTAURANT — split image+text (Ammolite layout)
-  ══════════════════════════════════════ -->
-  <section id="restaurant">
+  <!-- Scroll hint -->
+  <div class="scroll-hint" id="scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
 
-    <!-- Row 1: image left, text right -->
-    <div class="split-section">
-      <div class="split-img">
-        <img src="https://placehold.co/960x680/1a1814/242018?text=" alt="Le Bernardin Interior" />
-      </div>
-      <div class="split-text">
-        <div class="reveal">
-          <span class="eyebrow">The Restaurant</span>
-          <h2 class="heading-section">An Oasis of<br><em>Refined Calm</em></h2>
-          <div class="gold-rule"></div>
-          <p class="body-copy">
-            Situated at 155 West 51st Street in Midtown Manhattan, Le Bernardin offers an atmosphere
-            of serene elegance. The room — warm, unhurried, and precise — mirrors the philosophy
-            of its kitchen: nothing superfluous, everything essential.
-          </p>
-          <p class="body-copy" style="margin-top:16px;">
-            Designed to make every guest feel the quiet privilege of exceptional hospitality,
-            Le Bernardin's dining room has been a sanctuary for those who understand that
-            true luxury lies in restraint.
-          </p>
-          <a href="#reserve" class="btn-outline-dark" style="margin-top:36px;">Make a Reservation</a>
-        </div>
-      </div>
-    </div>
+  <!-- Inner nav -->
+  <div class="inner-nav" id="inner-nav">
+    <span class="nav-back" id="nav-back">← Back</span>
+    <span class="nav-label" id="nav-label"></span>
+  </div>
 
-    <!-- Row 2: text left, image right -->
-    <div class="split-section reverse">
-      <div class="split-img">
-        <img src="https://placehold.co/960x680/0e0d0b/181612?text=" alt="Seafood Preparation" />
-      </div>
-      <div class="split-text dark">
-        <div class="reveal">
-          <span class="eyebrow">Our Commitment</span>
-          <h2 class="heading-section" style="color:var(--white);">Sustainably<br><em>Sourced, Always</em></h2>
-          <div class="gold-rule"></div>
-          <p class="body-copy">
-            We are committed to purchasing and serving only responsibly sourced seafood —
-            without compromising the future of our oceans. Every ingredient on our menu
-            is chosen with the same reverence we bring to its preparation.
-          </p>
-          <p class="body-copy" style="margin-top:16px;">
-            Our partnerships with sustainable fisheries span continents. The result is
-            a menu that changes with the seasons, guided always by what the ocean
-            can generously and responsibly provide.
-          </p>
-          <a href="#menus" class="btn-outline-white" style="margin-top:36px;">Explore the Menu</a>
-        </div>
-      </div>
-    </div>
+  <!-- HOME -->
+  <div class="page active" id="page-home">
+    <h1 class="home-title" id="home-title">Resn is a Digital Experience Design Studio</h1>
+  </div>
 
-    <!-- Row 3: image left, text right -->
-    <div class="split-section">
-      <div class="split-img">
-        <img src="https://placehold.co/960x680/14120f/1e1c18?text=" alt="Wine Cellar" />
-      </div>
-      <div class="split-text">
-        <div class="reveal">
-          <span class="eyebrow">The Wine Program</span>
-          <h2 class="heading-section">15,000 Bottles.<br><em>One Vision.</em></h2>
-          <div class="gold-rule"></div>
-          <p class="body-copy">
-            Led by Aldo Sohm — named Best Sommelier in the World in 2008 — our cellar holds
-            over 15,000 bottles across 900 selections. Each pairing is crafted to elevate
-            the natural flavors of the sea to their highest expression.
-          </p>
-          <p class="body-copy" style="margin-top:16px;">
-            Wine pairings are available with every tasting menu, curated personally
-            by Aldo and his team to guide your journey through the meal.
-          </p>
-          <a href="#reserve" class="btn-outline-dark" style="margin-top:36px;">Wine Pairing Menus</a>
-        </div>
-      </div>
-    </div>
+  <!-- MENU -->
+  <div class="page" id="page-menu">
+    <span class="menu-close" id="menu-close">Close</span>
+    <nav class="menu-nav">
+      <div class="menu-item" data-target="page-about">About</div>
+      <div class="menu-item" data-target="page-work">Work</div>
+      <div class="menu-item" data-target="page-contact">Contact</div>
+    </nav>
+  </div>
 
-  </section>
+  <!-- ABOUT -->
+  <div class="page" id="page-about">
+    <div class="about-inner">
+      <h2 class="about-title">Resn is a digital experience design studio. We help progressive brands engage with today's connected customers.</h2>
 
-  <!-- ══════════════════════════════════════
-       MENU PHILOSOPHY
-  ══════════════════════════════════════ -->
-  <section class="section philosophy-section" id="menus">
-    <div style="max-width:1200px;margin:0 auto;">
-      <div class="reveal">
-        <span class="eyebrow">The Menu</span>
-        <h2 class="heading-display" style="max-width:700px;">A Language of<br><em>Preparation</em></h2>
-        <div class="gold-rule"></div>
-        <p class="body-copy">
-          At Le Bernardin, every dish belongs to one of three philosophies — a language
-          that describes our relationship with the ingredient, and our respect for its natural form.
-        </p>
+      <div class="about-block">
+        <div class="about-label">We Amaze and Engage</div>
+        <p>We create innovative digital experiences that captivate audiences and drive meaningful engagement. From interactive installations to immersive web experiences, we push the boundaries of what's possible in the digital space — blending craft, code, and creative thinking into something genuinely surprising.</p>
       </div>
 
-      <div class="philosophy-grid">
-        <div class="philosophy-card reveal">
-          <div class="philosophy-num">I</div>
-          <div class="philosophy-title">Almost Raw</div>
-          <p class="philosophy-body">
-            The fish barely touched by heat. Pure expression of the ocean's finest —
-            refined by curing, marinating, or the gentlest of preparations.
-            The ingredient speaks for itself.
-          </p>
-          <div class="philosophy-dishes">
-            <div class="philosophy-dish">Bluefin Tuna · Caviar · Nori Crisp</div>
-            <div class="philosophy-dish">Yellowfin Tuna · Foie Gras · Toasted Baguette</div>
-            <div class="philosophy-dish">Kampachi · Kumquat · Jalapeño</div>
+      <div class="divider"></div>
+
+      <div class="about-block">
+        <div class="about-label">Our Approach</div>
+        <p>Every brand has a story worth telling in a way that's never been told before. We develop bespoke communication strategies that connect with audiences across mobile, web, and emerging platforms. Our in-house 3D graphics and video production capabilities mean we can take ideas from concept to execution without compromise.</p>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="about-block">
+        <div class="about-label">How We Work</div>
+        <div class="two-col">
+          <div>
+            <div class="two-col-label">We make</div>
+            <ul>
+              <li>Mobile experiences</li>
+              <li>Web platforms</li>
+              <li>Games &amp; interactive</li>
+              <li>Installations</li>
+              <li>3D graphics</li>
+              <li>Video production</li>
+              <li>Social campaigns</li>
+            </ul>
           </div>
-        </div>
-        <div class="philosophy-card reveal reveal-d1">
-          <div class="philosophy-num">II</div>
-          <div class="philosophy-title">Barely Touched</div>
-          <p class="philosophy-body">
-            Delicate heat applied with absolute precision. The flesh yields only at the moment
-            of perfection — translucent at the center, gently yielding to the fork.
-          </p>
-          <div class="philosophy-dishes">
-            <div class="philosophy-dish">Poached Halibut · Truffled Morels</div>
-            <div class="philosophy-dish">Dover Sole · Romanesco · Cauliflower</div>
-            <div class="philosophy-dish">Wild Striped Bass · Mushroom Broth</div>
-          </div>
-        </div>
-        <div class="philosophy-card reveal reveal-d2">
-          <div class="philosophy-num">III</div>
-          <div class="philosophy-title">Lightly Cooked</div>
-          <p class="philosophy-body">
-            The fullest expression of technique — where classical French mastery meets
-            the elemental simplicity of the sea. Cooked through, yet never surrendering
-            its essential character.
-          </p>
-          <div class="philosophy-dishes">
-            <div class="philosophy-dish">Pan-Roasted Grouper · Wild Mushrooms</div>
-            <div class="philosophy-dish">Grilled Salmon · Mushroom Vinaigrette</div>
-            <div class="philosophy-dish">Seared Skate · Capers · Brown Butter</div>
+          <div>
+            <div class="two-col-label">We have</div>
+            <ul>
+              <li>Ideas &amp; strategy</li>
+              <li>UX &amp; design</li>
+              <li>Motion &amp; effects</li>
+              <li>3D &amp; graphics</li>
+              <li>Installation tech</li>
+              <li>Animation</li>
+              <li>Audio design</li>
+              <li>Development</li>
+              <li>Quality assurance</li>
+            </ul>
           </div>
         </div>
       </div>
 
-      <!-- Pricing strip -->
-      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:0;border:1px solid var(--border);border-top:none;" class="reveal">
-        <div style="padding:32px 36px;border-right:1px solid var(--border);">
-          <div style="font-family:'Cormorant SC',serif;font-size:1rem;letter-spacing:0.1em;color:var(--black);margin-bottom:6px;">Chef's Tasting</div>
-          <div style="font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:300;color:var(--gold);">$350</div>
-          <div style="font-size:11px;color:var(--muted);margin-top:4px;font-family:'Jost',sans-serif;letter-spacing:0.08em;">Wine pairing +$180</div>
-        </div>
-        <div style="padding:32px 36px;border-right:1px solid var(--border);">
-          <div style="font-family:'Cormorant SC',serif;font-size:1rem;letter-spacing:0.1em;color:var(--black);margin-bottom:6px;">Dinner Prix Fixe</div>
-          <div style="font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:300;color:var(--gold);">$218</div>
-          <div style="font-size:11px;color:var(--muted);margin-top:4px;font-family:'Jost',sans-serif;letter-spacing:0.08em;">Three courses</div>
-        </div>
-        <div style="padding:32px 36px;border-right:1px solid var(--border);">
-          <div style="font-family:'Cormorant SC',serif;font-size:1rem;letter-spacing:0.1em;color:var(--black);margin-bottom:6px;">Lunch Prix Fixe</div>
-          <div style="font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:300;color:var(--gold);">$137</div>
-          <div style="font-size:11px;color:var(--muted);margin-top:4px;font-family:'Jost',sans-serif;letter-spacing:0.08em;">Two or three courses</div>
-        </div>
-        <div style="padding:32px 36px;">
-          <div style="font-family:'Cormorant SC',serif;font-size:1rem;letter-spacing:0.1em;color:var(--black);margin-bottom:6px;">Vegetarian Truffle</div>
-          <div style="font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:300;color:var(--gold);">$350</div>
-          <div style="font-size:11px;color:var(--muted);margin-top:4px;font-family:'Jost',sans-serif;letter-spacing:0.08em;">Tasting menu</div>
+      <div class="divider"></div>
+
+      <div class="about-block">
+        <div class="about-label">Where We Are</div>
+        <div class="two-col">
+          <div>
+            <div class="two-col-label">Wellington</div>
+            <ul>
+              <li style="font-size:1.5rem;color:rgba(255,255,255,0.5);line-height:2.4rem;">Level 7, Anvil House<br>138 Wakefield Street<br>Wellington, New Zealand<br>+64 4 385 0705</li>
+            </ul>
+          </div>
+          <div>
+            <div class="two-col-label">Amsterdam</div>
+            <ul>
+              <li style="font-size:1.5rem;color:rgba(255,255,255,0.5);line-height:2.4rem;">Keizersgracht 174-1<br>1016 DW Amsterdam<br>Netherlands<br>+31 20 261 0299</li>
+            </ul>
+          </div>
         </div>
       </div>
 
-      <div style="text-align:center;margin-top:52px;">
-        <a href="#reserve" class="btn-gold">Reserve Your Table</a>
-      </div>
-    </div>
-  </section>
+      <div class="divider"></div>
 
-  <!-- ══════════════════════════════════════
-       CHEF / TEAM — dark split (Ammolite team section)
-  ══════════════════════════════════════ -->
-  <section id="team" class="chef-section">
-    <div class="split-section" style="min-height:700px;">
-      <div class="split-text dark" style="background:var(--black);">
-        <div class="reveal">
-          <span class="eyebrow" style="color:var(--gold-light);">The Chef</span>
-          <h2 class="heading-section" style="color:var(--white);font-size:clamp(2.2rem,4vw,4.5rem);">
-            Eric<br><em>Ripert</em>
-          </h2>
-          <div class="gold-rule"></div>
-          <p class="body-copy">
-            Born in Antibes, France, Eric Ripert has led Le Bernardin's kitchen since 1994.
-            His approach is deceptively simple: honor the fish, master the technique,
-            remove everything superfluous. The result has earned three Michelin stars —
-            every year since the guide began awarding them in New York.
-          </p>
-          <p class="body-copy" style="margin-top:16px;">
-            A recipient of the James Beard Award for Outstanding Chef, Ripert has
-            defined an entire school of cooking — one that holds the ocean in reverence
-            and places the ingredient, not the chef, at the center of every plate.
-          </p>
-          <blockquote style="margin-top:32px;padding-left:20px;border-left:2px solid var(--gold);font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-style:italic;color:rgba(255,255,255,0.7);line-height:1.5;">
-            "When you walk into my kitchen, you feel the respect we have for the ocean.
-            That respect is the foundation of everything we do."
-          </blockquote>
+      <div class="about-block">
+        <div class="about-label">What We've Won</div>
+        <div class="awards-grid">
+          <div class="award-block"><div class="award-num">121</div><div class="award-name">FWA</div></div>
+          <div class="award-block"><div class="award-num">54</div><div class="award-name">Awwwards</div></div>
+          <div class="award-block"><div class="award-num">28</div><div class="award-name">Cannes Lions</div></div>
+          <div class="award-block"><div class="award-num">19</div><div class="award-name">One Show</div></div>
+          <div class="award-block"><div class="award-num">12</div><div class="award-name">D&amp;AD</div></div>
+          <div class="award-block"><div class="award-num">9</div><div class="award-name">Webbys</div></div>
         </div>
       </div>
-      <div class="split-img">
-        <img src="https://placehold.co/960x700/131210/1d1b18?text=" alt="Eric Ripert" />
+
+      <div class="divider"></div>
+
+      <div class="about-block">
+        <div class="about-label">We're Hiring</div>
+        <p>We're always looking for talented people to join our studio. If you're passionate about creating exceptional digital experiences, <a href="mailto:careers@resn.co.nz" style="border-bottom:1px solid rgba(255,255,255,0.35);padding-bottom:1px;">get in touch</a>.</p>
       </div>
     </div>
+  </div>
 
-    <!-- Sous-chef row -->
-    <div class="split-section reverse" style="min-height:560px;">
-      <div class="split-img">
-        <img src="https://placehold.co/960x560/0f0e0c/191714?text=" alt="Le Bernardin Kitchen" />
+  <!-- WORK -->
+  <div class="page" id="page-work">
+    <div class="work-inner">
+      <div class="work-grid">
+
+        <div class="work-item wide">
+          <div class="work-thumb">
+            <div class="work-thumb-inner" style="background-color:#0a0a0e;background-image:url('https://placehold.co/1400x534/0a0a0e/161620?text=');"></div>
+          </div>
+          <div class="work-meta">
+            <div class="work-client">Nike</div>
+            <div class="work-title">Just Move — Global Campaign Experience</div>
+            <div class="work-tags">Interactive · Web · Motion</div>
+          </div>
+        </div>
+
+        <div class="work-item">
+          <div class="work-thumb">
+            <div class="work-thumb-inner" style="background-color:#0d0d10;background-image:url('https://placehold.co/700x394/0d0d10/1a1a1e?text=');"></div>
+          </div>
+          <div class="work-meta">
+            <div class="work-client">Spotify</div>
+            <div class="work-title">Wrapped — Interactive Year in Review</div>
+            <div class="work-tags">Web · Data Visualisation · Motion</div>
+          </div>
+        </div>
+
+        <div class="work-item">
+          <div class="work-thumb">
+            <div class="work-thumb-inner" style="background-color:#100d0d;background-image:url('https://placehold.co/700x394/100d0d/1e1818?text=');"></div>
+          </div>
+          <div class="work-meta">
+            <div class="work-client">Google</div>
+            <div class="work-title">Arts &amp; Culture — Immersive Portal</div>
+            <div class="work-tags">Web · 3D · Installation</div>
+          </div>
+        </div>
+
+        <div class="work-item">
+          <div class="work-thumb">
+            <div class="work-thumb-inner" style="background-color:#0d100d;background-image:url('https://placehold.co/700x394/0d100d/181e18?text=');"></div>
+          </div>
+          <div class="work-meta">
+            <div class="work-client">Adidas</div>
+            <div class="work-title">Originals — Generative Identity System</div>
+            <div class="work-tags">3D · Generative · Web</div>
+          </div>
+        </div>
+
+        <div class="work-item">
+          <div class="work-thumb">
+            <div class="work-thumb-inner" style="background-color:#0e0d0d;background-image:url('https://placehold.co/700x394/0e0d0d/1c1a1a?text=');"></div>
+          </div>
+          <div class="work-meta">
+            <div class="work-client">Apple</div>
+            <div class="work-title">Today at Apple — Experience Microsite</div>
+            <div class="work-tags">Web · Motion · Social</div>
+          </div>
+        </div>
+
+        <div class="work-item">
+          <div class="work-thumb">
+            <div class="work-thumb-inner" style="background-color:#0d0d0e;background-image:url('https://placehold.co/700x394/0d0d0e/1a1a1c?text=');"></div>
+          </div>
+          <div class="work-meta">
+            <div class="work-client">Red Bull</div>
+            <div class="work-title">Racing — Real-Time Strategy Game</div>
+            <div class="work-tags">Game · Interactive · Mobile</div>
+          </div>
+        </div>
+
+        <div class="work-item wide">
+          <div class="work-thumb">
+            <div class="work-thumb-inner" style="background-color:#0e0d12;background-image:url('https://placehold.co/1400x534/0e0d12/1c1a20?text=');"></div>
+          </div>
+          <div class="work-meta">
+            <div class="work-client">Samsung</div>
+            <div class="work-title">Galaxy Unpacked — Live Event Experience</div>
+            <div class="work-tags">Interactive · Broadcast · Web</div>
+          </div>
+        </div>
+
+        <div class="work-item">
+          <div class="work-thumb">
+            <div class="work-thumb-inner" style="background-color:#10100d;background-image:url('https://placehold.co/700x394/10100d/1e1e18?text=');"></div>
+          </div>
+          <div class="work-meta">
+            <div class="work-client">Puma</div>
+            <div class="work-title">Forever Faster — Social Campaign</div>
+            <div class="work-tags">Social · Motion · Video</div>
+          </div>
+        </div>
+
+        <div class="work-item">
+          <div class="work-thumb">
+            <div class="work-thumb-inner" style="background-color:#0d0e10;background-image:url('https://placehold.co/700x394/0d0e10/1a1c1e?text=');"></div>
+          </div>
+          <div class="work-meta">
+            <div class="work-client">HBO</div>
+            <div class="work-title">House of the Dragon — Launch Experience</div>
+            <div class="work-tags">Web · 3D · Interactive</div>
+          </div>
+        </div>
+
       </div>
-      <div class="split-text dark">
-        <div class="reveal">
-          <span class="eyebrow" style="color:var(--gold-light);">The Kitchen</span>
-          <h2 class="heading-section" style="color:var(--white);">Mastery Through<br><em>Discipline</em></h2>
-          <div class="gold-rule"></div>
-          <p class="body-copy">
-            Twelve years of continuous three-star recognition do not happen by accident.
-            They happen through a kitchen culture that demands and delivers absolute
-            consistency — every service, every plate, every day.
-          </p>
-          <p class="body-copy" style="margin-top:16px;">
-            Our brigade is led by some of the most accomplished professionals in
-            American fine dining. Their collective discipline, curiosity, and
-            dedication to craft form the backbone of every meal served here.
-          </p>
-          <a href="#reserve" class="btn-outline-white" style="margin-top:36px;">Private Dining</a>
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <div class="page" id="page-contact">
+    <div class="contact-inner">
+      <div class="contact-email-col">
+        <div class="contact-label">Get in touch</div>
+        <a class="contact-link" href="mailto:hello@resn.co.nz">hello@resn.co.nz</a>
+        <a class="contact-link" href="mailto:newbusiness@resn.co.nz">newbusiness@resn.co.nz</a>
+        <a class="contact-hire" href="mailto:careers@resn.co.nz">We're hiring →</a>
+      </div>
+      <div class="contact-other-col">
+        <div class="contact-addr-block">
+          <h4>Wellington</h4>
+          <p>+64 4 385 0705<br>Level 7, Anvil House<br>138 Wakefield Street<br>Wellington, New Zealand</p>
+        </div>
+        <div class="contact-addr-block">
+          <h4>Amsterdam</h4>
+          <p>+31 20 261 0299<br>Keizersgracht 174-1<br>1016 DW Amsterdam<br>Netherlands</p>
+        </div>
+        <div class="social-col">
+          <h4>Follow</h4>
+          <a class="social-link" href="#">Twitter / @resn_has_no_i</a>
+          <a class="social-link" href="#">Instagram / @resn_has_no_i</a>
+          <a class="social-link" href="#">LinkedIn / resn</a>
+          <a class="social-link" href="#">Facebook / resnglobal</a>
         </div>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- ══════════════════════════════════════
-       RESERVATION CTA (Ammolite style)
-  ══════════════════════════════════════ -->
-  <section class="cta-section" id="reserve">
-    <div class="cta-bg-text">Reserve</div>
-    <div class="cta-content reveal">
-      <span class="eyebrow" style="justify-content:center;">New York · 155 West 51st Street</span>
-      <h2 class="cta-title">
-        Join Us for an<br><em>Unforgettable</em> Evening
-      </h2>
-      <p class="cta-sub">
-        Reservations accepted up to 28 days in advance.<br>
-        For parties of 6 or more, please contact us directly.
-      </p>
-      <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
-        <a href="tel:+12125541515" class="btn-gold">Reserve by Phone</a>
-        <a href="#" class="btn-outline-dark">Reserve Online (Resy)</a>
+  <!-- REEL -->
+  <div class="page" id="page-reel">
+    <div class="reel-wrap">
+      <div class="reel-play" id="reel-play-btn">
+        <svg width="14" height="18" viewBox="0 0 14 18" fill="none">
+          <path d="M0 0L14 9L0 18V0Z" fill="white"/>
+        </svg>
       </div>
-      <p style="margin-top:24px;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.12em;color:var(--muted);">
-        +1 (212) 554-1515 &nbsp;·&nbsp; Monday–Friday Lunch &amp; Dinner &nbsp;·&nbsp; Dinner Only Saturday
-      </p>
+      <div class="reel-label">Play Showreel 2024</div>
     </div>
-  </section>
-
-  <!-- ══════════════════════════════════════
-       CONTACT / PRIVATE DINING — split
-  ══════════════════════════════════════ -->
-  <section id="contact">
-    <div class="split-section" style="min-height:560px;">
-      <div class="split-img">
-        <img src="https://placehold.co/960x560/111009/1b1917?text=" alt="Private Dining Room" />
-      </div>
-      <div class="split-text">
-        <div class="reveal">
-          <span class="eyebrow">Private Dining</span>
-          <h2 class="heading-section">Your Private<br><em>Occasion</em></h2>
-          <div class="gold-rule"></div>
-          <p class="body-copy">
-            Le Bernardin's private dining rooms accommodate groups from 10 to 80 guests.
-            Whether a corporate dinner, a milestone celebration, or an intimate gathering,
-            each event receives the same meticulous attention as our main dining room.
-          </p>
-          <p class="body-copy" style="margin-top:16px;">
-            Custom menus, curated wine pairings, and dedicated service staff ensure
-            that every private event at Le Bernardin becomes a memory.
-          </p>
-          <a href="#" class="btn-outline-dark" style="margin-top:36px;">Inquire About Events</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══════════════════════════════════════
-       FOOTER
-  ══════════════════════════════════════ -->
-  <footer>
-    <div class="footer-top">
-      <div>
-        <div class="footer-brand">Le Bernardin</div>
-        <div class="footer-brand-sub">by Eric Ripert · Est. 1986</div>
-        <p class="footer-about">
-          155 West 51st Street<br>
-          New York, NY 10019<br><br>
-          +1 (212) 554-1515<br>
-          info@le-bernardin.com
-        </p>
-      </div>
-      <div class="footer-col">
-        <div class="footer-col-title">Visit</div>
-        <ul>
-          <li><a href="#restaurant">The Restaurant</a></li>
-          <li><a href="#menus">Menus</a></li>
-          <li><a href="#team">Our Team</a></li>
-          <li><a href="#contact">Private Dining</a></li>
-          <li><a href="#reserve">Reservations</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <div class="footer-col-title">Menus</div>
-        <ul>
-          <li><a>Chef's Tasting</a></li>
-          <li><a>Dinner Prix Fixe</a></li>
-          <li><a>Lunch Prix Fixe</a></li>
-          <li><a>Vegetarian Truffle</a></li>
-          <li><a>Lounge Menu</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <div class="footer-col-title">Information</div>
-        <ul>
-          <li><a>Gift Cards</a></li>
-          <li><a>Press</a></li>
-          <li><a>Careers</a></li>
-          <li><a>Sustainability</a></li>
-          <li><a>Cookbooks</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <div class="footer-copy">© 2024 Le Bernardin. All rights reserved.</div>
-      <div class="footer-legal">
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms of Use</a>
-        <a href="#">Accessibility</a>
-      </div>
-    </div>
-  </footer>
+  </div>
 
   <script>
-    /* ── Nav solidifies on scroll ── */
-    const nav = document.getElementById('main-nav');
-    window.addEventListener('scroll', () => {
-      nav.classList.toggle('solid', window.scrollY > 80);
-    }, { passive: true });
+    // ── State ──
+    let currentPage = 'page-home';
+    let holding = false;
+    let holdRaf = null;
+    let holdStart = 0;
+    let holdProgress = 0;
+    const HOLD_MS = 1300;
 
-    /* ── Hero image soft zoom on load ── */
-    window.addEventListener('load', () => {
-      document.getElementById('hero-img').classList.add('loaded');
+    // ── Canvas ring ──
+    const canvas = document.getElementById('ring-canvas');
+    const ctx = canvas.getContext('2d');
+
+    function drawRing(p) {
+      ctx.clearRect(0, 0, 80, 80);
+      ctx.beginPath();
+      ctx.arc(40, 40, 26, 0, Math.PI * 2);
+      ctx.strokeStyle = 'rgba(255,255,255,0.1)';
+      ctx.lineWidth = 1;
+      ctx.stroke();
+      if (p > 0.008) {
+        ctx.beginPath();
+        ctx.arc(40, 40, 26, -Math.PI / 2, -Math.PI / 2 + Math.PI * 2 * p);
+        ctx.strokeStyle = 'rgba(255,255,255,0.88)';
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+      }
+    }
+    drawRing(0);
+
+    // ── Page switch ──
+    function showPage(id) {
+      if (id === currentPage) return;
+      const prev = document.getElementById(currentPage);
+      const next = document.getElementById(id);
+      if (!next) return;
+
+      prev.classList.remove('active');
+      next.classList.add('active');
+      currentPage = id;
+
+      const home   = id === 'page-home';
+      const menu   = id === 'page-menu';
+      const inner  = ['page-about','page-work','page-contact','page-reel'].includes(id);
+
+      // Shell buttons
+      ['btn-drop','btn-disco','btn-reel','btn-audio'].forEach(b =>
+        document.getElementById(b).classList.toggle('vis', home)
+      );
+
+      // Gem
+      document.querySelector('.bg-gem').style.display = home ? 'flex' : 'none';
+
+      // Inner nav
+      const nav = document.getElementById('inner-nav');
+      nav.classList.toggle('vis', inner || menu);
+      document.getElementById('nav-label').textContent =
+        id === 'page-about'   ? 'About'    :
+        id === 'page-work'    ? 'Work'     :
+        id === 'page-contact' ? 'Contact'  :
+        id === 'page-reel'    ? 'Showreel' : '';
+
+      // Scroll inner pages to top + scroll hint
+      if (inner) {
+        next.scrollTop = 0;
+        const hint = document.getElementById('scroll-hint');
+        setTimeout(() => { hint.classList.add('vis'); }, 700);
+        setTimeout(() => { hint.classList.remove('vis'); }, 3200);
+      } else {
+        document.getElementById('scroll-hint').classList.remove('vis');
+      }
+    }
+
+    function goBack() {
+      const inner = ['page-about','page-work','page-contact','page-reel'];
+      if (inner.includes(currentPage) || currentPage === 'page-menu') {
+        showPage(inner.includes(currentPage) ? 'page-menu' : 'page-home');
+      }
+    }
+
+    // ── Hold mechanic ──
+    function animateHold(ts) {
+      if (!holding) return;
+      holdProgress = Math.min((ts - holdStart) / HOLD_MS, 1);
+      drawRing(holdProgress);
+      if (holdProgress < 1) {
+        holdRaf = requestAnimationFrame(animateHold);
+      } else {
+        holding = false;
+        setTimeout(() => {
+          holdProgress = 0;
+          drawRing(0);
+          showPage('page-menu');
+        }, 120);
+      }
+    }
+
+    function startHold() {
+      if (currentPage !== 'page-home') return;
+      holding = true;
+      holdStart = performance.now();
+      holdRaf = requestAnimationFrame(animateHold);
+    }
+
+    function endHold() {
+      if (!holding) return;
+      holding = false;
+      cancelAnimationFrame(holdRaf);
+      const from = holdProgress;
+      let p = from;
+      (function decay() {
+        p -= 0.035;
+        if (p <= 0) { holdProgress = 0; drawRing(0); return; }
+        holdProgress = p; drawRing(p);
+        requestAnimationFrame(decay);
+      })();
+    }
+
+    // ── Events ──
+    const gem = document.getElementById('gem');
+    gem.addEventListener('mousedown',  startHold);
+    gem.addEventListener('touchstart', e => { e.preventDefault(); startHold(); }, { passive: false });
+    window.addEventListener('mouseup',     endHold);
+    window.addEventListener('touchend',    endHold);
+    window.addEventListener('touchcancel', endHold);
+
+    document.getElementById('btn-drop').addEventListener('click',  () => showPage('page-menu'));
+    document.getElementById('btn-disco').addEventListener('click', () => showPage('page-menu'));
+    document.getElementById('btn-reel').addEventListener('click',  () => showPage('page-reel'));
+    document.getElementById('btn-audio').addEventListener('click', e => {
+      e.currentTarget.textContent = e.currentTarget.textContent.includes('◯') ? '● Audio' : '◯ Audio';
     });
 
-    /* ── Scroll reveal ── */
-    const revealObs = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('visible');
-          revealObs.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.1 });
+    document.querySelectorAll('.menu-item').forEach(item =>
+      item.addEventListener('click', () => showPage(item.dataset.target))
+    );
 
-    document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+    document.getElementById('menu-close').addEventListener('click', () => showPage('page-home'));
+    document.getElementById('nav-back').addEventListener('click', goBack);
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') goBack(); });
 
-    /* ── Smooth anchor scrolling with nav offset ── */
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
-      a.addEventListener('click', e => {
-        const target = document.querySelector(a.getAttribute('href'));
-        if (!target) return;
-        e.preventDefault();
-        const offset = nav.offsetHeight + 20;
-        window.scrollTo({ top: target.offsetTop - offset, behavior: 'smooth' });
-      });
-    });
+    // ── Init ──
+    setTimeout(() => {
+      ['btn-drop','btn-disco','btn-reel','btn-audio'].forEach(b =>
+        document.getElementById(b).classList.add('vis')
+      );
+    }, 500);
+    setTimeout(() => document.getElementById('home-title').classList.add('in'), 150);
   </script>
 </body>
 </html>
