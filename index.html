@@ -22,6 +22,7 @@
       height: 100vh;
       user-select: none;
       -webkit-tap-highlight-color: rgba(0,0,0,0);
+      cursor: none;
     }
 
     ::-webkit-scrollbar { width: 6px; }
@@ -29,6 +30,35 @@
     ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.25); border-radius: 3px; }
 
     a { color: inherit; text-decoration: none; }
+
+    /* ── Custom cursor ── */
+    #cursor-dot {
+      position: fixed;
+      top: 0; left: 0;
+      width: 6px; height: 6px;
+      background: #fff;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: transform 0.08s ease, opacity 0.3s ease, width 0.25s ease, height 0.25s ease, background 0.25s ease;
+      will-change: transform;
+    }
+    #cursor-ring {
+      position: fixed;
+      top: 0; left: 0;
+      width: 36px; height: 36px;
+      border: 1px solid rgba(255,255,255,0.5);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: width 0.35s cubic-bezier(0.16,1,0.3,1), height 0.35s cubic-bezier(0.16,1,0.3,1), opacity 0.3s ease, border-color 0.25s ease;
+      will-change: transform;
+    }
+    body.cursor-hover #cursor-dot { width: 10px; height: 10px; background: #fff; }
+    body.cursor-hover #cursor-ring { width: 56px; height: 56px; border-color: rgba(255,255,255,0.3); }
+    body.cursor-hold  #cursor-ring { width: 80px; height: 80px; border-color: rgba(255,255,255,0.7); }
 
     /* ── Shell ── */
     .shell {
@@ -48,14 +78,18 @@
       font-weight: 400;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      cursor: pointer;
+      cursor: none;
       pointer-events: all;
       padding: 3rem;
       opacity: 0;
-      transition: opacity 0.5s ease;
+      transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.16,1,0.3,1);
     }
-    .shell-btn.vis { opacity: 1; }
-    .shell-btn:hover { opacity: 0.5 !important; }
+    .shell-btn.vis { opacity: 1; transform: none !important; }
+    .btn-drop  { transform: translate(-8px, -8px); }
+    .btn-disco { transform: translate(8px, -8px); }
+    .btn-reel  { transform: translate(8px, 8px); }
+    .btn-audio { transform: translate(-8px, 8px); }
+    .shell-btn:hover { opacity: 0.45 !important; }
 
     .btn-drop  { top: 0; left: 0; }
     .btn-disco { top: 0; right: 0; }
@@ -72,10 +106,19 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      cursor: pointer;
+      cursor: none;
       pointer-events: all;
       width: 140px;
       height: 180px;
+      animation: gemFloat 4s ease-in-out infinite;
+      opacity: 0;
+      transition: opacity 0.8s ease;
+    }
+    .bg-gem.vis { opacity: 1; }
+
+    @keyframes gemFloat {
+      0%, 100% { transform: translate(-50%, -50%); }
+      50%       { transform: translate(-50%, calc(-50% - 8px)); }
     }
 
     .gem-svg-wrap {
@@ -84,9 +127,9 @@
       left: 50%;
       transform: translate(-50%, -58%);
       opacity: 0.15;
-      transition: opacity 0.4s ease;
+      transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.16,1,0.3,1);
     }
-    .bg-gem:hover .gem-svg-wrap { opacity: 0.45; }
+    .bg-gem:hover .gem-svg-wrap { opacity: 0.5; transform: translate(-50%, -62%) scale(1.06); }
 
     .gem-ring-wrap {
       position: absolute;
@@ -115,12 +158,18 @@
       inset: 0;
       opacity: 0;
       pointer-events: none;
-      transition: opacity 0.7s ease;
+      transform: translateY(12px);
+      transition: opacity 0.75s cubic-bezier(0.16,1,0.3,1), transform 0.75s cubic-bezier(0.16,1,0.3,1);
       z-index: 10;
     }
     .page.active {
       opacity: 1;
       pointer-events: all;
+      transform: translateY(0);
+    }
+    .page.exit {
+      opacity: 0;
+      transform: translateY(-8px);
     }
 
     /* ── Home ── */
@@ -128,9 +177,8 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      cursor: grab;
+      cursor: none;
     }
-    #page-home:active { cursor: grabbing; }
 
     .home-title {
       font-size: clamp(2.8rem, 4vw, 4.8rem);
@@ -142,8 +190,8 @@
       padding: 0 2rem;
       pointer-events: none;
       opacity: 0;
-      transform: translateY(14px);
-      transition: opacity 1s ease 0.5s, transform 1s ease 0.5s;
+      transform: translateY(20px);
+      transition: opacity 1.2s cubic-bezier(0.16,1,0.3,1) 0.4s, transform 1.2s cubic-bezier(0.16,1,0.3,1) 0.4s;
     }
     .home-title.in { opacity: 1; transform: translateY(0); }
 
@@ -168,12 +216,12 @@
       line-height: 1;
       letter-spacing: -2px;
       text-transform: uppercase;
-      cursor: pointer;
+      cursor: none;
       padding: 0.5rem 0;
       position: relative;
       opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.5s ease, transform 0.5s ease, color 0.2s;
+      clip-path: inset(0 0 100% 0);
+      transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1), clip-path 0.6s cubic-bezier(0.16,1,0.3,1), color 0.25s ease;
     }
     .menu-item::after {
       content: '';
@@ -185,15 +233,16 @@
       background: #fff;
       transform: scaleX(0);
       transform-origin: left;
-      transition: transform 0.35s ease;
+      transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
     }
     .menu-item:hover::after { transform: scaleX(1); }
-    .menu-item:hover { color: rgba(255,255,255,0.55); }
+    .menu-item:hover { color: rgba(255,255,255,0.5); }
 
-    #page-menu.active .menu-item { opacity: 1; transform: translateY(0); }
-    #page-menu.active .menu-item:nth-child(1) { transition-delay: 0.08s; }
-    #page-menu.active .menu-item:nth-child(2) { transition-delay: 0.17s; }
-    #page-menu.active .menu-item:nth-child(3) { transition-delay: 0.26s; }
+    #page-menu.active .menu-item { opacity: 1; clip-path: inset(0 0 0% 0); }
+    #page-menu.active .menu-item:nth-child(1) { transition-delay: 0.05s; }
+    #page-menu.active .menu-item:nth-child(2) { transition-delay: 0.13s; }
+    #page-menu.active .menu-item:nth-child(3) { transition-delay: 0.21s; }
+    #page-menu:not(.active) .menu-item { clip-path: inset(0 0 100% 0); opacity: 0; }
 
     .menu-close {
       position: absolute;
@@ -260,6 +309,14 @@
       margin-bottom: 9rem;
     }
 
+    /* ── Scroll reveal ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1);
+    }
+    .reveal.in { opacity: 1; transform: translateY(0); }
+
     .about-block { margin-bottom: 7rem; }
 
     .about-label {
@@ -297,15 +354,16 @@
 
     .work-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem 4rem; }
 
-    .work-item { cursor: pointer; }
+    .work-item { cursor: none; }
 
     .work-thumb { width: 100%; aspect-ratio: 16/9; overflow: hidden; position: relative; background: #0d0d0d; }
-    .work-thumb-inner { width: 100%; height: 100%; background-size: cover; background-position: center; filter: brightness(0.6); transition: transform 0.8s ease, filter 0.4s ease; }
-    .work-item:hover .work-thumb-inner { transform: scale(1.04); filter: brightness(0.85); }
+    .work-thumb-inner { width: 100%; height: 100%; background-size: cover; background-position: center; filter: brightness(0.55); transition: transform 1s cubic-bezier(0.16,1,0.3,1), filter 0.5s ease; }
+    .work-item:hover .work-thumb-inner { transform: scale(1.05); filter: brightness(0.9); }
+    .work-title { font-size: 2.4rem; font-weight: 200; letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 0.8rem; transition: opacity 0.25s ease; }
+    .work-item:hover .work-title { opacity: 0.7; }
 
     .work-meta { padding: 2.2rem 0 0; }
     .work-client { font-size: 1.1rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.32); margin-bottom: 0.8rem; }
-    .work-title { font-size: 2.4rem; font-weight: 200; letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 0.8rem; }
     .work-tags { font-size: 1.2rem; font-weight: 300; color: rgba(255,255,255,0.3); }
 
     .work-item.wide { grid-column: 1 / -1; }
@@ -416,6 +474,10 @@
 </head>
 <body>
 
+  <!-- Custom cursor -->
+  <div id="cursor-dot"></div>
+  <div id="cursor-ring"></div>
+
   <!-- Shell -->
   <div class="shell">
     <button class="shell-btn btn-drop"  id="btn-drop">Drop</button>
@@ -474,23 +536,23 @@
   <!-- ABOUT -->
   <div class="page" id="page-about">
     <div class="about-inner">
-      <h2 class="about-title">Resn is a digital experience design studio. We help progressive brands engage with today's connected customers.</h2>
+      <h2 class="about-title reveal">Resn is a digital experience design studio. We help progressive brands engage with today's connected customers.</h2>
 
-      <div class="about-block">
+      <div class="about-block reveal">
         <div class="about-label">We Amaze and Engage</div>
         <p>We create innovative digital experiences that captivate audiences and drive meaningful engagement. From interactive installations to immersive web experiences, we push the boundaries of what's possible in the digital space — blending craft, code, and creative thinking into something genuinely surprising.</p>
       </div>
 
-      <div class="divider"></div>
+      <div class="divider reveal"></div>
 
-      <div class="about-block">
+      <div class="about-block reveal">
         <div class="about-label">Our Approach</div>
         <p>Every brand has a story worth telling in a way that's never been told before. We develop bespoke communication strategies that connect with audiences across mobile, web, and emerging platforms. Our in-house 3D graphics and video production capabilities mean we can take ideas from concept to execution without compromise.</p>
       </div>
 
-      <div class="divider"></div>
+      <div class="divider reveal"></div>
 
-      <div class="about-block">
+      <div class="about-block reveal">
         <div class="about-label">How We Work</div>
         <div class="two-col">
           <div>
@@ -522,9 +584,9 @@
         </div>
       </div>
 
-      <div class="divider"></div>
+      <div class="divider reveal"></div>
 
-      <div class="about-block">
+      <div class="about-block reveal">
         <div class="about-label">Where We Are</div>
         <div class="two-col">
           <div>
@@ -542,23 +604,23 @@
         </div>
       </div>
 
-      <div class="divider"></div>
+      <div class="divider reveal"></div>
 
-      <div class="about-block">
+      <div class="about-block reveal">
         <div class="about-label">What We've Won</div>
         <div class="awards-grid">
-          <div class="award-block"><div class="award-num">121</div><div class="award-name">FWA</div></div>
-          <div class="award-block"><div class="award-num">54</div><div class="award-name">Awwwards</div></div>
-          <div class="award-block"><div class="award-num">28</div><div class="award-name">Cannes Lions</div></div>
-          <div class="award-block"><div class="award-num">19</div><div class="award-name">One Show</div></div>
-          <div class="award-block"><div class="award-num">12</div><div class="award-name">D&amp;AD</div></div>
-          <div class="award-block"><div class="award-num">9</div><div class="award-name">Webbys</div></div>
+          <div class="award-block reveal"><div class="award-num" data-count="121">0</div><div class="award-name">FWA</div></div>
+          <div class="award-block reveal"><div class="award-num" data-count="54">0</div><div class="award-name">Awwwards</div></div>
+          <div class="award-block reveal"><div class="award-num" data-count="28">0</div><div class="award-name">Cannes Lions</div></div>
+          <div class="award-block reveal"><div class="award-num" data-count="19">0</div><div class="award-name">One Show</div></div>
+          <div class="award-block reveal"><div class="award-num" data-count="12">0</div><div class="award-name">D&amp;AD</div></div>
+          <div class="award-block reveal"><div class="award-num" data-count="9">0</div><div class="award-name">Webbys</div></div>
         </div>
       </div>
 
-      <div class="divider"></div>
+      <div class="divider reveal"></div>
 
-      <div class="about-block">
+      <div class="about-block reveal">
         <div class="about-label">We're Hiring</div>
         <p>We're always looking for talented people to join our studio. If you're passionate about creating exceptional digital experiences, <a href="mailto:careers@resn.co.nz" style="border-bottom:1px solid rgba(255,255,255,0.35);padding-bottom:1px;">get in touch</a>.</p>
       </div>
@@ -570,7 +632,7 @@
     <div class="work-inner">
       <div class="work-grid">
 
-        <div class="work-item wide">
+        <div class="work-item wide reveal">
           <div class="work-thumb">
             <div class="work-thumb-inner" style="background-color:#0a0a0e;background-image:url('https://placehold.co/1400x534/0a0a0e/161620?text=');"></div>
           </div>
@@ -581,7 +643,7 @@
           </div>
         </div>
 
-        <div class="work-item">
+        <div class="work-item reveal">
           <div class="work-thumb">
             <div class="work-thumb-inner" style="background-color:#0d0d10;background-image:url('https://placehold.co/700x394/0d0d10/1a1a1e?text=');"></div>
           </div>
@@ -592,7 +654,7 @@
           </div>
         </div>
 
-        <div class="work-item">
+        <div class="work-item reveal">
           <div class="work-thumb">
             <div class="work-thumb-inner" style="background-color:#100d0d;background-image:url('https://placehold.co/700x394/100d0d/1e1818?text=');"></div>
           </div>
@@ -603,7 +665,7 @@
           </div>
         </div>
 
-        <div class="work-item">
+        <div class="work-item reveal">
           <div class="work-thumb">
             <div class="work-thumb-inner" style="background-color:#0d100d;background-image:url('https://placehold.co/700x394/0d100d/181e18?text=');"></div>
           </div>
@@ -614,7 +676,7 @@
           </div>
         </div>
 
-        <div class="work-item">
+        <div class="work-item reveal">
           <div class="work-thumb">
             <div class="work-thumb-inner" style="background-color:#0e0d0d;background-image:url('https://placehold.co/700x394/0e0d0d/1c1a1a?text=');"></div>
           </div>
@@ -625,7 +687,7 @@
           </div>
         </div>
 
-        <div class="work-item">
+        <div class="work-item reveal">
           <div class="work-thumb">
             <div class="work-thumb-inner" style="background-color:#0d0d0e;background-image:url('https://placehold.co/700x394/0d0d0e/1a1a1c?text=');"></div>
           </div>
@@ -636,7 +698,7 @@
           </div>
         </div>
 
-        <div class="work-item wide">
+        <div class="work-item wide reveal">
           <div class="work-thumb">
             <div class="work-thumb-inner" style="background-color:#0e0d12;background-image:url('https://placehold.co/1400x534/0e0d12/1c1a20?text=');"></div>
           </div>
@@ -647,7 +709,7 @@
           </div>
         </div>
 
-        <div class="work-item">
+        <div class="work-item reveal">
           <div class="work-thumb">
             <div class="work-thumb-inner" style="background-color:#10100d;background-image:url('https://placehold.co/700x394/10100d/1e1e18?text=');"></div>
           </div>
@@ -658,7 +720,7 @@
           </div>
         </div>
 
-        <div class="work-item">
+        <div class="work-item reveal">
           <div class="work-thumb">
             <div class="work-thumb-inner" style="background-color:#0d0e10;background-image:url('https://placehold.co/700x394/0d0e10/1a1c1e?text=');"></div>
           </div>
@@ -723,6 +785,28 @@
     let holdProgress = 0;
     const HOLD_MS = 1300;
 
+    // ── Custom cursor ──
+    const dot  = document.getElementById('cursor-dot');
+    const ring = document.getElementById('cursor-ring');
+    let mx = -100, my = -100, rx = -100, ry = -100;
+
+    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+
+    (function cursorLoop() {
+      rx += (mx - rx) * 0.12;
+      ry += (my - ry) * 0.12;
+      dot.style.left  = mx + 'px';
+      dot.style.top   = my + 'px';
+      ring.style.left = rx + 'px';
+      ring.style.top  = ry + 'px';
+      requestAnimationFrame(cursorLoop);
+    })();
+
+    document.querySelectorAll('button, .menu-item, .work-item, .nav-back, .menu-close, .contact-link, .social-link, .contact-hire, .reel-play, a').forEach(el => {
+      el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+      el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+    });
+
     // ── Canvas ring ──
     const canvas = document.getElementById('ring-canvas');
     const ctx = canvas.getContext('2d');
@@ -744,6 +828,59 @@
     }
     drawRing(0);
 
+    // ── Scroll reveal (IntersectionObserver) ──
+    const observers = new Map();
+
+    function initReveal(container) {
+      const els = container.querySelectorAll('.reveal');
+      if (!els.length) return;
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach((entry, i) => {
+          if (entry.isIntersecting) {
+            const el = entry.target;
+            const delay = el.dataset.delay || 0;
+            setTimeout(() => {
+              el.classList.add('in');
+              // count-up for award numbers
+              const num = el.querySelector('[data-count]');
+              if (num) countUp(num);
+            }, delay);
+            obs.unobserve(el);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+      els.forEach((el, i) => {
+        el.style.transitionDelay = (i * 0.04) + 's';
+        obs.observe(el);
+      });
+      observers.set(container.id, obs);
+    }
+
+    function resetReveal(container) {
+      container.querySelectorAll('.reveal').forEach(el => {
+        el.classList.remove('in');
+        el.style.transitionDelay = '';
+      });
+      // reset award numbers
+      container.querySelectorAll('[data-count]').forEach(el => { el.textContent = '0'; });
+      const obs = observers.get(container.id);
+      if (obs) obs.disconnect();
+      observers.delete(container.id);
+    }
+
+    function countUp(el) {
+      const target = parseInt(el.dataset.count, 10);
+      const dur = 1200;
+      const start = performance.now();
+      (function tick(now) {
+        const p = Math.min((now - start) / dur, 1);
+        el.textContent = Math.round(p * p * target);
+        if (p < 1) requestAnimationFrame(tick);
+        else el.textContent = target;
+      })(start);
+    }
+
     // ── Page switch ──
     function showPage(id) {
       if (id === currentPage) return;
@@ -751,13 +888,16 @@
       const next = document.getElementById(id);
       if (!next) return;
 
+      // Exit animation on prev
+      prev.classList.add('exit');
       prev.classList.remove('active');
+      setTimeout(() => prev.classList.remove('exit'), 800);
+
       next.classList.add('active');
       currentPage = id;
 
-      const home   = id === 'page-home';
-      const menu   = id === 'page-menu';
-      const inner  = ['page-about','page-work','page-contact','page-reel'].includes(id);
+      const home  = id === 'page-home';
+      const inner = ['page-about','page-work','page-contact','page-reel'].includes(id);
 
       // Shell buttons
       ['btn-drop','btn-disco','btn-reel','btn-audio'].forEach(b =>
@@ -765,23 +905,28 @@
       );
 
       // Gem
-      document.querySelector('.bg-gem').style.display = home ? 'flex' : 'none';
+      const gem = document.querySelector('.bg-gem');
+      gem.style.display = home ? 'flex' : 'none';
+      if (home) setTimeout(() => gem.classList.add('vis'), 50);
+      else gem.classList.remove('vis');
 
       // Inner nav
       const nav = document.getElementById('inner-nav');
-      nav.classList.toggle('vis', inner || menu);
+      nav.classList.toggle('vis', inner || id === 'page-menu');
       document.getElementById('nav-label').textContent =
         id === 'page-about'   ? 'About'    :
         id === 'page-work'    ? 'Work'     :
         id === 'page-contact' ? 'Contact'  :
         id === 'page-reel'    ? 'Showreel' : '';
 
-      // Scroll inner pages to top + scroll hint
+      // Inner page setup
       if (inner) {
         next.scrollTop = 0;
+        resetReveal(next);
+        setTimeout(() => initReveal(next), 200);
         const hint = document.getElementById('scroll-hint');
-        setTimeout(() => { hint.classList.add('vis'); }, 700);
-        setTimeout(() => { hint.classList.remove('vis'); }, 3200);
+        setTimeout(() => hint.classList.add('vis'), 900);
+        setTimeout(() => hint.classList.remove('vis'), 3400);
       } else {
         document.getElementById('scroll-hint').classList.remove('vis');
       }
@@ -789,9 +934,8 @@
 
     function goBack() {
       const inner = ['page-about','page-work','page-contact','page-reel'];
-      if (inner.includes(currentPage) || currentPage === 'page-menu') {
-        showPage(inner.includes(currentPage) ? 'page-menu' : 'page-home');
-      }
+      if (inner.includes(currentPage)) showPage('page-menu');
+      else if (currentPage === 'page-menu') showPage('page-home');
     }
 
     // ── Hold mechanic ──
@@ -803,11 +947,8 @@
         holdRaf = requestAnimationFrame(animateHold);
       } else {
         holding = false;
-        setTimeout(() => {
-          holdProgress = 0;
-          drawRing(0);
-          showPage('page-menu');
-        }, 120);
+        document.body.classList.remove('cursor-hold');
+        setTimeout(() => { holdProgress = 0; drawRing(0); showPage('page-menu'); }, 120);
       }
     }
 
@@ -815,17 +956,18 @@
       if (currentPage !== 'page-home') return;
       holding = true;
       holdStart = performance.now();
+      document.body.classList.add('cursor-hold');
       holdRaf = requestAnimationFrame(animateHold);
     }
 
     function endHold() {
       if (!holding) return;
       holding = false;
+      document.body.classList.remove('cursor-hold');
       cancelAnimationFrame(holdRaf);
-      const from = holdProgress;
-      let p = from;
+      let p = holdProgress;
       (function decay() {
-        p -= 0.035;
+        p -= 0.04;
         if (p <= 0) { holdProgress = 0; drawRing(0); return; }
         holdProgress = p; drawRing(p);
         requestAnimationFrame(decay);
@@ -856,12 +998,10 @@
     document.addEventListener('keydown', e => { if (e.key === 'Escape') goBack(); });
 
     // ── Init ──
-    setTimeout(() => {
-      ['btn-drop','btn-disco','btn-reel','btn-audio'].forEach(b =>
-        document.getElementById(b).classList.add('vis')
-      );
-    }, 500);
-    setTimeout(() => document.getElementById('home-title').classList.add('in'), 150);
+    const btns = ['btn-drop','btn-disco','btn-reel','btn-audio'];
+    btns.forEach((b, i) => setTimeout(() => document.getElementById(b).classList.add('vis'), 400 + i * 80));
+    setTimeout(() => document.getElementById('home-title').classList.add('in'), 200);
+    setTimeout(() => document.querySelector('.bg-gem').classList.add('vis'), 600);
   </script>
 </body>
 </html>
