@@ -192,8 +192,8 @@
 
     .story { position: relative; }
     .story-background { position: sticky; top: 0; height: 100svh; color: var(--ivory); overflow: hidden; }
-    .story-background > img { width: 100%; height: 100%; object-fit: cover; }
-    .story-background::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, #2224, #2227 60%, var(--page)); }
+    .story-background > video { width: 100%; height: 100%; object-fit: cover; object-position: 50% 65%; }
+    .story-background::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, #2227, #222a 60%, var(--charcoal)); }
     .story-background .corner-frame { inset: 35vh 17.5vw; z-index: 2; }
     .timeline { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 5vh; min-height: 250svh; margin-top: -90svh; padding: 5vh 7.5vw 50vh; text-align: center; color: var(--ivory); }
     .story-step { width: 100%; display: flex; flex-direction: column; align-items: center; }
@@ -466,7 +466,7 @@
       </div>
     </section>
     <section class="story" id="story" aria-labelledby="story-label">
-      <div class="story-background"><img src="assets/placeholders/story.svg" alt="" width="1920" height="1080" loading="lazy"><div class="corner-frame" aria-hidden="true"><i></i><i></i><i></i><i></i></div></div>
+      <div class="story-background"><video data-ambient-video data-src="assets/photos/Zeelander_Web.mp4" poster="assets/video-posters/zeelander.webp" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video><div class="corner-frame" aria-hidden="true"><i></i><i></i><i></i></div></div>
       <div class="timeline">
         <p class="label orange" id="story-label">Our story</p>
         <div class="story-step"><span class="story-line" aria-hidden="true"></span><div class="step-count" aria-label="Chapter 1 of 3"><span>1</span><span aria-hidden="true"></span><span>3</span></div><h3>Every story begins with an idea.</h3><p class="body-copy">A spark of curiosity, a new perspective, a possibility worth exploring.</p></div>
