@@ -52,6 +52,10 @@
     img[src$="Verschuur-media-Web-export-14-optimized.webp"] { object-position: 50% 72%; }
     img[src$="Unknown-5.png"] { object-position: 78% 55%; }
     img[src$="Unknown-6.png"] { object-position: 72% 65%; }
+    img[src$="moza_flight_controller.webp"] { object-position: 54% 60%; }
+    img[src$="dreameaze_bedroom_mask_closeup.webp"] { object-position: 52% 38%; }
+    img[src$="dreameaze_outdoor_black_mask_lifestyle.webp"] { object-position: 50% 40%; }
+    img[src$="gym-3.webp"] { object-position: 35% 45%; }
     a { color: inherit; text-decoration: none; }
     button { font: inherit; color: inherit; border: 0; background: none; cursor: pointer; }
     button, a { touch-action: manipulation; }
@@ -173,12 +177,16 @@
     .work-card:focus-visible { outline-offset: -6px; }
     .work .cta-row { display: flex; justify-content: center; margin-top: 5vh; }
     .gallery { position: relative; height: 100svh; overflow: hidden; }
-    .photo-grid { position: absolute; inset: -12vh 0; display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; width: 260vw; left: -80vw; transform: scale(1.05); transform-origin: center; will-change: transform; }
+    .photo-grid { position: absolute; inset: -17.5vh 0; display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; width: 260vw; left: -80vw; transform: scale(1.05); transform-origin: center; will-change: transform; }
     .photo-column { display: flex; flex-direction: column; gap: 16px; will-change: transform; }
-    .photo-column:nth-child(even) { padding-top: 15vh; }
-    .photo-column img { width: 100%; height: 36vh; object-fit: cover; }
-    .photo-column img:nth-child(2) { height: 26vh; }
-    .photo-column img:nth-child(3) { height: 44vh; }
+    .photo-column:nth-child(even) { padding-top: 5vh; }
+    .photo-tile { position: relative; display: block; overflow: hidden; }
+    .photo-column .photo-tile { flex: 0 0 44vh; width: 100%; height: 44vh; }
+    .photo-tile img { width: 100%; height: 100%; object-fit: cover; transition: transform 500ms var(--ease); }
+    .has-mouse .photo-tile:hover img, .photo-tile:focus-visible img { transform: scale(1.04); }
+    .photo-tile:focus-visible { outline-offset: -6px; }
+    .photo-tile:active { transform: none; }
+    .photo-tile:active img { transform: scale(1.02); }
 
     .services { position: relative; padding: 8vh var(--gutter) 12vh; }
     .services-header { display: grid; gap: 3vh; margin: 3vh 0 5vh; }
@@ -240,16 +248,20 @@
 
     .social { padding-top: 10vh; margin-bottom: 20vh; }
     .social-strip { overflow: hidden; }
-    .social-track { width: max-content; display: flex; align-items: center; animation: marquee 40s linear infinite; }
+    .social-track { width: max-content; display: flex; align-items: center; will-change: transform; }
     .social-group { display: flex; align-items: center; }
-    .social-photo { flex: 0 0 55vw; width: 55vw; height: 45vh; margin-right: 2vw; object-fit: cover; transition: transform 500ms var(--ease); }
-    .has-mouse .social-photo:hover { transform: scale(1.04); }
-    .social-photo:nth-child(even) { height: 24vh; }
+    .social-tile { flex: 0 0 55vw; width: 55vw; height: 45vh; margin-right: 2vw; }
+    .social-tile--short { height: 24vh; }
     .social-copy { width: 70%; margin: 7.5vh auto 0; text-align: center; }
     .social-copy .cta { margin-top: 3vh; }
+    .social-contact-note { margin-top: 4vh; font-size: 16px; line-height: 1.6; }
+    .social-copy .email-cue { margin-top: 10px; font-size: 15px; }
+    .email-cue:hover svg, .email-cue:focus-visible svg { transform: translateY(3px); }
 
     .site-footer { --accent: #69d9ed; background: var(--charcoal); color: var(--ivory); min-height: 91.5svh; display: flex; flex-direction: column; justify-content: space-between; padding: 7.5vh var(--gutter) 3.5vh; }
     .footer-top { display: grid; grid-template-columns: 1fr 1fr; gap: 5vh; }
+    .contact-details { grid-column: 1 / -1; grid-row: 1; }
+    .contact-email { display: inline-block; margin-top: 20px; color: #69d9ed; font-size: clamp(13px, 1.1vw, 17px); overflow-wrap: anywhere; }
     .footer-links { display: flex; flex-direction: column; gap: 12px; align-items: flex-start; font-weight: 600; text-transform: uppercase; }
     .contact-cta { grid-column: 1 / -1; grid-row: 1; display: flex; gap: 15px; align-items: center; width: fit-content; font-family: Manrope, Switzer, sans-serif; font-weight: 650; font-size: 50px; line-height: 1; letter-spacing: -.045em; }
     .contact-cta svg { width: 43px; height: 43px; flex-shrink: 0; transition: transform 350ms var(--ease); }
@@ -287,6 +299,8 @@
     .reel-placeholder svg { width: 64px; height: 64px; }
     .reel-video { width: 100%; height: 100%; object-fit: contain; }
     .project-dialog-content { display: grid; gap: 5vh; padding: 4vh var(--gutter) 10vh; }
+    #project-dialog { scroll-padding-top: 100px; }
+    #project-dialog .dialog-header { position: sticky; top: 0; z-index: 5; background: var(--page); }
     .project-dialog-content > img { width: 100%; height: auto; max-height: 60vh; object-fit: contain; }
     .project-dialog-content > video { width: 100%; height: 50vh; object-fit: contain; background: var(--charcoal); }
     .project-dialog-copy .label { margin-bottom: 20px; }
@@ -295,6 +309,12 @@
     .project-dialog-copy dl { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding: 20px 0 32px; margin-bottom: 24px; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
     .project-dialog-copy dt { font-size: 11px; text-transform: uppercase; color: var(--accent); }
     .project-dialog-copy dd { font-size: 14px; }
+    .project-dialog-gallery { padding: 0 var(--gutter) 10vh; }
+    .project-dialog-gallery h3 { margin-bottom: 4vh; }
+    .project-photo-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; align-items: start; }
+    .project-photo-grid img { width: 100%; height: auto; }
+    .photo-reveal { opacity: 0; transform: translateY(18px); transition: opacity 450ms, transform 650ms var(--ease); }
+    .photo-reveal.is-visible { opacity: 1; transform: none; }
     [hidden] { display: none !important; }
     @keyframes marquee { to { transform: translateX(-50%); } }
     @keyframes rotate-ring { to { transform: rotate(360deg); } }
@@ -359,12 +379,13 @@
       .impact-panel { padding: 20vh 7.5vw; }
       .impact-panel h2 { font-size: clamp(44px, 4.5vw, 72px); }
       .social { padding-top: 20vh; margin-bottom: 30vh; }
-      .social-photo { flex-basis: 22.5vw; width: 22.5vw; margin-right: 1vw; }
+      .social-tile { flex-basis: 22.5vw; width: 22.5vw; margin-right: 1vw; }
       .social-copy { width: 45vw; margin-top: 12vh; }
       .site-footer { height: 91.5vh; min-height: 0; padding: 10vh var(--gutter) 3vh; }
       .footer-top { grid-template-columns: 12vw 12vw 1fr 17vw; gap: 3vw; align-items: start; }
       .footer-links { gap: 1.333vh; margin-top: 1vh; }
       .contact-cta { grid-column: auto; grid-row: auto; gap: 1vw; font-size: 4.688vw; white-space: nowrap; }
+      .contact-details { grid-column: auto; grid-row: auto; }
       .contact-cta svg { width: 4.2vw; height: 4.2vw; }
       .back-top { grid-column: auto; width: 17vw; height: 10vh; }
       .footer-bottom { margin-top: 0; }
@@ -374,6 +395,7 @@
       .project-dialog-content > img { height: 70vh; max-height: 70vh; }
       .project-dialog-content > video { height: 70vh; }
       .project-dialog-copy { padding-top: 5vh; }
+      .project-photo-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
     }
     @media (max-width: 479px) {
       .hero { min-height: 600px; }
@@ -396,6 +418,9 @@
       *, *::before, *::after { animation: none !important; transition: none !important; }
       .photo-column { will-change: auto; }
       .photo-grid { transform: none !important; will-change: auto; }
+      .photo-reveal { opacity: 1; transform: none; }
+      .social-track { will-change: auto; }
+      .social-strip { overflow-x: auto; }
       .client-track { width: 100%; }
       .client-group { width: 100%; flex-wrap: wrap; justify-content: center; row-gap: 24px; }
       .client-group[aria-hidden="true"], .client-logo[aria-hidden="true"] { display: none; }
@@ -410,6 +435,7 @@
     <symbol id="plus-icon" viewBox="0 0 24 24"><path d="M12 3v18M3 12h18" fill="none" stroke="currentColor" stroke-width="1.5"/></symbol>
     <symbol id="close-icon" viewBox="0 0 24 24"><path d="m5 5 14 14M19 5 5 19" fill="none" stroke="currentColor" stroke-width="1.5"/></symbol>
     <symbol id="big-arrow" viewBox="0 0 60 60"><path d="M7 30h45M35 13l17 17-17 17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="down-icon" viewBox="0 0 24 24"><path d="M12 4v16m-7-7 7 7 7-7" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
   </defs></svg>
   <header class="site-header">
     <div class="nav-inner">
@@ -471,20 +497,20 @@
       </div>
       <div class="cta-row"><a class="cta" href="#gallery">View all work<svg aria-hidden="true"><use href="#arrow-icon"/></svg></a></div>
     </section>
-    <div class="gallery" id="gallery" aria-label="Portfolio photography collection"><div class="photo-grid">
-      <div class="photo-column"><img src="assets/photos/DSC00394-optimized.webp" alt="Black-and-white photograph of an elephant raising its trunk in grassland" loading="lazy" width="1600" height="1067"><img src="assets/photos/dsc01490-1600.webp" alt="Outdoor portrait of a woman wearing sunglasses and flower earrings" loading="lazy" width="1020" height="1600"><img src="assets/photos/dreameaze-1600.webp" alt="Woman reclining on pillows with a silk sleep mask" loading="lazy" width="1066" height="1600"></div>
-      <div class="photo-column"><img src="assets/photos/Verschuur-media-Web-export-14-optimized.webp" alt="Child carrying a bag past warm-toned buildings" loading="lazy" width="870" height="1600"><img src="assets/photos/kopie-van-dsc01183-2-1600.webp" alt="Event portrait of a woman holding a champagne glass" loading="lazy" width="858" height="1600"><img src="assets/photos/dsc03837-1600.webp" alt="Outdoor portrait of a woman wearing a navy silk sleep bonnet" loading="lazy" width="1112" height="1600"></div>
-      <div class="photo-column"><img src="assets/photos/02.png" alt="Yellow and black Nubia phones beneath a Born to Win display" loading="lazy" width="1153" height="649"><img src="assets/photos/Unknown-5.png" alt="Visitors trying flight simulation controls at the MOZA booth" loading="lazy" width="1672" height="941"><img src="assets/photos/kopie-van-dsc01355-1600.webp" alt="Street portrait with sunglasses, gold earrings, and a patterned jacket" loading="lazy" width="1066" height="1600"></div>
-      <div class="photo-column"><img src="assets/photos/Verschuur-media-Web-export-8-optimized.webp" alt="People resting beside camels in an open landscape" loading="lazy" width="1066" height="1600"><img src="assets/photos/Unknown-6.png" alt="MOZA flight simulation equipment displayed beneath a blue branded backdrop" loading="lazy" width="1672" height="941"><img src="assets/photos/kopie-van-dsc01388-1600.webp" alt="Children in yellow shirts dancing and playing a drum on the beach" loading="lazy" width="1066" height="1600"></div>
-      <div class="photo-column"><img src="assets/photos/Verschuur-media-Web-export-10-optimized.webp" alt="Fruit vendor handing a bag to a customer" loading="lazy" width="1066" height="1600"><img src="assets/photos/dreameaze-1-1600.webp" alt="Woman sitting in bed wearing a navy silk sleep bonnet" loading="lazy" width="1066" height="1600"><img src="assets/photos/dreameaze-2-1600.webp" alt="Bedroom portrait featuring a navy silk sleep bonnet" loading="lazy" width="1066" height="1600"></div>
-      <div class="photo-column"><img src="assets/photos/Verschuur-media-Web-export-7-optimized.webp" alt="A seated artisan working with woven baskets" loading="lazy" width="956" height="1600"><img src="assets/photos/Verschuur-media-Web-export-6-optimized.webp" alt="Orange vendor at a roadside fruit stall" loading="lazy" width="1600" height="1068"><img src="assets/photos/dsc01490-1600.webp" alt="Outdoor portrait of a woman wearing sunglasses and flower earrings" loading="lazy" width="1020" height="1600"></div>
+    <div class="gallery" id="gallery" aria-label="Browse project photography and film stills"><div class="photo-grid">
+      <div class="photo-column"><button class="photo-tile" type="button" data-photo-project="4" data-photo="assets/video-stills/gym-1.webp" aria-label="View Gym Groesbeek Promotion photos" aria-haspopup="dialog" aria-controls="project-dialog"><img src="assets/video-stills/gym-1.webp" alt="Film still 1 from Gym Groesbeek Promotion" loading="lazy" width="1280" height="720"></button><button class="photo-tile" type="button" data-photo-project="5" data-photo="assets/photos/dreameaze_bathroom_mirror.webp" aria-label="View Dreameaze photos" aria-haspopup="dialog" aria-controls="project-dialog"><img src="assets/photos/dreameaze_bathroom_mirror.webp" alt="Portrait reflected in a bathroom mirror with a Dreameaze sleep mask" loading="lazy" width="1024" height="1536"></button><button class="photo-tile" type="button" data-photo-project="0" data-photo="assets/video-stills/zeelander-3.webp" aria-label="View Zeelander Yachts photos" aria-haspopup="dialog" aria-controls="project-dialog"><img src="assets/video-stills/zeelander-3.webp" alt="Film still 3 from Zeelander Yachts" loading="lazy" width="720" height="1280"></button></div>
+      <div class="photo-column"><button class="photo-tile" type="button" data-photo-project="3" data-photo="assets/video-stills/eelco-1.webp" aria-label="View Eelco de Boer Aftermovie photos" aria-haspopup="dialog" aria-controls="project-dialog"><img src="assets/video-stills/eelco-1.webp" alt="Film still 1 from Eelco de Boer Aftermovie" loading="lazy" width="1280" height="720"></button><button class="photo-tile" type="button" data-photo-project="moza" data-photo="assets/photos/Unknown-5.png" aria-label="View MOZA photos" aria-haspopup="dialog" aria-controls="project-dialog"><img src="assets/photos/Unknown-5.png" alt="Visitors trying flight simulation controls at the MOZA booth" loading="lazy" width="1672" height="941"></button><button class="photo-tile" type="button" data-photo-project="5" data-photo="assets/photos/dreameaze_bedroom_mask_closeup.webp" aria-label="View Dreameaze photos" aria-haspopup="dialog" aria-controls="project-dialog"><img src="assets/photos/dreameaze_bedroom_mask_closeup.webp" alt="Close-up portrait with a champagne-colored Dreameaze sleep mask" loading="lazy" width="1024" height="1536"></button></div>
+      <div class="photo-column"><button class="photo-tile" type="button" data-photo-project="0" data-photo="assets/video-stills/zeelander-1.webp" aria-label="View Zeelander Yachts photos" aria-haspopup="dialog" aria-controls="project-dialog"><img src="assets/video-stills/zeelander-1.webp" alt="Film still 1 from Zeelander Yachts" loading="lazy" width="720" height="1280"></button><button class="photo-tile" type="button" data-photo-project="5" data-photo="assets/photos/dreameaze_outdoor_black_mask_lifestyle.webp" aria-label="View Dreameaze photos" aria-haspopup="dialog" aria-controls="project-dialog"><img src="assets/photos/dreameaze_outdoor_black_mask_lifestyle.webp" alt="Outdoor lifestyle portrait with a black Dreameaze sleep mask" loading="lazy" width="1024" height="1536"></button><button class="photo-tile" type="button" data-photo-project="3" data-photo="assets/video-stills/eelco-2.webp" aria-label="View Eelco de Boer Aftermovie photos" aria-haspopup="dialog" aria-controls="project-dialog"><img src="assets/video-stills/eelco-2.webp" alt="Film still 2 from Eelco de Boer Aftermovie" loading="lazy" width="1280" height="720"></button></div>
+      <div class="photo-column"><button class="photo-tile" type="button" data-photo-project="2" data-photo="assets/video-stills/iceland-1.webp" aria-label="View Iceland Travel photos" aria-haspopup="dialog" aria-controls="project-dialog"><img src="assets/video-stills/iceland-1.webp" alt="Film still 1 from Iceland Travel" loading="lazy" width="1280" height="720"></button><button class="photo-tile" type="button" data-photo-project="moza" data-photo="assets/photos/moza_flight_controller.webp" aria-label="View MOZA photos" aria-haspopup="dialog" aria-controls="project-dialog"><img src="assets/photos/moza_flight_controller.webp" alt="Close-up of a MOZA flight controller being used" loading="lazy" width="1024" height="1536"></button><button class="photo-tile" type="button" data-photo-project="4" data-photo="assets/video-stills/gym-2.webp" aria-label="View Gym Groesbeek Promotion photos" aria-haspopup="dialog" aria-controls="project-dialog"><img src="assets/video-stills/gym-2.webp" alt="Film still 2 from Gym Groesbeek Promotion" loading="lazy" width="1280" height="720"></button></div>
+      <div class="photo-column"><button class="photo-tile" type="button" data-photo-project="moza" data-photo="assets/photos/Unknown-6.png" aria-label="View MOZA photos" aria-haspopup="dialog" aria-controls="project-dialog"><img src="assets/photos/Unknown-6.png" alt="MOZA flight simulation equipment beneath a blue branded backdrop" loading="lazy" width="1672" height="941"></button><button class="photo-tile" type="button" data-photo-project="3" data-photo="assets/video-stills/eelco-3.webp" aria-label="View Eelco de Boer Aftermovie photos" aria-haspopup="dialog" aria-controls="project-dialog"><img src="assets/video-stills/eelco-3.webp" alt="Film still 3 from Eelco de Boer Aftermovie" loading="lazy" width="1280" height="720"></button><button class="photo-tile" type="button" data-photo-project="2" data-photo="assets/video-stills/iceland-2.webp" aria-label="View Iceland Travel photos" aria-haspopup="dialog" aria-controls="project-dialog"><img src="assets/video-stills/iceland-2.webp" alt="Film still 2 from Iceland Travel" loading="lazy" width="1280" height="720"></button></div>
+      <div class="photo-column"><button class="photo-tile" type="button" data-photo-project="0" data-photo="assets/video-stills/zeelander-2.webp" aria-label="View Zeelander Yachts photos" aria-haspopup="dialog" aria-controls="project-dialog"><img src="assets/video-stills/zeelander-2.webp" alt="Film still 2 from Zeelander Yachts" loading="lazy" width="720" height="1280"></button><button class="photo-tile" type="button" data-photo-project="4" data-photo="assets/video-stills/gym-3.webp" aria-label="View Gym Groesbeek Promotion photos" aria-haspopup="dialog" aria-controls="project-dialog"><img src="assets/video-stills/gym-3.webp" alt="Film still 3 from Gym Groesbeek Promotion" loading="lazy" width="1280" height="720"></button><button class="photo-tile" type="button" data-photo-project="2" data-photo="assets/video-stills/iceland-3.webp" aria-label="View Iceland Travel photos" aria-haspopup="dialog" aria-controls="project-dialog"><img src="assets/video-stills/iceland-3.webp" alt="Film still 3 from Iceland Travel" loading="lazy" width="1280" height="720"></button></div>
     </div></div>
     <section class="services" id="services" aria-labelledby="services-title">
       <p class="label accent">How I work</p>
       <div class="services-header"><h2 id="services-title">From an idea.<br>To something you feel.</h2><p class="body-copy">I take care of the whole picture: a clear direction before the shoot, an eye for the moment on location, and a careful edit afterwards. You work with me from the first conversation to the finished piece.</p></div>
       <div class="services-stage">
         <div class="process-preview"><div class="service-visual" data-phase="0" aria-hidden="true">
-          <div class="service-image-track"><img class="is-active" src="assets/video-posters/landscape.webp" alt="" loading="lazy" width="1276" height="718"><img src="assets/photos/02.png" alt="" loading="lazy" width="1153" height="649"><img src="assets/photos/Unknown-5.png" alt="" loading="lazy" width="1672" height="941"><img src="assets/photos/dreameaze-1600.webp" alt="" loading="lazy" width="1066" height="1600"></div>
+          <div class="service-image-track"><img class="is-active" src="assets/video-stills/iceland-4.webp" alt="" loading="lazy" width="1280" height="720"><img src="assets/video-stills/gym-4.webp" alt="" loading="lazy" width="1280" height="720"><img src="assets/video-stills/eelco-4.webp" alt="" loading="lazy" width="1280" height="720"><img src="assets/video-stills/zeelander-4.webp" alt="" loading="lazy" width="720" height="1280"></div>
           <div class="process-frame"><i></i><i></i><i></i><i></i></div>
           <div class="process-caption"><span id="process-count">01 / 04</span><span id="process-caption">Find the story</span></div><div class="process-progress"></div>
         </div><p class="process-hint"><span class="desktop-hint">Scroll through the process, or choose a step.</span><span class="mobile-hint">Choose a step to follow the process.</span></p></div>
@@ -507,11 +533,15 @@
     </section>
     <section class="impact" aria-labelledby="impact-title"><div class="impact-panel"><img src="assets/photos/DSC00394-optimized.webp" alt="" width="1600" height="1067" loading="lazy"><h2 id="impact-title">A considered eye.<br>A personal approach.</h2><p class="body-copy">Good work starts with paying attention. To your story, to the light, to the small details that are easy to miss. I bring that same care to every project, from the first conversation to the final frame.</p><a class="cta" href="#contact">Tell me your idea<svg aria-hidden="true"><use href="#arrow-icon"/></svg></a></div></section>
     <section class="social" id="social" aria-labelledby="social-title">
-      <div class="social-strip" aria-label="Photography collection"><div class="social-track">
-        <div class="social-group"><img class="social-photo" src="assets/photos/Unknown-5.png" alt="Visitors trying flight simulation controls at the MOZA booth" loading="lazy" width="1672" height="941"><img class="social-photo" src="assets/photos/02.png" alt="Yellow and black Nubia phones beneath a Born to Win display" loading="lazy" width="1153" height="649"><img class="social-photo" src="assets/photos/Verschuur-media-Web-export-10-optimized.webp" alt="Fruit vendor handing a bag to a customer" loading="lazy" width="1066" height="1600"><img class="social-photo" src="assets/photos/Unknown-6.png" alt="MOZA flight simulation equipment displayed beneath a blue branded backdrop" loading="lazy" width="1672" height="941"><img class="social-photo" src="assets/photos/Verschuur-media-Web-export-6-optimized.webp" alt="Orange vendor at a roadside fruit stall" loading="lazy" width="1600" height="1068"><img class="social-photo" src="assets/photos/Verschuur-media-Web-export-14-optimized.webp" alt="Child carrying a bag past warm-toned buildings" loading="lazy" width="870" height="1600"><img class="social-photo" src="assets/photos/kopie-van-dsc01355-1600.webp" alt="Street portrait with sunglasses, gold earrings, and a patterned jacket" loading="lazy" width="1066" height="1600"><img class="social-photo" src="assets/photos/dsc03837-1600.webp" alt="Outdoor portrait of a woman wearing a navy silk sleep bonnet" loading="lazy" width="1112" height="1600"></div>
-        <div class="social-group" aria-hidden="true"><img class="social-photo" src="assets/photos/Unknown-5.png" alt="" loading="lazy" width="1672" height="941"><img class="social-photo" src="assets/photos/02.png" alt="" loading="lazy" width="1153" height="649"><img class="social-photo" src="assets/photos/Verschuur-media-Web-export-10-optimized.webp" alt="" loading="lazy" width="1066" height="1600"><img class="social-photo" src="assets/photos/Unknown-6.png" alt="" loading="lazy" width="1672" height="941"><img class="social-photo" src="assets/photos/Verschuur-media-Web-export-6-optimized.webp" alt="" loading="lazy" width="1600" height="1068"><img class="social-photo" src="assets/photos/Verschuur-media-Web-export-14-optimized.webp" alt="" loading="lazy" width="870" height="1600"><img class="social-photo" src="assets/photos/kopie-van-dsc01355-1600.webp" alt="" loading="lazy" width="1066" height="1600"><img class="social-photo" src="assets/photos/dsc03837-1600.webp" alt="" loading="lazy" width="1112" height="1600"></div>
-      </div></div>
-      <div class="social-copy"><h2 id="social-title">More moments.<br>More stories.</h2><a class="cta" href="https://www.instagram.com/max.verschuur/" target="_blank" rel="noopener noreferrer">Follow @max.verschuur<svg aria-hidden="true"><use href="#arrow-icon"/></svg></a></div>
+      <div class="social-strip" aria-label="Browse photography projects"><div class="social-track"><div class="social-group">
+        <button class="photo-tile social-tile social-tile--short" type="button" data-photo-project="personal" data-photo="assets/photos/dsc01490-1600.webp" aria-label="View Personal photography photos" aria-haspopup="dialog" aria-controls="project-dialog"><img class="social-photo" src="assets/photos/dsc01490-1600.webp" alt="Outdoor portrait with sunglasses and flower earrings" loading="lazy" width="1020" height="1600"></button>
+        <button class="photo-tile social-tile" type="button" data-photo-project="personal" data-photo="assets/photos/Verschuur-media-Web-export-14-optimized.webp" aria-label="View Personal photography photos" aria-haspopup="dialog" aria-controls="project-dialog"><img class="social-photo" src="assets/photos/Verschuur-media-Web-export-14-optimized.webp" alt="Child carrying a bag past warm-toned buildings" loading="lazy" width="870" height="1600"></button>
+        <button class="photo-tile social-tile social-tile--short" type="button" data-photo-project="personal" data-photo="assets/photos/kopie-van-dsc01355-1600.webp" aria-label="View Personal photography photos" aria-haspopup="dialog" aria-controls="project-dialog"><img class="social-photo" src="assets/photos/kopie-van-dsc01355-1600.webp" alt="Street portrait with sunglasses, gold earrings, and a patterned jacket" loading="lazy" width="1066" height="1600"></button>
+        <button class="photo-tile social-tile" type="button" data-photo-project="personal" data-photo="assets/photos/Verschuur-media-Web-export-8-optimized.webp" aria-label="View Personal photography photos" aria-haspopup="dialog" aria-controls="project-dialog"><img class="social-photo" src="assets/photos/Verschuur-media-Web-export-8-optimized.webp" alt="People resting beside camels in an open landscape" loading="lazy" width="1066" height="1600"></button>
+        <button class="photo-tile social-tile social-tile--short" type="button" data-photo-project="personal" data-photo="assets/photos/kopie-van-dsc01183-2-1600.webp" aria-label="View Personal photography photos" aria-haspopup="dialog" aria-controls="project-dialog"><img class="social-photo" src="assets/photos/kopie-van-dsc01183-2-1600.webp" alt="Event portrait of a woman holding a champagne glass" loading="lazy" width="858" height="1600"></button>
+        <button class="photo-tile social-tile" type="button" data-photo-project="personal" data-photo="assets/photos/Verschuur-media-Web-export-7-optimized.webp" aria-label="View Personal photography photos" aria-haspopup="dialog" aria-controls="project-dialog"><img class="social-photo" src="assets/photos/Verschuur-media-Web-export-7-optimized.webp" alt="A seated artisan working with woven baskets" loading="lazy" width="956" height="1600"></button>
+      </div></div></div>
+      <div class="social-copy"><h2 id="social-title">More moments.<br>More stories.</h2><a class="cta" href="https://www.instagram.com/max.verschuur/" target="_blank" rel="noopener noreferrer">IG: max.verschuur<svg aria-hidden="true"><use href="#arrow-icon"/></svg></a><p class="social-contact-note">Have a project in mind?</p><a class="cta email-cue" href="#contact">Email me below<svg aria-hidden="true"><use href="#down-icon"/></svg></a></div>
     </section>
   </main>
   <!-- CONTENT: contact and social links. -->
@@ -519,7 +549,7 @@
     <div class="footer-top">
       <nav class="footer-links" aria-label="Footer navigation"><a class="text-link" href="#home">Home</a><a class="text-link" href="#projects">Projects</a><a class="text-link" href="#about">About</a><a class="text-link" href="#contact">Contact</a></nav>
       <nav class="footer-links" aria-label="Social links"><a class="text-link" href="https://www.instagram.com/max.verschuur/" target="_blank" rel="noopener noreferrer">Instagram</a><a class="text-link" href="mailto:maxverschuur396@gmail.com">Email</a></nav>
-      <a class="contact-cta" href="mailto:maxverschuur396@gmail.com"><svg aria-hidden="true"><use href="#big-arrow"/></svg><span>Let’s talk.</span></a>
+      <div class="contact-details"><a class="contact-cta" href="mailto:maxverschuur396@gmail.com"><svg aria-hidden="true"><use href="#big-arrow"/></svg><span>Email me.</span></a><a class="contact-email text-link" href="mailto:maxverschuur396@gmail.com">maxverschuur396@gmail.com</a></div>
       <button class="back-top" type="button"><svg viewBox="0 0 250 90" preserveAspectRatio="none" aria-hidden="true"><path d="M26 18C-40 6 164-4 235 30S124 90 45 82-4 48 103 20" fill="none" stroke="currentColor" stroke-width="1"/></svg><span class="label">Back to top</span></button>
     </div>
     <div class="footer-bottom"><img class="footer-logo" src="assets/photos/luxury_heraldic_crest_logo.png" alt="Verschuur Media" width="1254" height="1254" loading="lazy"><div class="footer-fineprint"><span>©<span data-year>2026</span> Verschuur Media</span><span>Film &amp; photography by Max Verschuur</span></div></div>
@@ -535,10 +565,11 @@
   </dialog>
   <dialog id="project-dialog" aria-labelledby="project-dialog-title">
     <div class="dialog-header"><span class="dialog-brand"><span class="brand-mark" aria-hidden="true"><img src="assets/photos/luxury_heraldic_crest_logo.png" alt="" width="1254" height="1254"></span>Verschuur Media</span><button class="close-dialog label" type="button" data-close>Close<svg aria-hidden="true"><use href="#close-icon"/></svg></button></div>
-    <div class="project-dialog-content"><img id="project-dialog-image" src="assets/photos/dreameaze-1600.webp" alt="Woman reclining on pillows with a silk sleep mask" width="1066" height="1600"><video id="project-dialog-video" controls playsinline preload="none" hidden></video><div class="project-dialog-copy"><p class="label accent" id="project-dialog-client">Zeelander Yachts</p><h2 id="project-dialog-title">Zeelander Yachts</h2><p class="body-copy" id="project-dialog-description"></p><dl><div><dt>Services</dt><dd id="project-dialog-services"></dd></div><div><dt>Type</dt><dd id="project-dialog-type"></dd></div></dl><a class="cta" href="#contact" id="project-contact">Get in touch<svg aria-hidden="true"><use href="#arrow-icon"/></svg></a></div></div>
+    <div class="project-dialog-content"><img id="project-dialog-image" alt="" hidden><video id="project-dialog-video" controls playsinline preload="none" hidden></video><div class="project-dialog-copy"><p class="label accent" id="project-dialog-client">Zeelander Yachts</p><h2 id="project-dialog-title">Zeelander Yachts</h2><p class="body-copy" id="project-dialog-description"></p><dl><div><dt>Services</dt><dd id="project-dialog-services"></dd></div><div><dt>Type</dt><dd id="project-dialog-type"></dd></div></dl><a class="cta" href="#contact" id="project-contact">Get in touch<svg aria-hidden="true"><use href="#arrow-icon"/></svg></a></div></div>
+    <section class="project-dialog-gallery" aria-labelledby="project-gallery-title" hidden><h3 id="project-gallery-title">Project photography</h3><div class="project-photo-grid"></div></section>
   </dialog>
   <script>
-    // CONTENT: update project names, images, services, and descriptions here.
+    // CONTENT: project photos are grouped here; homepage selections use each image once.
     const projects = [
       {
             "title": "Zeelander Yachts",
@@ -549,7 +580,33 @@
             "video": "assets/photos/Zeelander_Web.mp4",
             "alt": "A Zeelander yacht cruising on the water",
             "services": "Brand film",
-            "description": "A short yacht film focused on the details, movement, and feeling of being out on the water."
+            "description": "A short yacht film focused on the details, movement, and feeling of being out on the water.",
+            "photos": [
+                  {
+                        "image": "assets/video-stills/zeelander-1.webp",
+                        "alt": "Film still 1 from Zeelander Yachts",
+                        "width": 720,
+                        "height": 1280
+                  },
+                  {
+                        "image": "assets/video-stills/zeelander-2.webp",
+                        "alt": "Film still 2 from Zeelander Yachts",
+                        "width": 720,
+                        "height": 1280
+                  },
+                  {
+                        "image": "assets/video-stills/zeelander-3.webp",
+                        "alt": "Film still 3 from Zeelander Yachts",
+                        "width": 720,
+                        "height": 1280
+                  },
+                  {
+                        "image": "assets/video-stills/zeelander-4.webp",
+                        "alt": "Film still 4 from Zeelander Yachts",
+                        "width": 720,
+                        "height": 1280
+                  }
+            ]
       },
       {
             "title": "ZTE Nubia at TwitchCon",
@@ -559,7 +616,15 @@
             "height": 649,
             "alt": "Yellow and black Nubia phones beneath a Born to Win display at TwitchCon",
             "services": "Event photography",
-            "description": "ZTE Nubia at TwitchCon, capturing the phones and the brand’s presence at the event."
+            "description": "ZTE Nubia at TwitchCon, capturing the phones and the brand’s presence at the event.",
+            "photos": [
+                  {
+                        "image": "assets/photos/02.png",
+                        "alt": "Yellow and black Nubia phones beneath a Born to Win display at TwitchCon",
+                        "width": 1153,
+                        "height": 649
+                  }
+            ]
       },
       {
             "title": "Iceland Travel",
@@ -570,7 +635,33 @@
             "video": "assets/photos/Video_Web_Full.mp4",
             "alt": "Icelandic mountain landscapes beneath a dramatic sky",
             "services": "Travel film",
-            "description": "A travel film through Iceland’s mountain landscapes, with a focus on scale, light, and movement."
+            "description": "A travel film through Iceland’s mountain landscapes, with a focus on scale, light, and movement.",
+            "photos": [
+                  {
+                        "image": "assets/video-stills/iceland-1.webp",
+                        "alt": "Film still 1 from Iceland Travel",
+                        "width": 1280,
+                        "height": 720
+                  },
+                  {
+                        "image": "assets/video-stills/iceland-2.webp",
+                        "alt": "Film still 2 from Iceland Travel",
+                        "width": 1280,
+                        "height": 720
+                  },
+                  {
+                        "image": "assets/video-stills/iceland-3.webp",
+                        "alt": "Film still 3 from Iceland Travel",
+                        "width": 1280,
+                        "height": 720
+                  },
+                  {
+                        "image": "assets/video-stills/iceland-4.webp",
+                        "alt": "Film still 4 from Iceland Travel",
+                        "width": 1280,
+                        "height": 720
+                  }
+            ]
       },
       {
             "title": "Eelco de Boer Aftermovie",
@@ -581,7 +672,33 @@
             "video": "assets/photos/after_website_720p.mp4",
             "alt": "An audience member taking notes during an Eelco de Boer event",
             "services": "Event film",
-            "description": "An aftermovie bringing together the audience, speakers, and moments between sessions at an Eelco de Boer event."
+            "description": "An aftermovie bringing together the audience, speakers, and moments between sessions at an Eelco de Boer event.",
+            "photos": [
+                  {
+                        "image": "assets/video-stills/eelco-1.webp",
+                        "alt": "Film still 1 from Eelco de Boer Aftermovie",
+                        "width": 1280,
+                        "height": 720
+                  },
+                  {
+                        "image": "assets/video-stills/eelco-2.webp",
+                        "alt": "Film still 2 from Eelco de Boer Aftermovie",
+                        "width": 1280,
+                        "height": 720
+                  },
+                  {
+                        "image": "assets/video-stills/eelco-3.webp",
+                        "alt": "Film still 3 from Eelco de Boer Aftermovie",
+                        "width": 1280,
+                        "height": 720
+                  },
+                  {
+                        "image": "assets/video-stills/eelco-4.webp",
+                        "alt": "Film still 4 from Eelco de Boer Aftermovie",
+                        "width": 1280,
+                        "height": 720
+                  }
+            ]
       },
       {
             "title": "Gym Groesbeek Promotion",
@@ -592,7 +709,33 @@
             "video": "assets/photos/Gym_Promotion_Web.mp4",
             "alt": "Athletes training in a gym in Groesbeek",
             "services": "Promotional film",
-            "description": "A promotional film capturing the training, movement, and atmosphere of a gym in Groesbeek."
+            "description": "A promotional film capturing the training, movement, and atmosphere of a gym in Groesbeek.",
+            "photos": [
+                  {
+                        "image": "assets/video-stills/gym-1.webp",
+                        "alt": "Film still 1 from Gym Groesbeek Promotion",
+                        "width": 1280,
+                        "height": 720
+                  },
+                  {
+                        "image": "assets/video-stills/gym-2.webp",
+                        "alt": "Film still 2 from Gym Groesbeek Promotion",
+                        "width": 1280,
+                        "height": 720
+                  },
+                  {
+                        "image": "assets/video-stills/gym-3.webp",
+                        "alt": "Film still 3 from Gym Groesbeek Promotion",
+                        "width": 1280,
+                        "height": 720
+                  },
+                  {
+                        "image": "assets/video-stills/gym-4.webp",
+                        "alt": "Film still 4 from Gym Groesbeek Promotion",
+                        "width": 1280,
+                        "height": 720
+                  }
+            ]
       },
       {
             "title": "Dreameaze",
@@ -602,9 +745,181 @@
             "height": 1600,
             "alt": "Woman reclining on pillows with a Dreameaze silk sleep mask",
             "services": "Brand photography",
-            "description": "Portraits and product photography for Dreameaze, bringing their silk sleep essentials into everyday settings."
+            "description": "Portraits and product photography for Dreameaze, bringing their silk sleep essentials into everyday settings.",
+            "photos": [
+                  {
+                        "image": "assets/photos/dreameaze-1600.webp",
+                        "alt": "Woman reclining on pillows with a Dreameaze silk sleep mask",
+                        "width": 1066,
+                        "height": 1600
+                  },
+                  {
+                        "image": "assets/photos/dreameaze-1-1600.webp",
+                        "alt": "Bedroom portrait with a navy Dreameaze sleep mask",
+                        "width": 1066,
+                        "height": 1600
+                  },
+                  {
+                        "image": "assets/photos/dsc03837-1600.webp",
+                        "alt": "Outdoor portrait with a navy Dreameaze sleep mask",
+                        "width": 1112,
+                        "height": 1600
+                  },
+                  {
+                        "image": "assets/photos/dreameaze_bathroom_mirror.webp",
+                        "alt": "Portrait reflected in a bathroom mirror with a Dreameaze sleep mask",
+                        "width": 1024,
+                        "height": 1536
+                  },
+                  {
+                        "image": "assets/photos/dreameaze_bedroom_champagne_mask.webp",
+                        "alt": "Bedroom portrait with a champagne-colored Dreameaze sleep mask",
+                        "width": 1024,
+                        "height": 1536
+                  },
+                  {
+                        "image": "assets/photos/dreameaze_bedroom_mask_closeup.webp",
+                        "alt": "Close-up portrait with a champagne-colored Dreameaze sleep mask",
+                        "width": 1024,
+                        "height": 1536
+                  },
+                  {
+                        "image": "assets/photos/dreameaze_outdoor_black_mask.webp",
+                        "alt": "Outdoor portrait with a black Dreameaze sleep mask",
+                        "width": 1024,
+                        "height": 1536
+                  },
+                  {
+                        "image": "assets/photos/dreameaze_outdoor_black_mask_lifestyle.webp",
+                        "alt": "Outdoor lifestyle portrait with a black Dreameaze sleep mask",
+                        "width": 1024,
+                        "height": 1536
+                  },
+                  {
+                        "image": "assets/photos/dreameaze_outdoor_champagne_mask_closeup.webp",
+                        "alt": "Outdoor close-up with a champagne-colored Dreameaze sleep mask",
+                        "width": 1024,
+                        "height": 1536
+                  },
+                  {
+                        "image": "assets/photos/dreameaze_outdoor_champagne_mask_lifestyle.webp",
+                        "alt": "Outdoor lifestyle portrait with a champagne-colored Dreameaze sleep mask",
+                        "width": 1024,
+                        "height": 1536
+                  },
+                  {
+                        "image": "assets/photos/dreameaze_sofa_lifestyle.webp",
+                        "alt": "Woman reclining on a sofa with a Dreameaze silk pillowcase",
+                        "width": 1024,
+                        "height": 1536
+                  }
+            ]
       }
 ];
+    const photoProjects = {
+      "moza": {
+            "title": "MOZA",
+            "client": "MOZA",
+            "services": "Event & product photography",
+            "description": "Visitors, details, and flight simulation equipment photographed for the MOZA project.",
+            "photos": [
+                  {
+                        "image": "assets/photos/Unknown-5.png",
+                        "alt": "Visitors trying flight simulation controls at the MOZA booth",
+                        "width": 1672,
+                        "height": 941
+                  },
+                  {
+                        "image": "assets/photos/Unknown-6.png",
+                        "alt": "MOZA flight simulation equipment beneath a blue branded backdrop",
+                        "width": 1672,
+                        "height": 941
+                  },
+                  {
+                        "image": "assets/photos/moza_flight_controller.webp",
+                        "alt": "Close-up of a MOZA flight controller being used",
+                        "width": 1024,
+                        "height": 1536
+                  }
+            ],
+            "image": "assets/photos/Unknown-5.png",
+            "alt": "Visitors trying flight simulation controls at the MOZA booth",
+            "width": 1672,
+            "height": 941
+      },
+      "personal": {
+            "title": "Personal photography",
+            "client": "Personal work",
+            "services": "Travel, portraits & wildlife",
+            "description": "People, places, and moments photographed along the way.",
+            "photos": [
+                  {
+                        "image": "assets/photos/dsc01490-1600.webp",
+                        "alt": "Outdoor portrait with sunglasses and flower earrings",
+                        "width": 1020,
+                        "height": 1600
+                  },
+                  {
+                        "image": "assets/photos/kopie-van-dsc01355-1600.webp",
+                        "alt": "Street portrait with sunglasses, gold earrings, and a patterned jacket",
+                        "width": 1066,
+                        "height": 1600
+                  },
+                  {
+                        "image": "assets/photos/kopie-van-dsc01183-2-1600.webp",
+                        "alt": "Event portrait of a woman holding a champagne glass",
+                        "width": 858,
+                        "height": 1600
+                  },
+                  {
+                        "image": "assets/photos/Verschuur-media-Web-export-14-optimized.webp",
+                        "alt": "Child carrying a bag past warm-toned buildings",
+                        "width": 870,
+                        "height": 1600
+                  },
+                  {
+                        "image": "assets/photos/Verschuur-media-Web-export-8-optimized.webp",
+                        "alt": "People resting beside camels in an open landscape",
+                        "width": 1066,
+                        "height": 1600
+                  },
+                  {
+                        "image": "assets/photos/Verschuur-media-Web-export-10-optimized.webp",
+                        "alt": "Fruit vendor handing a bag to a customer",
+                        "width": 1066,
+                        "height": 1600
+                  },
+                  {
+                        "image": "assets/photos/Verschuur-media-Web-export-6-optimized.webp",
+                        "alt": "Orange vendor at a roadside fruit stall",
+                        "width": 1600,
+                        "height": 1068
+                  },
+                  {
+                        "image": "assets/photos/Verschuur-media-Web-export-7-optimized.webp",
+                        "alt": "A seated artisan working with woven baskets",
+                        "width": 956,
+                        "height": 1600
+                  },
+                  {
+                        "image": "assets/photos/kopie-van-dsc01388-1600.webp",
+                        "alt": "Children dancing and playing a drum on the beach",
+                        "width": 1066,
+                        "height": 1600
+                  },
+                  {
+                        "image": "assets/photos/DSC00394-optimized.webp",
+                        "alt": "Black-and-white photograph of an elephant raising its trunk in grassland",
+                        "width": 1600,
+                        "height": 1067
+                  }
+            ],
+            "image": "assets/photos/dsc01490-1600.webp",
+            "alt": "Outdoor portrait with sunglasses and flower earrings",
+            "width": 1020,
+            "height": 1600
+      }
+};
     const root = document.documentElement;
     const motionQuery = matchMedia('(prefers-reduced-motion: reduce)');
     const desktopQuery = matchMedia('(min-width: 992px)');
@@ -736,6 +1051,43 @@
         });
       } else cards.forEach(card => photoFit(card, card.getBoundingClientRect()));
     }
+    const photoGallery = document.querySelector('.project-dialog-gallery');
+    const photoGridInDialog = document.querySelector('.project-photo-grid');
+    const photoRevealObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('is-visible'); photoRevealObserver.unobserve(entry.target); } });
+    }, { threshold: .1 });
+    function openProject(project, selectedPhoto = null) {
+      const lead = selectedPhoto || { image: project.image, alt: project.alt, width: project.width, height: project.height };
+      document.querySelector('#project-dialog-title').textContent = project.title;
+      document.querySelector('#project-dialog-client').textContent = project.client;
+      document.querySelector('#project-dialog-description').textContent = project.description;
+      document.querySelector('#project-dialog-services').textContent = project.services;
+      document.querySelector('#project-dialog-type').textContent = project.video ? 'Film' : 'Photography';
+      const image = document.querySelector('#project-dialog-image');
+      image.hidden = Boolean(project.video);
+      if (project.video) image.removeAttribute('src');
+      else { image.src = lead.image; image.alt = lead.alt; image.width = lead.width; image.height = lead.height; }
+      const video = document.querySelector('#project-dialog-video');
+      video.hidden = !project.video;
+      video.pause(); video.removeAttribute('src'); video.load();
+      if (project.video) { video.poster = project.image; video.src = project.video; video.setAttribute('aria-label', project.title); }
+      photoRevealObserver.disconnect();
+      photoGridInDialog.replaceChildren();
+      const photos = (project.photos || []).filter(photo => project.video || photo.image !== lead.image);
+      photoGallery.hidden = photos.length === 0;
+      document.querySelector('#project-gallery-title').textContent = project.video ? 'Frames from the film' : 'Project photography';
+      photos.forEach((photo, index) => {
+        const figure = document.createElement('figure');
+        const img = document.createElement('img');
+        img.src = photo.image; img.alt = photo.alt; img.width = photo.width; img.height = photo.height;
+        img.loading = 'lazy'; img.decoding = 'async'; figure.append(img);
+        if (!motionQuery.matches) { figure.className = 'photo-reveal'; figure.style.transitionDelay = (index % 3 * 70) + 'ms'; photoRevealObserver.observe(figure); }
+        photoGridInDialog.append(figure);
+      });
+      const dialog = document.querySelector('#project-dialog');
+      dialog.showModal(); dialog.scrollTop = 0;
+      if (project.video) video.play().catch(() => {});
+    }
     cards.forEach((card, index) => {
       const project = projects[index];
       card.querySelector('.project-name').textContent = project.title;
@@ -761,29 +1113,15 @@
       card.setAttribute('aria-label', 'View ' + project.title);
       card.addEventListener('pointerenter', event => { if (isHoverPointer(event)) expandCard(card); });
       card.addEventListener('focus', () => expandCard(card));
-      card.addEventListener('click', () => {
-        document.querySelector('#project-dialog-title').textContent = project.title;
-        document.querySelector('#project-dialog-client').textContent = project.client;
-        document.querySelector('#project-dialog-description').textContent = project.description;
-        document.querySelector('#project-dialog-services').textContent = project.services;
-        document.querySelector('#project-dialog-type').textContent = project.video ? 'Film' : 'Photography';
-        const image = document.querySelector('#project-dialog-image');
-        image.src = project.image; image.alt = project.alt; image.width = project.width; image.height = project.height;
-        image.hidden = Boolean(project.video);
-        const video = document.querySelector('#project-dialog-video');
-        video.hidden = !project.video;
-        video.pause();
-        video.removeAttribute('src');
-        video.load();
-        if (project.video) {
-          video.poster = project.image;
-          video.src = project.video;
-          video.setAttribute('aria-label', project.title);
-        }
-        document.querySelector('#project-dialog').showModal();
-        if (project.video) video.play().catch(() => {});
-      });
+      card.addEventListener('click', () => openProject(project));
     });
+    document.querySelectorAll('.photo-tile').forEach(tile => tile.addEventListener('click', () => {
+      const key = tile.dataset.photoProject;
+      const project = /^\d+$/.test(key) ? projects[Number(key)] : photoProjects[key];
+      if (!project) return;
+      const selected = !project.video && project.photos?.find(photo => photo.image === tile.dataset.photo);
+      openProject(project, selected || null);
+    }));
     const ambientVideos = [...document.querySelectorAll('[data-ambient-video]')];
     const visibleVideos = new Set();
     function wantsAmbientPlayback(video) {
@@ -824,6 +1162,8 @@
       dialogVideo.pause();
       dialogVideo.removeAttribute('src');
       dialogVideo.load();
+      photoRevealObserver.disconnect(); photoGridInDialog.replaceChildren(); photoGallery.hidden = true;
+      const image = document.querySelector('#project-dialog-image'); image.removeAttribute('src'); image.hidden = true;
     });
     const dialogObserver = new MutationObserver(syncAmbientVideos);
     document.querySelectorAll('dialog').forEach(dialog => dialogObserver.observe(dialog, { attributes: true, attributeFilter: ['open'] }));
@@ -890,13 +1230,43 @@
     const gallery = document.querySelector('.gallery');
     const photoGrid = document.querySelector('.photo-grid');
     const columns = [...document.querySelectorAll('.photo-column')];
-    // Overscan the moving columns so the mosaic stays filled at both extremes.
-    columns.forEach(column => {
-      const extra = column.querySelector('img').cloneNode();
-      extra.alt = '';
-      extra.setAttribute('aria-hidden', 'true');
-      column.append(extra);
-    });
+    // Recycle the original social tiles after they leave the viewport. This
+    // keeps the continuous motion without duplicate images or cloned groups.
+    const socialStrip = document.querySelector('.social-strip');
+    const socialTrack = document.querySelector('.social-track');
+    const socialGroup = document.querySelector('.social-group');
+    let socialOffset = 0, socialFrame = 0, socialTime = 0, socialVisible = false;
+    function wantsSocialMotion() {
+      return socialVisible && !motionQuery.matches && !document.hidden && !document.querySelector('dialog[open]') && !socialGroup.querySelector(':focus-visible');
+    }
+    function moveSocial(time) {
+      socialFrame = 0;
+      if (!wantsSocialMotion()) { socialTime = 0; return; }
+      if (socialTime) socialOffset += Math.min(64, time - socialTime) * socialGroup.scrollWidth / 40000;
+      socialTime = time;
+      let first = socialGroup.firstElementChild;
+      let span = first.getBoundingClientRect().width + parseFloat(getComputedStyle(first).marginRight);
+      while (socialOffset >= span) {
+        socialOffset -= span; socialGroup.append(first); first = socialGroup.firstElementChild;
+        span = first.getBoundingClientRect().width + parseFloat(getComputedStyle(first).marginRight);
+      }
+      socialTrack.style.transform = 'translate3d(' + (-socialOffset) + 'px,0,0)';
+      socialFrame = requestAnimationFrame(moveSocial);
+    }
+    function syncSocialMotion() {
+      if (wantsSocialMotion()) { if (!socialFrame) socialFrame = requestAnimationFrame(moveSocial); }
+      else { cancelAnimationFrame(socialFrame); socialFrame = 0; socialTime = 0; }
+      if (motionQuery.matches) { socialOffset = 0; socialTrack.style.transform = ''; }
+    }
+    const socialObserver = new IntersectionObserver(entries => { socialVisible = entries[0].isIntersecting; syncSocialMotion(); }, { threshold: .1 });
+    socialObserver.observe(socialStrip);
+    socialGroup.addEventListener('focusin', () => queueMicrotask(syncSocialMotion));
+    socialGroup.addEventListener('focusout', () => queueMicrotask(syncSocialMotion));
+    document.addEventListener('visibilitychange', syncSocialMotion);
+    motionQuery.addEventListener('change', syncSocialMotion);
+    const socialDialogObserver = new MutationObserver(syncSocialMotion);
+    document.querySelectorAll('dialog').forEach(dialog => socialDialogObserver.observe(dialog, { attributes: true, attributeFilter: ['open'] }));
+    addEventListener('resize', () => { socialOffset = 0; socialTrack.style.transform = ''; socialTime = 0; syncSocialMotion(); });
     let galleryProgress = 0;
     let galleryTarget = 0;
     let galleryFrame = 0;

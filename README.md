@@ -21,9 +21,13 @@ The six projects appear in this order:
 5. **Gym Groesbeek Promotion** — `Gym_Promotion_Web.mp4`, promotional film.
 6. **Dreameaze** — `dreameaze-1600.webp`, brand photography.
 
-Edit the JavaScript `projects` array to update project titles, clients, images, descriptions, and services. Static card markup mirrors that order. A `video` property provides a silent card preview and a film player with controls and audio in the project dialog. Photo projects open the full original photograph.
+Edit the JavaScript `projects` array to update project titles, clients, images, descriptions, and services. Static card markup mirrors that order. A `video` property provides a silent card preview and a film player with controls and audio in the project dialog. Each project’s `photos` array adds its own gallery. Film galleries are labeled **Frames from the film**. Photo previews show the selected photo first and exclude it from the rest of the gallery, so it appears only once within the preview. The close control remains visible while scrolling.
 
-The seventeen portfolio photographs, including the wildlife photograph and both MOZA project shots, remain in the parallax gallery and scrolling photo strip. Image-specific framing keeps faces and products in view. Uploaded originals are unchanged.
+All **25 unique supplied photographs** are grouped under their matching projects or the personal photography collection. Dreameaze has its complete eleven-photo set, including all eight new uploads. MOZA has its three-photo set, including `moza_flight_controller.webp`. These collections open from their linked photo tiles; the six Selected Work cards keep their established order.
+
+The homepage mosaic uses three different images for each of six featured film/photo collections. Each homepage portfolio image has one placement across the cards, mosaic, process, social strip, and closing panel. Dreameaze has a curated homepage selection, with the rest inside its project. The exact duplicate `dreameaze-2-1600.webp` is kept as an original upload but is not displayed. The gallery and social strip use no cloned photographs.
+
+Sixteen distinct stills in `assets/video-stills/` come from the four supplied films and balance the film projects alongside the client photographs. Image-specific framing keeps subjects in view. All uploaded originals are unchanged.
 
 ## Identity and contact
 
@@ -31,14 +35,14 @@ The seventeen portfolio photographs, including the wildlife photograph and both 
 - The palette uses carbon `#141c23`, paper `#f4f8fa`, Miami-inspired blue `#00a8cc`, and ice blue `#69d9ed`. Light surfaces use the darker accent `#007b98` for readable links.
 - Manrope headlines, Switzer body copy, and occasional Playfair story headings are self-hosted. Attribution and licenses are in [assets/fonts/README.md](assets/fonts/README.md).
 - Instagram links point to [@max.verschuur](https://www.instagram.com/max.verschuur/).
-- Email links point to `maxverschuur396@gmail.com`.
+- The social link reads **IG: max.verschuur**. An **Email me below** link leads to the footer, which shows **Email me.** and the full clickable address `maxverschuur396@gmail.com`.
 - Copy is written from Max’s perspective. Project details describe the supplied work without inventing dates, awards, or a team.
 
 ## Motion and media
 
 The four-stage process moves from **Find the story** to **Shape the direction**, **Capture the moment**, and **Make it flow**. Scrolling on desktop or choosing a step changes the photograph, focus frame, caption, and progress line. Motion animates only transforms and opacity.
 
-The story retains the pinned Zeelander video behind three personal chapters. The closing panel uses the black-and-white elephant photograph. Desktop project cards expand with their media proportions preserved; mobile cards use horizontal snapping. The photo mosaic moves alternate columns as you scroll, and the client/photo strips loop continuously.
+The story retains the pinned Zeelander video behind three personal chapters. The closing panel uses the black-and-white elephant photograph. Desktop project cards expand with their media proportions preserved; mobile cards use horizontal snapping. The photo mosaic moves alternate columns as you scroll. The client strip loops continuously. The photo strip recycles its six original nodes after they leave the viewport, keeping the motion continuous without repeated images. It pauses offscreen, for open dialogs, keyboard focus, hidden pages, and reduced motion. Individual project photographs reveal gently as they enter view.
 
 Backgrounds and previews load on demand, play silently while visible and active, and pause for open dialogs, hidden pages, and reduced-motion preferences. Dialog players keep the original film format and release their video when closed. The server supports MP4 byte ranges for seeking. Reduced motion disables animated transitions and autoplay.
 
@@ -54,4 +58,4 @@ Screenshots are saved in the ignored `temporary screenshots/` directory. Review 
 
 ## Asset credits
 
-Photographs, films, client logos, and the supplied crest in `assets/photos/` belong to Verschuur Media. Posters in `assets/video-posters/` are frames from those films. Earlier placeholder assets remain available for future editing; reference branding and media are not included in the site.
+Photographs, films, client logos, and the supplied crest in `assets/photos/` belong to Verschuur Media. Posters in `assets/video-posters/` and stills in `assets/video-stills/` are frames from those films, rather than separate photography shoots. Earlier placeholder assets remain available for future editing; reference branding and media are not included in the site.
