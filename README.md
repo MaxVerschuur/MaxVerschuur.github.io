@@ -1,6 +1,6 @@
-# MaxVerschuur.github.io
+# Verschuur Media
 
-A responsive Verschuur Media website inspired by [Jacob Media](https://jacobmedia.com), with your brand logo, portfolio photography, and films. Additional project details and copy can be added as they become available.
+Films and photography by Max Verschuur. A static portfolio with a personal voice, a Miami-inspired blue palette, the supplied heraldic crest, and cinematic motion.
 
 ## Run locally
 
@@ -8,35 +8,50 @@ A responsive Verschuur Media website inspired by [Jacob Media](https://jacobmedi
 node serve.mjs
 ```
 
-The site runs on port 3000. It is a static site with no build step. `index.html` contains the layout, inline styles, and interactions; fonts and placeholder images are served locally from `assets/`.
+Open `http://localhost:3000`. There is no build step. Layout, styles, portfolio content, and interactions are in `index.html`; all media and fonts are served locally. `.nojekyll` supports GitHub Pages hosting from the repository root.
 
-## Add your content
+## Selected work
 
-- The site name is **Verschuur Media**. The transparent ivory logo in `assets/brand/verschuur-media-ivory.png` is adapted from the supplied logo and used in the hero, footer, navigation, and project/menu dialogs. The compact shield uses the same asset, cropped by CSS. Search for `CONTENT:` comments in `index.html` to find the main editing points.
-- Update the five entries in the JavaScript `projects` array. Names, clients, images, alt text, services, and descriptions populate both the cards and their project previews. A `video` property adds a silent card preview and a film player in the project dialog; `image`, `width`, and `height` define its poster. Client details and project descriptions can be expanded as you add context.
-- The seventeen portfolio photos in `assets/photos/` appear throughout the project cards, parallax gallery, service slides, and social strip. **Wildlife Photography** opens the complete elephant photograph, which also fills the **Creative First, Purpose Led** panel behind a dark gradient for readable text. The Nubia project photo (`02.png`) and both MOZA project photos (`Unknown-5.png` and `Unknown-6.png`) appear in the animated gallery and social strip. Uploaded files are unchanged; image-specific `object-position` rules keep the MOZA visitors and equipment in view.
-- `Video_Web_Full.mp4` is the homepage background and main showreel, and appears as **Landscape Film** in Selected Work. **Gym Promotion**, **Zeelander**, and **Event Aftermovie** use `Gym_Promotion_Web.mp4`, `Zeelander_Web.mp4`, and `after_website_720p.mp4`. All four original uploads remain in `assets/photos/`; lightweight frame posters are in `assets/video-posters/`. To change the showreel, update the hero's `data-src`, the button's `data-video-src`, and their posters.
-- Backgrounds and card previews play silently only while visible and active, and pause when a dialog opens, the page is hidden, or reduced motion is enabled. Film dialogs provide normal playback controls and audio, retain the original landscape or portrait format, and pause when closed. Videos load on demand; the development server supports MP4 content types and byte ranges for seeking.
-- **Our story** uses `Zeelander_Web.mp4` as a silent looping background, pinned behind the scrolling timeline like the reference. It fills the viewport with a crop that keeps the yacht in view; a dark gradient keeps the story text readable. Reduced motion shows its poster instead of autoplaying.
-- Replace all `hello@example.com` addresses and the Instagram and LinkedIn destinations with your own details.
-- The client strip uses the supplied Nubia, Resilia, Zeelander, and MOZA Racing logos in `assets/photos/`. CSS gives them a monochrome treatment for each theme and frames Resilia's wordmark inside its square logo. The uploaded WebPs are unchanged. Keep the repeating logo sequence and both marquee groups identical; decorative repeats are hidden from screen readers. Reduced motion shows all four clients in a static layout.
+The six projects appear in this order:
 
-The site includes dark/light mode with a saved preference, mobile navigation, project previews, desktop card expansion, scroll-controlled service slides, parallax imagery, and support for reduced motion.
+1. **Zeelander Yachts** — `Zeelander_Web.mp4`, with its portrait-format poster.
+2. **ZTE Nubia at TwitchCon** — `02.png`, event photography.
+3. **Iceland Travel** — `Video_Web_Full.mp4`, also used for the homepage showreel/background.
+4. **Eelco de Boer Aftermovie** — `after_website_720p.mp4`.
+5. **South African Wildlife** — `DSC00394-optimized.webp`, wildlife photography.
+6. **Dreameaze** — `dreameaze-1600.webp`, brand photography.
 
-Photo motion follows the reference: desktop cards expand to roughly 70% of the row, photographs keep their proportions during expansion, and the mosaic zooms out while alternate columns move in opposite directions. On touch screens, swiping highlights the nearest project. The client and photo strips loop continuously in 17.5 and 40 seconds respectively. Mouse interactions use actual pointer input so they also work in the cloud preview browser; the system's reduced-motion preference disables animation.
+Edit the JavaScript `projects` array to update project titles, clients, images, descriptions, and services. Static card markup mirrors that order. A `video` property provides a silent card preview and a film player with controls and audio in the project dialog. Photo projects open the full original photograph.
 
-## Browser screenshots
+The uploaded gym film remains available in `assets/photos/`, outside the selected six. The seventeen portfolio photographs, including both MOZA project shots, remain in the parallax gallery and scrolling photo strip. Image-specific framing keeps faces and products in view. Uploaded originals are unchanged.
 
-The existing `screenshot.mjs` requires Puppeteer and a Chromium browser. In the prepared cloud environment:
+## Identity and contact
+
+- The current logo is `assets/photos/luxury_heraldic_crest_logo.png`. The homepage uses a smaller, higher crest; navigation, dialogs, and the footer use the same supplied asset. CSS crops the unused canvas and applies an SVG luminance filter to make the paper transparent and the original ink white (or black on light surfaces). The original crest and lettering are preserved.
+- The palette uses carbon `#141c23`, paper `#f4f8fa`, Miami-inspired blue `#00a8cc`, and ice blue `#69d9ed`. Light surfaces use the darker accent `#007b98` for readable links.
+- Manrope headlines, Switzer body copy, and occasional Playfair story headings are self-hosted. Attribution and licenses are in [assets/fonts/README.md](assets/fonts/README.md).
+- Instagram links point to [@max.verschuur](https://www.instagram.com/max.verschuur/).
+- Email links point to `maxverschuur396@gmail.com`.
+- Copy is written from Max’s perspective. Project details describe the supplied work without inventing dates, awards, or a team.
+
+## Motion and media
+
+The four-stage process moves from **Find the story** to **Shape the direction**, **Capture the moment**, and **Make it flow**. Scrolling on desktop or choosing a step changes the photograph, focus frame, caption, and progress line. Motion animates only transforms and opacity.
+
+The story retains the pinned Zeelander video behind three personal chapters. The closing panel uses the black-and-white elephant photograph. Desktop project cards expand with their media proportions preserved; mobile cards use horizontal snapping. The photo mosaic moves alternate columns as you scroll, and the client/photo strips loop continuously.
+
+Backgrounds and previews load on demand, play silently while visible and active, and pause for open dialogs, hidden pages, and reduced-motion preferences. Dialog players keep the original film format and release their video when closed. The server supports MP4 byte ranges for seeking. Reduced motion disables animated transitions and autoplay.
+
+## Browser review
+
+Use the existing screenshot script unchanged:
 
 ```bash
 PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium node screenshot.mjs http://localhost:3000
 ```
 
-Screenshots are saved in the ignored `temporary screenshots/` directory. Desktop and mobile views were visually compared with the reference in two rounds. Browser checks cover navigation, theme persistence, project dialogs, service slides, responsive widths, actual mouse and touch motion, media proportions during expansion, reduced-motion preferences, and film playback, seeking, and pause behavior.
+Screenshots are saved in the ignored `temporary screenshots/` directory. Review the hero, six project previews, process stages, story, contact links, and both themes at desktop and mobile widths. Browser checks should cover actual pointer input, video/image bindings, media pause behavior, process clicks and scroll progression, navigation, and reduced motion.
 
 ## Asset credits
 
-Portfolio photographs, films, and client logos in `assets/photos/` were supplied by Verschuur Media. Posters in `assets/video-posters/` are frames from those films. All remaining placeholder SVGs were generated by [Placehold](https://placehold.co/). Reference photos, films, client logos, and branding are not included.
-
-Font attribution and source details are in [assets/fonts/README.md](assets/fonts/README.md).
+Photographs, films, client logos, and the supplied crest in `assets/photos/` belong to Verschuur Media. Posters in `assets/video-posters/` are frames from those films. Earlier placeholder assets remain available for future editing; reference branding and media are not included in the site.
