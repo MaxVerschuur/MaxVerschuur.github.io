@@ -18,12 +18,12 @@ The six projects appear in this order:
 2. **ZTE Nubia at TwitchCon** — `02.png`, event photography.
 3. **Iceland Travel** — `Video_Web_Full.mp4`, also used for the homepage showreel/background.
 4. **Eelco de Boer Aftermovie** — `after_website_720p.mp4`.
-5. **South African Wildlife** — `DSC00394-optimized.webp`, wildlife photography.
+5. **Gym Groesbeek Promotion** — `Gym_Promotion_Web.mp4`, promotional film.
 6. **Dreameaze** — `dreameaze-1600.webp`, brand photography.
 
 Edit the JavaScript `projects` array to update project titles, clients, images, descriptions, and services. Static card markup mirrors that order. A `video` property provides a silent card preview and a film player with controls and audio in the project dialog. Photo projects open the full original photograph.
 
-The uploaded gym film remains available in `assets/photos/`, outside the selected six. The seventeen portfolio photographs, including both MOZA project shots, remain in the parallax gallery and scrolling photo strip. Image-specific framing keeps faces and products in view. Uploaded originals are unchanged.
+The seventeen portfolio photographs, including the wildlife photograph and both MOZA project shots, remain in the parallax gallery and scrolling photo strip. Image-specific framing keeps faces and products in view. Uploaded originals are unchanged.
 
 ## Identity and contact
 
