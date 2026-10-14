@@ -122,6 +122,10 @@
     .reel-trigger { position: absolute; z-index: 2; inset: 90px 0 0; width: 100%; cursor: pointer; }
     .reel-trigger:focus-visible { outline-offset: -20px; }
     .reel-trigger:active { transform: none; }
+    .reel-label { position: absolute; right: var(--gutter); bottom: 2.5vh; display: inline-flex; align-items: center; gap: 10px; padding: 11px 15px; border: 1px solid #69d9ed90; border-radius: 24px; background: #141c2380; color: var(--ivory); font-size: 12px; transition: transform 350ms var(--ease), opacity 200ms; }
+    .reel-label svg { width: 12px; height: 12px; }
+    .reel-trigger:hover .reel-label, .reel-trigger:focus-visible .reel-label { transform: translateY(-3px); }
+    .reel-trigger:active .reel-label { opacity: .7; }
     .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
     .reel-cursor { position: absolute; z-index: 3; left: 0; top: 0; width: 108px; height: 108px; opacity: 0; pointer-events: none; color: var(--accent); transition: opacity 200ms; }
     .ring-label { width: 100%; height: 100%; animation: rotate-ring 16s linear infinite; }
@@ -201,9 +205,6 @@
     .photo-column:nth-child(even) { padding-top: 5vh; }
     .photo-tile { position: relative; display: block; overflow: hidden; }
     .photo-column .photo-tile { flex: 0 0 44vh; width: 100%; height: 44vh; }
-    .photo-column .photo-tile--phones { flex: 0 0 auto; height: auto; aspect-ratio: 1153 / 649; }
-    .photo-tile.photo-tile--phones img { object-fit: cover; object-position: center; }
-    .photo-column:has(.photo-tile--phones) .photo-tile:last-child { flex-basis: 64vh; height: 64vh; }
     .photo-tile img { width: 100%; height: 100%; object-fit: cover; transition: transform 500ms var(--ease); }
     .has-mouse .photo-tile:hover img, .photo-tile:focus-visible img { transform: scale(1.04); }
     .photo-tile:focus-visible { outline-offset: -6px; }
@@ -260,6 +261,7 @@
     .story-step:first-of-type .step-count { color: #69d9ed; }
     .story-step h3 { margin-bottom: 2vh; font-family: Playfair, Georgia, serif; font-weight: 400; letter-spacing: -.025em; }
     .story-step p { max-width: 800px; }
+    .story-step .cta { margin-top: 24px; color: #69d9ed; }
     .impact { position: relative; z-index: 3; margin-top: -75vh; padding: 10vh var(--gutter) 5vh; background: linear-gradient(180deg, #2220 12.5%, var(--page) 40%); }
     .impact-panel { position: relative; isolation: isolate; padding: 17.5vh 5vw; text-align: center; color: var(--ivory); }
     .impact-panel > img { position: absolute; z-index: -2; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 45% 60%; }
@@ -280,7 +282,7 @@
     .social-copy .email-cue { margin-top: 10px; font-size: 15px; }
     .email-cue:hover svg, .email-cue:focus-visible svg { transform: translateY(3px); }
 
-    .site-footer { --accent: #69d9ed; background: var(--charcoal); color: var(--ivory); min-height: 91.5svh; display: flex; flex-direction: column; justify-content: space-between; padding: 7.5vh var(--gutter) 3.5vh; }
+    .site-footer { --accent: #69d9ed; background: var(--charcoal); color: var(--ivory); display: flex; flex-direction: column; padding: 7.5vh var(--gutter) 3.5vh; }
     .footer-top { display: grid; grid-template-columns: 1fr 1fr; gap: 5vh; }
     .contact-details { grid-column: 1 / -1; grid-row: 1; }
     .contact-email { display: inline-block; margin-top: 20px; color: #69d9ed; font-size: clamp(13px, 1.1vw, 17px); overflow-wrap: anywhere; }
@@ -293,10 +295,11 @@
     .back-top svg { position: absolute; inset: 0; width: 100%; height: 100%; color: var(--accent); transition: transform 400ms var(--ease); }
     .back-top:hover svg { transform: rotate(-5deg); }
     .back-top:active { opacity: .6; }
-    .footer-bottom { width: 100%; margin-top: 15vh; }
-    .footer-logo { width: min(400px, 85%); height: 250px; object-fit: cover; object-position: 50% 50%; margin: 0 auto 3vh; filter: url(#logo-cutout); }
-    .footer-fineprint { display: flex; justify-content: space-between; gap: 20px; border-top: 1px solid #fffbee80; padding-top: 3vh; font-size: 10px; text-transform: uppercase; }
-    .footer-fineprint > span:last-child { text-align: right; }
+    .footer-bottom { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; width: 100%; margin-top: 10vh; padding-top: 24px; border-top: 1px solid #f4f8fa40; }
+    .footer-signature { display: inline-flex; align-items: center; gap: 10px; font: 400 18px/1.1 Playfair, Georgia, serif; letter-spacing: -.025em; }
+    .footer-signature:hover { opacity: .7; }
+    .footer-signature:active { opacity: .5; }
+    .footer-fineprint { font-size: 10px; text-transform: uppercase; }
 
     dialog { position: fixed; inset: 0; width: 100%; max-width: none; height: 100dvh; max-height: none; padding: 0; border: 0; background: var(--page); color: var(--ink); }
     dialog::backdrop { background: #222c; }
@@ -319,12 +322,17 @@
     .reel-body { height: calc(100dvh - 84px); padding: 5vh var(--gutter) 10vh; }
     .reel-placeholder { height: 100%; min-height: 300px; background: url('assets/placeholders/hero.svg') center / cover; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px; color: var(--ivory); }
     .reel-placeholder svg { width: 64px; height: 64px; }
-    .reel-video { width: 100%; height: 100%; object-fit: contain; }
+    .film-player--reel { display: flex; flex-direction: column; gap: 16px; height: 100%; }
+    .reel-video { flex: 1; min-height: 0; width: 100%; height: 0; object-fit: contain; }
+    .film-feedback { padding-top: 16px; font-size: 14px; line-height: 1.5; }
+    .film-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 16px 24px; margin-top: 12px; }
+    .film-actions .cta { font-size: 15px; }
+    .film-direct { color: var(--accent); }
     .project-dialog-content { display: grid; gap: 5vh; padding: 4vh var(--gutter) 10vh; }
     #project-dialog { scroll-padding-top: 100px; }
     #project-dialog .dialog-header { position: sticky; top: 0; z-index: 5; background: var(--page); }
     .project-dialog-content > img { width: 100%; height: auto; max-height: 60vh; object-fit: contain; }
-    .project-dialog-content > video { width: 100%; height: 50vh; object-fit: contain; background: var(--charcoal); }
+    .project-dialog-content .film-player > video { width: 100%; height: 50vh; object-fit: contain; background: var(--charcoal); }
     .project-dialog-copy .label { margin-bottom: 20px; }
     .project-dialog-copy h2 { margin-bottom: 24px; }
     .project-dialog-copy p { margin-bottom: 32px; }
@@ -372,6 +380,7 @@
       .hero-scroll-desktop { display: inline; }
       .hero-scroll-mobile { display: none; }
       .reel-trigger { inset: 100px 0 0; }
+      .reel-label { bottom: 7.5vh; }
       .client-logo { width: 9vw; min-width: 9vw; height: clamp(42px, 4vw, 64px); margin: 0 2.5vw; }
       .about { min-height: 100vh; grid-template-columns: minmax(0, .8fr) minmax(0, 1fr); align-items: center; gap: 8vw; padding: 14vh 10vw 18vh; }
       .about-portrait { width: 100%; max-width: 460px; }
@@ -404,23 +413,24 @@
       .social { padding-top: 20vh; margin-bottom: 30vh; }
       .social-tile { flex-basis: 22.5vw; width: 22.5vw; margin-right: 1vw; }
       .social-copy { width: 45vw; margin-top: 12vh; }
-      .site-footer { height: 91.5vh; min-height: 0; padding: 10vh var(--gutter) 3vh; }
+      .site-footer { padding: 10vh var(--gutter) 3vh; }
       .footer-top { grid-template-columns: 12vw 12vw 1fr 17vw; gap: 3vw; align-items: start; }
       .footer-links { gap: 1.333vh; margin-top: 1vh; }
       .contact-cta { grid-column: auto; grid-row: auto; gap: 1vw; font-size: 4.688vw; white-space: nowrap; }
       .contact-details { grid-column: auto; grid-row: auto; }
       .contact-cta svg { width: 4.2vw; height: 4.2vw; }
       .back-top { grid-column: auto; width: 17vw; height: 10vh; }
-      .footer-bottom { margin-top: 0; }
-      .footer-logo { height: 250px; }
+      .footer-bottom { margin-top: 12vh; }
       .footer-fineprint { font-size: .833333vw; }
       .project-dialog-content { grid-template-columns: 55vw 1fr; gap: 5vw; }
       .project-dialog-content > img { height: 70vh; max-height: 70vh; }
-      .project-dialog-content > video { height: 70vh; }
+      .project-dialog-content .film-player > video { height: 70vh; }
       .project-dialog-copy { padding-top: 5vh; }
       .project-photo-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
     }
     @media (max-width: 991px) {
+      .hero-scroll-mobile { left: var(--gutter); width: auto; text-align: left; }
+      .reel-label { padding: 8px 12px; font-size: 11px; }
       .about-portrait { width: min(80%, 300px); }
       .portrait-caption { gap: 10px; }
       .portrait-caption span:first-child { font-size: 20px; }
@@ -430,9 +440,6 @@
       .photo-grid { inset: -10svh 0; width: 174vw; left: -42vw; gap: 12px; }
       .photo-column { gap: 12px; }
       .photo-column .photo-tile { flex-basis: 32svh; height: 32svh; }
-      .photo-column .photo-tile--phones { flex-basis: auto; height: auto; }
-      .photo-column:has(.photo-tile--phones) { padding-top: 10svh; }
-      .photo-column:has(.photo-tile--phones) .photo-tile:last-child { flex-basis: 32svh; height: 32svh; }
       .service-visual { height: 30svh; min-height: 240px; }
       .process-caption { font-size: 18px; gap: 10px; }
       .process-caption span:first-child { flex-shrink: 0; white-space: nowrap; }
@@ -440,7 +447,7 @@
       .social-tile--short { height: 18svh; }
     }
     @media (max-width: 479px) {
-      .hero { min-height: 600px; }
+      .hero { min-height: min(600px, 100svh); }
       .hero-left { width: 85%; }
       .hero-copy { bottom: 9.5vh; }
       .hero-right { width: 15%; }
@@ -493,14 +500,14 @@
   </header>
   <main id="main">
     <section class="hero" id="home" aria-labelledby="hero-title">
-      <video class="hero-media" data-ambient-video data-src="assets/photos/Video_Web_Full.mp4" poster="assets/video-posters/landscape.webp" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
+      <video class="hero-media" data-ambient-video data-src="assets/video-previews/iceland-travel.mp4" poster="assets/video-posters/landscape.webp" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
       <div class="hero-wordmark"><img class="hero-logo" src="assets/photos/luxury_heraldic_crest_logo.png" alt="Verschuur Media" width="1254" height="1254" fetchpriority="high"></div>
       <div class="hero-copy">
         <div class="hero-left"><h1 class="hero-headline" id="hero-title"><span class="headline-line">Stories worth</span><span class="headline-line">looking at.</span></h1><div class="hero-meta label"><span>Film &amp; photography</span><span>By Max Verschuur</span></div></div>
         <div class="hero-right"><p class="hero-description body-copy">From first idea to final frame, I make films and photographs for brands, people, and places with a story to tell.</p><div class="hero-smallprint label"><span class="hero-scroll-desktop">Scroll down</span></div></div>
       </div>
       <p class="hero-scroll-mobile label">Scroll down</p>
-      <button class="reel-trigger" type="button" data-video-src="assets/photos/Video_Web_Full.mp4" aria-haspopup="dialog" aria-controls="reel-dialog"><span class="sr-only">Play showreel</span></button>
+      <button class="reel-trigger" type="button" data-video-src="assets/photos/Video_Web_Full.mp4" aria-haspopup="dialog" aria-controls="reel-dialog"><span class="sr-only">Play showreel</span><span class="reel-label" aria-hidden="true"><svg viewBox="0 0 12 12"><path d="m3 1 8 5-8 5Z" fill="currentColor"/></svg>Watch film</span></button>
       <div class="reel-cursor" aria-hidden="true"><svg class="ring-label" viewBox="0 0 108 108"><defs><path id="cursor-circle" d="M54 12a42 42 0 1 1-.01 0"/></defs><text fill="currentColor" font-size="10" font-family="Switzer, sans-serif" font-weight="600" letter-spacing="3.3"><textPath href="#cursor-circle">PLAY REEL · PLAY REEL · </textPath></text></svg><svg class="cursor-plus"><use href="#plus-icon"/></svg></div>
     </section>
     <!-- CONTENT: keep both client groups identical for the continuous loop. -->
@@ -535,7 +542,7 @@
       <h2 class="work-title" id="work-title">Selected Work</h2>
       <div class="work-grid">
         <button class="work-card" type="button" data-project="0" aria-haspopup="dialog" aria-controls="project-dialog" aria-label="View Zeelander Yachts"><img src="assets/video-posters/zeelander.webp" alt="A Zeelander yacht cruising on the water" loading="lazy" width="720" height="1280"><span class="media-treatment" aria-hidden="true"></span><span class="project-info"><span class="label accent">01 / Film</span><span class="project-name">Zeelander Yachts</span><span class="project-type">Brand film</span></span></button>
-        <button class="work-card" type="button" data-project="1" aria-haspopup="dialog" aria-controls="project-dialog" aria-label="View ZTE Nubia at TwitchCon"><img src="assets/brand/nubia-twitchcon.svg" alt="Nubia logo on the TwitchCon project cover" loading="lazy" width="1153" height="649"><span class="media-treatment" aria-hidden="true"></span><span class="project-info"><span class="label accent">02 / Photography</span><span class="project-name">ZTE Nubia at TwitchCon</span><span class="project-type">Event photography</span></span></button>
+        <button class="work-card" type="button" data-project="1" aria-haspopup="dialog" aria-controls="project-dialog" aria-label="View ZTE Nubia at TwitchCon"><img src="assets/photos/02.png" alt="Yellow and black Nubia phones beneath a Born to Win display at TwitchCon" loading="lazy" width="1153" height="649"><span class="media-treatment" aria-hidden="true"></span><span class="project-info"><span class="label accent">02 / Photography</span><span class="project-name">ZTE Nubia at TwitchCon</span><span class="project-type">Event photography</span></span></button>
         <button class="work-card" type="button" data-project="2" aria-haspopup="dialog" aria-controls="project-dialog" aria-label="View Iceland Travel"><img src="assets/video-posters/landscape.webp" alt="Icelandic mountain landscapes beneath a dramatic sky" loading="lazy" width="1276" height="718"><span class="media-treatment" aria-hidden="true"></span><span class="project-info"><span class="label accent">03 / Film</span><span class="project-name">Iceland Travel</span><span class="project-type">Travel film</span></span></button>
         <button class="work-card" type="button" data-project="3" aria-haspopup="dialog" aria-controls="project-dialog" aria-label="View Eelco de Boer Aftermovie"><img src="assets/video-posters/event.webp" alt="An audience member taking notes during an Eelco de Boer event" loading="lazy" width="1280" height="720"><span class="media-treatment" aria-hidden="true"></span><span class="project-info"><span class="label accent">04 / Film</span><span class="project-name">Eelco de Boer Aftermovie</span><span class="project-type">Event film</span></span></button>
         <button class="work-card" type="button" data-project="4" aria-haspopup="dialog" aria-controls="project-dialog" aria-label="View Gym Groesbeek Promotion"><img src="assets/video-posters/gym.webp" alt="Athletes training in a gym in Groesbeek" loading="lazy" width="1280" height="720"><span class="media-treatment" aria-hidden="true"></span><span class="project-info"><span class="label accent">05 / Film</span><span class="project-name">Gym Groesbeek Promotion</span><span class="project-type">Promotional film</span></span></button>
@@ -545,7 +552,7 @@
     </section>
     <div class="gallery" id="gallery" aria-label="Browse project photography"><div class="photo-grid">
       <div class="photo-column"><button class="photo-tile" type="button" data-photo-project="personal" data-photo="assets/photos/kopie-van-dsc01388-1600.webp" aria-label="View Personal photography photos" aria-haspopup="dialog" aria-controls="project-dialog"><img src="assets/photos/kopie-van-dsc01388-1600.webp" alt="Children dancing and playing a drum on the beach" loading="lazy" width="1066" height="1600"></button><button class="photo-tile" type="button" data-photo-project="5" data-photo="assets/photos/dreameaze_bathroom_mirror.webp" aria-label="View Dreameaze photos" aria-haspopup="dialog" aria-controls="project-dialog"><img src="assets/photos/dreameaze_bathroom_mirror.webp" alt="Portrait reflected in a bathroom mirror with a Dreameaze sleep mask" loading="lazy" width="1024" height="1536"></button><button class="photo-tile" type="button" data-photo-project="personal" data-photo="assets/photos/Verschuur-media-Web-export-10-optimized.webp" aria-label="View Personal photography photos" aria-haspopup="dialog" aria-controls="project-dialog"><img src="assets/photos/Verschuur-media-Web-export-10-optimized.webp" alt="Fruit vendor handing a bag to a customer" loading="lazy" width="1066" height="1600"></button></div>
-      <div class="photo-column"><button class="photo-tile" type="button" data-photo-project="moza" data-photo="assets/photos/Unknown-5.png" aria-label="View MOZA photos" aria-haspopup="dialog" aria-controls="project-dialog"><img src="assets/photos/Unknown-5.png" alt="Visitors trying flight simulation controls at the MOZA booth" loading="lazy" width="1672" height="941"></button><button class="photo-tile photo-tile--phones" type="button" data-photo-project="1" data-photo="assets/photos/02.png" aria-label="View ZTE Nubia at TwitchCon photos" aria-haspopup="dialog" aria-controls="project-dialog"><img src="assets/photos/02.png" alt="Yellow and black Nubia phones beneath a Born to Win display at TwitchCon" loading="lazy" width="1153" height="649"></button><button class="photo-tile" type="button" data-photo-project="5" data-photo="assets/photos/dreameaze_bedroom_mask_closeup.webp" aria-label="View Dreameaze photos" aria-haspopup="dialog" aria-controls="project-dialog"><img src="assets/photos/dreameaze_bedroom_mask_closeup.webp" alt="Close-up portrait with a champagne-colored Dreameaze sleep mask" loading="lazy" width="1024" height="1536"></button></div>
+      <div class="photo-column"><button class="photo-tile" type="button" data-photo-project="moza" data-photo="assets/photos/Unknown-5.png" aria-label="View MOZA photos" aria-haspopup="dialog" aria-controls="project-dialog"><img src="assets/photos/Unknown-5.png" alt="Visitors trying flight simulation controls at the MOZA booth" loading="lazy" width="1672" height="941"></button><button class="photo-tile" type="button" data-photo-project="5" data-photo="assets/photos/dreameaze-1-1600.webp" aria-label="View Dreameaze photos" aria-haspopup="dialog" aria-controls="project-dialog"><img src="assets/photos/dreameaze-1-1600.webp" alt="Portrait on a bed with a navy Dreameaze sleep mask" loading="lazy" width="1066" height="1600"></button><button class="photo-tile" type="button" data-photo-project="5" data-photo="assets/photos/dreameaze_bedroom_mask_closeup.webp" aria-label="View Dreameaze photos" aria-haspopup="dialog" aria-controls="project-dialog"><img src="assets/photos/dreameaze_bedroom_mask_closeup.webp" alt="Close-up portrait with a champagne-colored Dreameaze sleep mask" loading="lazy" width="1024" height="1536"></button></div>
       <div class="photo-column"><button class="photo-tile" type="button" data-photo-project="personal" data-photo="assets/photos/kopie-van-dsc01355-1600.webp" aria-label="View Personal photography photos" aria-haspopup="dialog" aria-controls="project-dialog"><img src="assets/photos/kopie-van-dsc01355-1600.webp" alt="Street portrait with sunglasses, gold earrings, and a patterned jacket" loading="lazy" width="1066" height="1600"></button><button class="photo-tile" type="button" data-photo-project="personal" data-photo="assets/photos/Verschuur-media-Web-export-8-optimized.webp" aria-label="View Personal photography photos" aria-haspopup="dialog" aria-controls="project-dialog"><img src="assets/photos/Verschuur-media-Web-export-8-optimized.webp" alt="People resting beside camels in an open landscape" loading="lazy" width="1066" height="1600"></button><button class="photo-tile" type="button" data-photo-project="5" data-photo="assets/photos/dreameaze_outdoor_black_mask_lifestyle.webp" aria-label="View Dreameaze photos" aria-haspopup="dialog" aria-controls="project-dialog"><img src="assets/photos/dreameaze_outdoor_black_mask_lifestyle.webp" alt="Outdoor lifestyle portrait with a black Dreameaze sleep mask" loading="lazy" width="1024" height="1536"></button></div>
       <div class="photo-column"><button class="photo-tile" type="button" data-photo-project="5" data-photo="assets/photos/dreameaze_sofa_lifestyle.webp" aria-label="View Dreameaze photos" aria-haspopup="dialog" aria-controls="project-dialog"><img src="assets/photos/dreameaze_sofa_lifestyle.webp" alt="Woman reclining on a sofa with a Dreameaze silk pillowcase" loading="lazy" width="1024" height="1536"></button><button class="photo-tile" type="button" data-photo-project="moza" data-photo="assets/photos/moza_flight_controller.webp" aria-label="View MOZA photos" aria-haspopup="dialog" aria-controls="project-dialog"><img src="assets/photos/moza_flight_controller.webp" alt="Close-up of a MOZA flight controller being used" loading="lazy" width="1024" height="1536"></button><button class="photo-tile" type="button" data-photo-project="personal" data-photo="assets/photos/Verschuur-media-Web-export-7-optimized.webp" aria-label="View Personal photography photos" aria-haspopup="dialog" aria-controls="project-dialog"><img src="assets/photos/Verschuur-media-Web-export-7-optimized.webp" alt="A seated artisan working with woven baskets" loading="lazy" width="956" height="1600"></button></div>
     </div></div>
@@ -567,10 +574,10 @@
       </div>
     </section>
     <section class="story" id="story" aria-labelledby="story-label">
-      <div class="story-background"><video data-ambient-video data-src="assets/photos/Zeelander_Web.mp4" poster="assets/video-posters/zeelander.webp" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video><div class="corner-frame" aria-hidden="true"><i></i><i></i><i></i></div></div>
+      <div class="story-background"><video data-ambient-video data-src="assets/video-previews/zeelander-yachts.mp4" poster="assets/video-posters/zeelander.webp" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video><div class="corner-frame" aria-hidden="true"><i></i><i></i><i></i></div></div>
       <div class="timeline">
         <p class="label accent" id="story-label">Our story</p>
-        <div class="story-step"><span class="story-line" aria-hidden="true"></span><div class="step-count" aria-label="Chapter 1 of 3"><span>1</span><span aria-hidden="true"></span><span>3</span></div><h3>It starts with looking closer.</h3><p class="body-copy">I’m Max. Verschuur Media is where I bring my eye for film and photography to the people, places, and ideas in front of my lens.</p></div>
+        <div class="story-step"><span class="story-line" aria-hidden="true"></span><div class="step-count" aria-label="Chapter 1 of 3"><span>1</span><span aria-hidden="true"></span><span>3</span></div><h3>It starts with looking closer.</h3><p class="body-copy">I’m Max. Verschuur Media is where I bring my eye for film and photography to the people, places, and ideas in front of my lens.</p><a class="cta story-film-trigger" href="assets/photos/Zeelander_Web.mp4" aria-haspopup="dialog" aria-controls="project-dialog">Watch the Zeelander film<svg aria-hidden="true"><use href="#arrow-icon"/></svg></a></div>
         <div class="story-step"><span class="story-line" aria-hidden="true"></span><div class="step-count" aria-label="Chapter 2 of 3"><span>2</span><span aria-hidden="true"></span><span>3</span></div><h3>Different places. The same curiosity.</h3><p class="body-copy">Yachts, convention floors, Icelandic landscapes, and South African wildlife. Each project asks me to see things a little differently.</p></div>
         <div class="story-step"><span class="story-line" aria-hidden="true"></span><div class="step-count" aria-label="Chapter 3 of 3"><span>3</span><span aria-hidden="true"></span><span>3</span></div><h3>Your story is the next frame.</h3><p class="body-copy">Whether it’s a brand, an event, or a place that deserves a closer look, I want to make something that feels like you.</p></div>
       </div>
@@ -596,7 +603,7 @@
       <div class="contact-details"><a class="contact-cta" href="mailto:maxverschuur396@gmail.com"><svg aria-hidden="true"><use href="#big-arrow"/></svg><span>Email me.</span></a><a class="contact-email text-link" href="mailto:maxverschuur396@gmail.com">maxverschuur396@gmail.com</a></div>
       <button class="back-top" type="button"><svg viewBox="0 0 250 90" preserveAspectRatio="none" aria-hidden="true"><path d="M26 18C-40 6 164-4 235 30S124 90 45 82-4 48 103 20" fill="none" stroke="currentColor" stroke-width="1"/></svg><span class="label">Back to top</span></button>
     </div>
-    <div class="footer-bottom"><img class="footer-logo" src="assets/photos/luxury_heraldic_crest_logo.png" alt="Verschuur Media" width="1254" height="1254" loading="lazy"><div class="footer-fineprint"><span>Verschuur Media</span><span>Film &amp; photography by Max Verschuur</span></div></div>
+    <div class="footer-bottom"><a class="footer-signature" href="#home" aria-label="Verschuur Media home"><span class="brand-mark" aria-hidden="true"><img src="assets/photos/luxury_heraldic_crest_logo.png" alt="" width="1254" height="1254" loading="lazy"></span><span>Verschuur Media</span></a><p class="footer-fineprint">Film &amp; photography by Max Verschuur</p></div>
   </footer>
   <dialog class="mobile-menu" id="mobile-menu" aria-label="Navigation menu">
     <div class="dialog-header"><span class="dialog-brand"><span class="brand-mark" aria-hidden="true"><img src="assets/photos/luxury_heraldic_crest_logo.png" alt="" width="1254" height="1254"></span>Verschuur Media</span><button class="close-dialog label" type="button" data-close>Close<svg aria-hidden="true"><use href="#close-icon"/></svg></button></div>
@@ -605,11 +612,11 @@
   </dialog>
   <dialog id="reel-dialog" aria-labelledby="reel-title">
     <div class="dialog-header"><span class="dialog-brand" id="reel-title">Verschuur Media showreel</span><button class="close-dialog label" type="button" data-close>Close<svg aria-hidden="true"><use href="#close-icon"/></svg></button></div>
-    <div class="reel-body"><div class="reel-placeholder" hidden><svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="none" stroke="currentColor"/><path d="m26 20 20 12-20 12Z" fill="currentColor"/></svg><h2>Your showreel</h2><p class="body-copy">Your film will appear here.</p></div><video class="reel-video" poster="assets/video-posters/landscape.webp" controls playsinline preload="none" hidden></video></div>
+    <div class="reel-body"><div class="reel-placeholder" hidden><svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="none" stroke="currentColor"/><path d="m26 20 20 12-20 12Z" fill="currentColor"/></svg><h2>Your showreel</h2><p class="body-copy">Your film will appear here.</p></div><div class="film-player film-player--reel" hidden><video class="reel-video" poster="assets/video-posters/landscape.webp" controls playsinline webkit-playsinline preload="metadata" hidden></video><div class="film-feedback" hidden><p class="film-message" role="status"></p><div class="film-actions"><button class="cta film-retry" type="button"><span>Play film</span><svg aria-hidden="true"><use href="#arrow-icon"/></svg></button><a class="film-direct text-link" target="_blank" rel="noopener">Open video</a></div></div></div></div>
   </dialog>
   <dialog id="project-dialog" aria-labelledby="project-dialog-title">
     <div class="dialog-header"><span class="dialog-brand"><span class="brand-mark" aria-hidden="true"><img src="assets/photos/luxury_heraldic_crest_logo.png" alt="" width="1254" height="1254"></span>Verschuur Media</span><button class="close-dialog label" type="button" data-close>Close<svg aria-hidden="true"><use href="#close-icon"/></svg></button></div>
-    <div class="project-dialog-content"><img id="project-dialog-image" alt="" hidden><video id="project-dialog-video" controls playsinline preload="none" hidden></video><div class="project-dialog-copy"><p class="label accent" id="project-dialog-client">Zeelander Yachts</p><h2 id="project-dialog-title">Zeelander Yachts</h2><p class="body-copy" id="project-dialog-description"></p><dl><div><dt>Services</dt><dd id="project-dialog-services"></dd></div><div><dt>Type</dt><dd id="project-dialog-type"></dd></div></dl><a class="cta" href="#contact" id="project-contact">Get in touch<svg aria-hidden="true"><use href="#arrow-icon"/></svg></a></div></div>
+    <div class="project-dialog-content"><img id="project-dialog-image" alt="" hidden><div class="film-player" hidden><video id="project-dialog-video" controls playsinline webkit-playsinline preload="metadata" hidden></video><div class="film-feedback" hidden><p class="film-message" role="status"></p><div class="film-actions"><button class="cta film-retry" type="button"><span>Play film</span><svg aria-hidden="true"><use href="#arrow-icon"/></svg></button><a class="film-direct text-link" target="_blank" rel="noopener">Open video</a></div></div></div><div class="project-dialog-copy"><p class="label accent" id="project-dialog-client">Zeelander Yachts</p><h2 id="project-dialog-title">Zeelander Yachts</h2><p class="body-copy" id="project-dialog-description"></p><dl><div><dt>Services</dt><dd id="project-dialog-services"></dd></div><div><dt>Type</dt><dd id="project-dialog-type"></dd></div></dl><a class="cta" href="#contact" id="project-contact">Get in touch<svg aria-hidden="true"><use href="#arrow-icon"/></svg></a></div></div>
     <section class="project-dialog-gallery" aria-labelledby="project-gallery-title" hidden><h3 id="project-gallery-title">Project photography</h3><div class="project-photo-grid"></div></section>
   </dialog>
   <script>
@@ -622,6 +629,7 @@
             "width": 720,
             "height": 1280,
             "video": "assets/photos/Zeelander_Web.mp4",
+            "preview": "assets/video-previews/zeelander-yachts.mp4",
             "alt": "A Zeelander yacht cruising on the water",
             "services": "Brand film",
             "description": "A short yacht film focused on the details, movement, and feeling of being out on the water.",
@@ -668,9 +676,7 @@
                         "width": 1153,
                         "height": 649
                   }
-            ],
-            "cardImage": "assets/brand/nubia-twitchcon.svg",
-            "cardAlt": "Nubia logo on the TwitchCon project cover"
+            ]
       },
       {
             "title": "Iceland Travel",
@@ -679,6 +685,7 @@
             "width": 1276,
             "height": 718,
             "video": "assets/photos/Video_Web_Full.mp4",
+            "preview": "assets/video-previews/iceland-travel.mp4",
             "alt": "Icelandic mountain landscapes beneath a dramatic sky",
             "services": "Travel film",
             "description": "A travel film through Iceland’s mountain landscapes, with a focus on scale, light, and movement.",
@@ -716,6 +723,7 @@
             "width": 1280,
             "height": 720,
             "video": "assets/photos/after_website_720p.mp4",
+            "preview": "assets/video-previews/eelco-de-boer-aftermovie.mp4",
             "alt": "An audience member taking notes during an Eelco de Boer event",
             "services": "Event film",
             "description": "An aftermovie bringing together the audience, speakers, and moments between sessions at an Eelco de Boer event.",
@@ -753,6 +761,7 @@
             "width": 1280,
             "height": 720,
             "video": "assets/photos/Gym_Promotion_Web.mp4",
+            "preview": "assets/video-previews/gym-groesbeek-promotion.mp4",
             "alt": "Athletes training in a gym in Groesbeek",
             "services": "Promotional film",
             "description": "A promotional film capturing the training, movement, and atmosphere of a gym in Groesbeek.",
@@ -996,18 +1005,56 @@
     menu.addEventListener('close', () => menuToggle.setAttribute('aria-expanded', 'false'));
     menu.querySelectorAll('nav a').forEach(link => link.addEventListener('click', () => menu.close()));
     document.querySelectorAll('[data-close]').forEach(button => button.addEventListener('click', () => button.closest('dialog').close()));
+    function showFilmHelp(video, error) {
+      const player = video.closest('.film-player');
+      if (player.hidden || !video.closest('dialog').open || error?.name === 'AbortError') return;
+      const blocked = error?.name === 'NotAllowedError';
+      player.querySelector('.film-message').textContent = blocked ? 'Press play to start the film.' : 'The film couldn’t load. Try again, or open the video directly.';
+      player.querySelector('.film-retry span').textContent = blocked ? 'Play film' : 'Try again';
+      player.querySelector('.film-feedback').hidden = false;
+    }
+    function playFilm(video) {
+      try { Promise.resolve(video.play()).catch(error => showFilmHelp(video, error)); }
+      catch (error) { showFilmHelp(video, error); }
+    }
+    function prepareFilm(video, source, title) {
+      const player = video.closest('.film-player');
+      player.hidden = false; video.hidden = false;
+      player.querySelector('.film-feedback').hidden = true;
+      player.querySelector('.film-direct').href = source;
+      video.controls = true; video.playsInline = true;
+      video.muted = false; video.defaultMuted = false;
+      video.setAttribute('aria-label', title);
+      video.src = source;
+      // Select the new resource once, before play(), within the click gesture.
+      video.load();
+    }
+    function releaseFilm(video) {
+      video.pause(); video.removeAttribute('src'); video.load(); video.hidden = true;
+      const player = video.closest('.film-player');
+      player.hidden = true; player.querySelector('.film-feedback').hidden = true;
+      player.querySelector('.film-direct').removeAttribute('href');
+    }
+    document.querySelectorAll('.film-player').forEach(player => {
+      const video = player.querySelector('video');
+      video.addEventListener('playing', () => { player.querySelector('.film-feedback').hidden = true; });
+      video.addEventListener('error', () => { if (video.hasAttribute('src')) showFilmHelp(video); });
+      player.querySelector('.film-retry').addEventListener('click', () => {
+        if (video.error) video.load();
+        playFilm(video);
+      });
+    });
     const reelDialog = document.querySelector('#reel-dialog');
     const reelTrigger = document.querySelector('.reel-trigger');
     const reelVideo = document.querySelector('.reel-video');
     reelTrigger.addEventListener('click', () => {
       const source = reelTrigger.dataset.videoSrc;
-      reelVideo.hidden = !source;
       document.querySelector('.reel-placeholder').hidden = Boolean(source);
-      if (source) reelVideo.src = source;
+      if (source) prepareFilm(reelVideo, source, 'Verschuur Media film');
       reelDialog.showModal();
-      if (source) reelVideo.play().catch(() => {});
+      if (source) playFilm(reelVideo);
     });
-    reelDialog.addEventListener('close', () => reelVideo.pause());
+    reelDialog.addEventListener('close', () => releaseFilm(reelVideo));
     const cursor = document.querySelector('.reel-cursor');
     reelTrigger.addEventListener('pointermove', event => {
       if (!isHoverPointer(event) || motionQuery.matches) return;
@@ -1113,9 +1160,8 @@
       if (project.video) image.removeAttribute('src');
       else { image.src = lead.image; image.alt = lead.alt; image.width = lead.width; image.height = lead.height; }
       const video = document.querySelector('#project-dialog-video');
-      video.hidden = !project.video;
-      video.pause(); video.removeAttribute('src'); video.load();
-      if (project.video) { video.poster = project.image; video.src = project.video; video.setAttribute('aria-label', project.title); }
+      if (project.video) { video.poster = project.image; prepareFilm(video, project.video, project.title); }
+      else releaseFilm(video);
       photoRevealObserver.disconnect();
       photoGridInDialog.replaceChildren();
       const photos = (project.photos || []).filter(photo => project.video || photo.image !== lead.image);
@@ -1131,7 +1177,7 @@
       });
       const dialog = document.querySelector('#project-dialog');
       dialog.showModal(); dialog.scrollTop = 0;
-      if (project.video) video.play().catch(() => {});
+      if (project.video) playFilm(video);
     }
     cards.forEach((card, index) => {
       const project = projects[index];
@@ -1145,7 +1191,7 @@
       if (project.video) {
         const video = document.createElement('video');
         video.dataset.ambientVideo = '';
-        video.dataset.src = project.video;
+        video.dataset.src = project.preview || project.video;
         video.muted = true;
         video.loop = true;
         video.playsInline = true;
@@ -1167,8 +1213,11 @@
       const selected = !project.video && project.photos?.find(photo => photo.image === tile.dataset.photo);
       openProject(project, selected || null);
     }));
+    document.querySelector('.story-film-trigger').addEventListener('click', event => { event.preventDefault(); openProject(projects[0]); });
     const ambientVideos = [...document.querySelectorAll('[data-ambient-video]')];
     const visibleVideos = new Set();
+    const pendingAmbientPlays = new WeakSet();
+    const blockedAmbientPlays = new WeakSet();
     function wantsAmbientPlayback(video) {
       const card = video.closest('.work-card');
       return visibleVideos.has(video) && !motionQuery.matches && !document.hidden && !document.querySelector('dialog[open]') &&
@@ -1177,9 +1226,22 @@
     function syncAmbientVideos() {
       ambientVideos.forEach(video => {
         if (wantsAmbientPlayback(video)) {
+          if (blockedAmbientPlays.has(video)) return;
+          video.autoplay = true;
           if (!video.hasAttribute('src')) video.src = video.dataset.src;
-          if (video.paused) video.play().catch(() => video.classList.remove('is-playing'));
+          if (video.paused && !pendingAmbientPlays.has(video)) {
+            if (video.error) video.load();
+            pendingAmbientPlays.add(video);
+            Promise.resolve(video.play()).catch(error => {
+              video.classList.remove('is-playing');
+              if (error.name !== 'AbortError' && wantsAmbientPlayback(video)) { blockedAmbientPlays.add(video); video.autoplay = false; }
+            }).finally(() => {
+              pendingAmbientPlays.delete(video);
+              if (wantsAmbientPlayback(video) && !blockedAmbientPlays.has(video) && video.paused) requestAnimationFrame(syncAmbientVideos);
+            });
+          }
         } else {
+          video.autoplay = false;
           video.pause();
           video.classList.remove('is-playing');
         }
@@ -1194,19 +1256,25 @@
       syncAmbientVideos();
     }, { threshold: .1 });
     ambientVideos.forEach(video => {
+      // Set both the attribute and property for inline muted playback on iOS.
+      video.defaultMuted = true; video.muted = true; video.playsInline = true;
+      video.setAttribute('muted', ''); video.setAttribute('playsinline', ''); video.setAttribute('webkit-playsinline', '');
       videoObserver.observe(video.closest('.work-card') || video);
       // Observe the frame rather than its oversized, animated media plane.
       video.addEventListener('playing', () => {
-        if (wantsAmbientPlayback(video)) video.classList.add('is-playing');
+        if (wantsAmbientPlayback(video)) { blockedAmbientPlays.delete(video); video.classList.add('is-playing'); }
         else { video.pause(); video.classList.remove('is-playing'); }
       });
       video.addEventListener('error', () => video.classList.remove('is-playing'));
     });
+    document.addEventListener('click', () => {
+      ambientVideos.forEach(video => blockedAmbientPlays.delete(video));
+      syncAmbientVideos();
+    }, { capture: true });
+    addEventListener('pageshow', () => { ambientVideos.forEach(video => blockedAmbientPlays.delete(video)); syncAmbientVideos(); });
     const dialogVideo = document.querySelector('#project-dialog-video');
     document.querySelector('#project-dialog').addEventListener('close', () => {
-      dialogVideo.pause();
-      dialogVideo.removeAttribute('src');
-      dialogVideo.load();
+      releaseFilm(dialogVideo);
       photoRevealObserver.disconnect(); photoGridInDialog.replaceChildren(); photoGallery.hidden = true;
       const image = document.querySelector('#project-dialog-image'); image.removeAttribute('src'); image.hidden = true;
     });

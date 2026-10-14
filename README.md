@@ -15,17 +15,17 @@ Open `http://localhost:3000`. There is no build step. Layout, styles, portfolio 
 The six projects appear in this order:
 
 1. **Zeelander Yachts** — `Zeelander_Web.mp4`, with its portrait-format poster.
-2. **ZTE Nubia at TwitchCon** — a branded cover made from the supplied Nubia logo; `02.png` leads its event photography gallery.
+2. **ZTE Nubia at TwitchCon** — `02.png`, the two-phone photograph, as its cover and event photography gallery lead.
 3. **Iceland Travel** — `Video_Web_Full.mp4`, also used for the homepage showreel/background.
 4. **Eelco de Boer Aftermovie** — `after_website_720p.mp4`.
 5. **Gym Groesbeek Promotion** — `Gym_Promotion_Web.mp4`, promotional film.
 6. **Dreameaze** — `dreameaze-1600.webp`, brand photography.
 
-Edit the JavaScript `projects` array to update project titles, clients, images, descriptions, and services. Static card markup mirrors that order. A `video` property provides a silent card preview and a film player with controls and audio in the project dialog. Each project’s `photos` array adds its own gallery. Film galleries are labeled **Frames from the film**. Photo previews show the selected photo first and exclude it from the rest of the gallery, so it appears only once within the preview. The close control remains visible while scrolling.
+Edit the JavaScript `projects` array to update project titles, clients, images, descriptions, and services. Static card markup mirrors that order. A `video` property opens the original film with controls and audio; `preview` supplies its separate silent card loop. Each project’s `photos` array adds its own gallery. Film galleries are labeled **Frames from the film**. Photo previews show the selected photo first and exclude it from the rest of the gallery, so it appears only once within the preview. The close control remains visible while scrolling.
 
 All **25 unique supplied photographs** are grouped under their matching projects or the personal photography collection. Dreameaze has its complete eleven-photo set, including all eight new uploads. MOZA has its three-photo set, including `moza_flight_controller.webp`. These collections open from their linked photo tiles; the six Selected Work cards keep their established order.
 
-The homepage mosaic and social strip contain **photographs only**. Twelve mosaic photographs mix Nubia, MOZA, Dreameaze, travel, and portraits across four moving columns. The two-phone Nubia tile matches the photograph’s original aspect ratio, without letterboxing. The six-photo social strip uses a separate selection. Each homepage portfolio image has one placement across the cards, mosaic, process, social strip, and closing panel. Dreameaze has a curated homepage selection, with the rest inside its project. The exact duplicate `dreameaze-2-1600.webp` is kept as an original upload but is not displayed. The gallery and social strip use no cloned photographs. Mobile uses smaller project cards, mosaic tiles, portrait, process image, and social photographs.
+The homepage mosaic and social strip contain **photographs only**. Twelve mosaic photographs mix MOZA, Dreameaze, travel, and portraits across four moving columns. The two-phone Nubia photograph appears on its Selected Work card. The six-photo social strip uses a separate selection. Each homepage portfolio image has one placement across the cards, mosaic, process, social strip, and closing panel. Dreameaze has a curated homepage selection, with the rest inside its project. The exact duplicate `dreameaze-2-1600.webp` is kept as an original upload but is not displayed. The gallery and social strip use no cloned photographs. Mobile uses smaller project cards, mosaic tiles, portrait, process image, and social photographs.
 
 Sixteen distinct stills in `assets/video-stills/` come from the four supplied films and appear inside their film galleries. The process uses a sunlit Iceland mountain frame for **Find the story** and the blue MOZA equipment photograph for **Shape the direction**. Image-specific framing keeps subjects in view. All uploaded originals are unchanged.
 
@@ -38,6 +38,7 @@ Sixteen distinct stills in `assets/video-stills/` come from the four supplied fi
 - The social link reads **IG: max.verschuur**. An **Email me below** link leads to the footer, which shows **Email me.** and the full clickable address `maxverschuur396@gmail.com`.
 - Copy is written from Max’s perspective. Project details describe the supplied work without inventing dates, awards, or a team.
 - About pairs `max-portrait-1024w.webp` with a personal introduction. The blue framing outline and portrait move with scrolling; the headline reveals as the portrait enters view. The photograph is used once, and reduced motion keeps the portrait and frame still with all text visible.
+- The footer uses a compact crest and brand name in the bottom row, matching the navigation signature and leaving the contact details prominent.
 
 ## Motion and media
 
@@ -45,7 +46,9 @@ The four-stage process moves from **Find the story** to **Shape the direction**,
 
 The story retains the pinned Zeelander video behind three personal chapters. The closing panel uses the black-and-white elephant photograph. Desktop project cards expand with their media proportions preserved; mobile cards use horizontal snapping. The photo mosaic moves alternate columns as you scroll. The client strip loops every nine seconds. The photo strip crosses its full six-photo sequence in eighteen seconds and recycles the original nodes after they leave the viewport, keeping the motion continuous without repeated images. It pauses offscreen, for open dialogs, keyboard focus, hidden pages, and reduced motion. Individual project photographs reveal gently as they enter view.
 
-Backgrounds and previews load on demand, play silently while visible and active, and pause for open dialogs, hidden pages, and reduced-motion preferences. Dialog players keep the original film format and release their video when closed. The server supports MP4 byte ranges for seeking. Reduced motion disables animated transitions and autoplay.
+Backgrounds and card previews use dedicated **audio-free H.264 Main, level 3.1 MP4s** in `assets/video-previews/`, with fast-start metadata and a maximum dimension of 960 pixels. Iceland and Zeelander use the complete short films; Gym uses seconds 18–30 and Eelco seconds 40–52. These lighter files are separate from the original full films with sound. Muted attributes and properties, inline playback, and autoplay are configured explicitly for Safari. Playback requests are tracked so scrolling does not interrupt a pending start; a user interaction can retry a blocked preview.
+
+Backgrounds and previews load on demand, play silently while visible and active, and pause for open dialogs, hidden pages, and reduced-motion preferences. Dialog players keep the original film format and release their video when closed. Visible **Watch film** links are available on the hero and story. If a browser blocks a player or a film fails to load, it shows a play/retry control and a direct video link. The server supports MP4 byte ranges for seeking. Reduced motion disables animated transitions and autoplay.
 
 ## Browser review
 
