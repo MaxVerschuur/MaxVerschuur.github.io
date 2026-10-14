@@ -129,7 +129,7 @@
     .reel-trigger:focus-visible ~ .reel-cursor { left: calc(50% - 54px); top: calc(50% - 54px); opacity: 1; }
 
     .client-strip { padding: 5vh 0; overflow: hidden; }
-    .client-track { display: flex; width: max-content; animation: marquee 17.5s linear infinite; }
+    .client-track { display: flex; width: max-content; animation: marquee 9s linear infinite; }
     .client-group { display: flex; align-items: center; }
     .client-logo { position: relative; flex: 0 0 auto; width: 28vw; min-width: 110px; height: 52px; margin: 0 5vw; overflow: hidden; }
     .client-logo img { width: 100%; height: 100%; object-fit: contain; filter: brightness(0) invert(1); }
@@ -201,8 +201,8 @@
     .photo-column:nth-child(even) { padding-top: 5vh; }
     .photo-tile { position: relative; display: block; overflow: hidden; }
     .photo-column .photo-tile { flex: 0 0 44vh; width: 100%; height: 44vh; }
-    .photo-column .photo-tile--phones { flex-basis: 24vh; height: 24vh; background: #090b0e; }
-    .photo-tile.photo-tile--phones img { object-fit: contain; object-position: center; }
+    .photo-column .photo-tile--phones { flex: 0 0 auto; height: auto; aspect-ratio: 1153 / 649; }
+    .photo-tile.photo-tile--phones img { object-fit: cover; object-position: center; }
     .photo-column:has(.photo-tile--phones) .photo-tile:last-child { flex-basis: 64vh; height: 64vh; }
     .photo-tile img { width: 100%; height: 100%; object-fit: cover; transition: transform 500ms var(--ease); }
     .has-mouse .photo-tile:hover img, .photo-tile:focus-visible img { transform: scale(1.04); }
@@ -420,6 +420,25 @@
       .project-dialog-copy { padding-top: 5vh; }
       .project-photo-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
     }
+    @media (max-width: 991px) {
+      .about-portrait { width: min(80%, 300px); }
+      .portrait-caption { gap: 10px; }
+      .portrait-caption span:first-child { font-size: 20px; }
+      .portrait-caption span:last-child { font-size: 9px; }
+      .work-card { flex-basis: 72vw; height: 54svh; min-height: 360px; }
+      .gallery { height: 64svh; }
+      .photo-grid { inset: -10svh 0; width: 174vw; left: -42vw; gap: 12px; }
+      .photo-column { gap: 12px; }
+      .photo-column .photo-tile { flex-basis: 32svh; height: 32svh; }
+      .photo-column .photo-tile--phones { flex-basis: auto; height: auto; }
+      .photo-column:has(.photo-tile--phones) { padding-top: 10svh; }
+      .photo-column:has(.photo-tile--phones) .photo-tile:last-child { flex-basis: 32svh; height: 32svh; }
+      .service-visual { height: 30svh; min-height: 240px; }
+      .process-caption { font-size: 18px; gap: 10px; }
+      .process-caption span:first-child { flex-shrink: 0; white-space: nowrap; }
+      .social-tile { flex-basis: 42vw; width: 42vw; height: 30svh; }
+      .social-tile--short { height: 18svh; }
+    }
     @media (max-width: 479px) {
       .hero { min-height: 600px; }
       .hero-left { width: 85%; }
@@ -478,7 +497,7 @@
       <div class="hero-wordmark"><img class="hero-logo" src="assets/photos/luxury_heraldic_crest_logo.png" alt="Verschuur Media" width="1254" height="1254" fetchpriority="high"></div>
       <div class="hero-copy">
         <div class="hero-left"><h1 class="hero-headline" id="hero-title"><span class="headline-line">Stories worth</span><span class="headline-line">looking at.</span></h1><div class="hero-meta label"><span>Film &amp; photography</span><span>By Max Verschuur</span></div></div>
-        <div class="hero-right"><p class="hero-description body-copy">From first idea to final frame, I make films and photographs for brands, people, and places with a story to tell.</p><div class="hero-smallprint label"><span>©<span data-year>2026</span></span><span class="hero-scroll-desktop">Scroll down</span></div></div>
+        <div class="hero-right"><p class="hero-description body-copy">From first idea to final frame, I make films and photographs for brands, people, and places with a story to tell.</p><div class="hero-smallprint label"><span class="hero-scroll-desktop">Scroll down</span></div></div>
       </div>
       <p class="hero-scroll-mobile label">Scroll down</p>
       <button class="reel-trigger" type="button" data-video-src="assets/photos/Video_Web_Full.mp4" aria-haspopup="dialog" aria-controls="reel-dialog"><span class="sr-only">Play showreel</span></button>
@@ -577,7 +596,7 @@
       <div class="contact-details"><a class="contact-cta" href="mailto:maxverschuur396@gmail.com"><svg aria-hidden="true"><use href="#big-arrow"/></svg><span>Email me.</span></a><a class="contact-email text-link" href="mailto:maxverschuur396@gmail.com">maxverschuur396@gmail.com</a></div>
       <button class="back-top" type="button"><svg viewBox="0 0 250 90" preserveAspectRatio="none" aria-hidden="true"><path d="M26 18C-40 6 164-4 235 30S124 90 45 82-4 48 103 20" fill="none" stroke="currentColor" stroke-width="1"/></svg><span class="label">Back to top</span></button>
     </div>
-    <div class="footer-bottom"><img class="footer-logo" src="assets/photos/luxury_heraldic_crest_logo.png" alt="Verschuur Media" width="1254" height="1254" loading="lazy"><div class="footer-fineprint"><span>©<span data-year>2026</span> Verschuur Media</span><span>Film &amp; photography by Max Verschuur</span></div></div>
+    <div class="footer-bottom"><img class="footer-logo" src="assets/photos/luxury_heraldic_crest_logo.png" alt="Verschuur Media" width="1254" height="1254" loading="lazy"><div class="footer-fineprint"><span>Verschuur Media</span><span>Film &amp; photography by Max Verschuur</span></div></div>
   </footer>
   <dialog class="mobile-menu" id="mobile-menu" aria-label="Navigation menu">
     <div class="dialog-header"><span class="dialog-brand"><span class="brand-mark" aria-hidden="true"><img src="assets/photos/luxury_heraldic_crest_logo.png" alt="" width="1254" height="1254"></span>Verschuur Media</span><button class="close-dialog label" type="button" data-close>Close<svg aria-hidden="true"><use href="#close-icon"/></svg></button></div>
@@ -971,7 +990,6 @@
       syncTheme();
     }));
     syncTheme();
-    document.querySelectorAll('[data-year]').forEach(element => { element.textContent = new Date().getFullYear(); });
     const menu = document.querySelector('#mobile-menu');
     const menuToggle = document.querySelector('.menu-toggle');
     menuToggle.addEventListener('click', () => { menu.showModal(); menuToggle.setAttribute('aria-expanded', 'true'); });
@@ -1286,7 +1304,7 @@
     function moveSocial(time) {
       socialFrame = 0;
       if (!wantsSocialMotion()) { socialTime = 0; return; }
-      if (socialTime) socialOffset += Math.min(64, time - socialTime) * socialGroup.scrollWidth / 40000;
+      if (socialTime) socialOffset += Math.min(64, time - socialTime) * socialGroup.scrollWidth / 18000;
       socialTime = time;
       let first = socialGroup.firstElementChild;
       let span = first.getBoundingClientRect().width + parseFloat(getComputedStyle(first).marginRight);
