@@ -15,7 +15,7 @@ Open `http://localhost:3000`. There is no build step. Layout, styles, portfolio 
 The six projects appear in this order:
 
 1. **Zeelander Yachts** — `Zeelander_Web.mp4`, with its portrait-format poster.
-2. **ZTE Nubia at TwitchCon** — `02.png`, event photography.
+2. **ZTE Nubia at TwitchCon** — a branded cover made from the supplied Nubia logo; `02.png` leads its event photography gallery.
 3. **Iceland Travel** — `Video_Web_Full.mp4`, also used for the homepage showreel/background.
 4. **Eelco de Boer Aftermovie** — `after_website_720p.mp4`.
 5. **Gym Groesbeek Promotion** — `Gym_Promotion_Web.mp4`, promotional film.
@@ -25,9 +25,9 @@ Edit the JavaScript `projects` array to update project titles, clients, images, 
 
 All **25 unique supplied photographs** are grouped under their matching projects or the personal photography collection. Dreameaze has its complete eleven-photo set, including all eight new uploads. MOZA has its three-photo set, including `moza_flight_controller.webp`. These collections open from their linked photo tiles; the six Selected Work cards keep their established order.
 
-The homepage mosaic uses three different images for each of six featured film/photo collections. Each homepage portfolio image has one placement across the cards, mosaic, process, social strip, and closing panel. Dreameaze has a curated homepage selection, with the rest inside its project. The exact duplicate `dreameaze-2-1600.webp` is kept as an original upload but is not displayed. The gallery and social strip use no cloned photographs.
+The homepage mosaic and social strip contain **photographs only**. Twelve mosaic photographs mix Nubia, MOZA, Dreameaze, travel, and portraits across four moving columns. The two-phone Nubia photograph has a wider, uncropped frame. The six-photo social strip uses a separate selection. Each homepage portfolio image has one placement across the cards, mosaic, process, social strip, and closing panel. Dreameaze has a curated homepage selection, with the rest inside its project. The exact duplicate `dreameaze-2-1600.webp` is kept as an original upload but is not displayed. The gallery and social strip use no cloned photographs.
 
-Sixteen distinct stills in `assets/video-stills/` come from the four supplied films and balance the film projects alongside the client photographs. Image-specific framing keeps subjects in view. All uploaded originals are unchanged.
+Sixteen distinct stills in `assets/video-stills/` come from the four supplied films and appear inside their film galleries. The process uses a sunlit Iceland mountain frame for **Find the story** and the blue MOZA equipment photograph for **Shape the direction**. Image-specific framing keeps subjects in view. All uploaded originals are unchanged.
 
 ## Identity and contact
 
@@ -37,6 +37,7 @@ Sixteen distinct stills in `assets/video-stills/` come from the four supplied fi
 - Instagram links point to [@max.verschuur](https://www.instagram.com/max.verschuur/).
 - The social link reads **IG: max.verschuur**. An **Email me below** link leads to the footer, which shows **Email me.** and the full clickable address `maxverschuur396@gmail.com`.
 - Copy is written from Max’s perspective. Project details describe the supplied work without inventing dates, awards, or a team.
+- About pairs `max-portrait-1024w.webp` with a personal introduction. The blue framing outline and portrait move with scrolling; the headline reveals as the portrait enters view. The photograph is used once, and reduced motion keeps the portrait and frame still with all text visible.
 
 ## Motion and media
 
