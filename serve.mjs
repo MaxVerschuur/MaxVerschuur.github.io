@@ -29,7 +29,18 @@ const mimeTypes = {
 };
 
 const server = createServer(async (req, res) => {
-  let filePath = join(__dirname, req.url === '/' ? 'index.html' : req.url);
+  const url = new URL(req.url, `http://localhost:${PORT}`);
+  let filePath = join(__dirname, url.pathname);
+  try {
+    if ((await stat(filePath)).isDirectory()) {
+      if (!url.pathname.endsWith('/')) {
+        res.writeHead(308, { Location: url.pathname + '/' + url.search });
+        res.end();
+        return;
+      }
+      filePath = join(filePath, 'index.html');
+    }
+  } catch { /* Let the existing missing-file handling below respond. */ }
   const ext = extname(filePath).toLowerCase();
   const contentType = mimeTypes[ext] || 'text/plain';
 
